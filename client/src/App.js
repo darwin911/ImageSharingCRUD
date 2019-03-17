@@ -22,6 +22,14 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  async componentDidMount () {
+    if (localStorage.getItem('photo-app-token')) {
+      this.setState({
+        authToken
+      })
+    }
+  }
+
   async handleUpload (ev) {
     ev.preventDefault();
     let {filepath} = this.state
