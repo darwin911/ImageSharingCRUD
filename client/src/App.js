@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
-import {Cloudinary} from 'cloudinary-react';
+import { Image, Video, Transformation, CloudinaryContext } from 'cloudinary-react';
+import { Cloudinary } from 'cloudinary-react';
 import FilesBase64 from 'react-file-base64';
-import {Route, Link} from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import uploadPhoto from './services/services';
 
 let api_key = process.env.REACT_APP_API_KEY;
@@ -22,23 +22,23 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     if (localStorage.getItem('photo-app-token')) {
       this.setState({
-        authToken
+        authToken: localStorage.getItem('photo-app-token')
       })
     }
   }
 
-  async handleUpload (ev) {
+  async handleUpload(ev) {
     ev.preventDefault();
-    let {filepath} = this.state
+    let { filepath } = this.state
     let resp = await uploadPhoto(filepath.base64);
     return resp;
   }
 
-  handleChange (ev) {
-    const {name, value} = ev.target;
+  handleChange(ev) {
+    const { name, value } = ev.target;
     this.setState(prevState => ({
       ...prevState,
       [name]: value
@@ -55,36 +55,36 @@ class App extends Component {
     return (
       <div className="App">
 
-          <CloudinaryContext
-            cloudName="photo-sharing-app"
-            apiKey={api_key}
-            apiSecret={api_secret}>
+        <CloudinaryContext
+          cloudName="photo-sharing-app"
+          apiKey={api_key}
+          apiSecret={api_secret}>
 
-            <Route
-            exact path = '/'
+          <Route
+            exact path='/'
             render={(props) => (
               <div>
                 <h2>This is an image retrieved from our Cloudinary account through the React SDK.</h2>
                 <Image publicId="sample" width="300" />
                 <form>
                   <FilesBase64
-                    multiple={ false }
-                    onDone={ this.getFiles.bind(this) } />
-                    <button type='submit' onClick={this.handleUpload}>upload</button>
+                    multiple={false}
+                    onDone={this.getFiles.bind(this)} />
+                  <button type='submit' onClick={this.handleUpload}>upload</button>
                 </form>
-              </div>)}/>
+              </div>)} />
 
-              <Route
-              path = '/user/:id'
-              render = {(props) => (
-                <div>
-                  <h1>User: {props.match.params.id}</h1>
-                </div>
-              )}/>
+          <Route
+            path='/user/:id'
+            render={(props) => (
+              <div>
+                <h1>User: {props.match.params.id}</h1>
+              </div>
+            )} />
 
 
 
-          </CloudinaryContext>
+        </CloudinaryContext>
 
       </div>
     );
