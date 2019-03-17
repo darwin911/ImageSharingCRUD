@@ -33,7 +33,9 @@ Axios, Express, Morgan, Body-Parser, Cors, React-router-dom
 Cloudinary-React, React-File-Base64
 
 ## Wireframes
-![Wireframe for Project Proposal] (https://photos.app.goo.gl/RDxoH5fjsw49QGFz6)
+![Wireframe Main View](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8be7487788656e2020932e/5c88de08d90376e20eebd526d9abac48/IMG_20190316_150426.jpg)
+![Wireframe User View](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8be7487788656e2020932e/4baeee51e1ab99b32baf87718ad1377f/IMG_20190316_151002.jpg)
+![Wireframe Public View](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8be7487788656e2020932e/0a79c57c7b7d85be37c520380037149c/IMG_20190316_151428.jpg)
 
 ## Component Hierarchy
 
