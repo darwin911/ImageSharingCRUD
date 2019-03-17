@@ -36,7 +36,5 @@ Cloudinary-React, React-File-Base64
 ![Wireframe for Project Proposal] (https://photos.app.goo.gl/RDxoH5fjsw49QGFz6)
 
 ## Component Hierarchy
-![Main View](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8eb50a8768ee6416e5cecc/ce91f70180d1d6602b357074b7e766bb/IMG_20190316_150346.jpg)
-![User View](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8eb50a8768ee6416e5cecc/e16caa25afc8ffcc04a1c5fe5aa13ee9/IMG_20190316_151008.jpg)
 
-App, Nav, Hero, Profile, Reel, Post, PostForm, FileInput, Footer, Login, Register.
+![Components](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8eb50a8768ee6416e5cecc/5d3379f9724c2c065a503aa52c1b45f7/IMG_20190316_144600.jpg)
