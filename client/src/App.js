@@ -98,16 +98,10 @@ class App extends Component {
               </div>
             )} />
         </CloudinaryContext>
-
-        <Hero />
-        <Profile />
-        <Login />
-        <Register />
-        <Post />
-        <ImageUpload />
-        <PostForm />
-        <Reel />
-        <Footer />
+        
+            <Route path="/login" render={
+              () => <Login />} 
+            />
       </div>
     );
   }

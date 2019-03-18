@@ -11,8 +11,11 @@ html {
 
 .App {
   min-height: 100vh;
+  text-align: center;
 }
 
 nav {
+  display: flex;
+  flex-direction: column;
   background: green;
 }
