@@ -3,21 +3,23 @@ import React from 'react';
 const Login = props => {
   const { email, password, handleChange, handleSubmit } = props;
   return (
-    <form onSubmit={handleSubmit}>
+    <form 
+      onSubmit={handleSubmit}
+      className="login-form">
       <h2>Login</h2>
-      <label>Email</label>
       <input
         type='text'
         name='email'
         id='email'
+        placeholder="Email"
         onChange={handleChange}
         value={email}
       />
-      <label>Password</label>
       <input
         type='text'
         name='password'
         id='password'
+        placeholder="Password"
         onChange={handleChange}
         value={password}
       />

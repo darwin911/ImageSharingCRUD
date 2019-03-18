@@ -102,6 +102,9 @@ class App extends Component {
             <Route path="/login" render={
               () => <Login />} 
             />
+            <Route path="/register" render={
+              () => <Register />} 
+            />
       </div>
     );
   }

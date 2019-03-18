@@ -5,27 +5,27 @@ const Register = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <h3>Register Form</h3>
-      <label>Name</label>
       <input
         type='text'
         name='name'
         id='name'
+        placeholder="Name"
         onChange={handleChange}
         value={name}
       />
-      <label>Email</label>
       <input
         type='text'
         name='email'
         id='email'
+        placeholder="Email"
         onChange={handleChange}
         value={email}
       />
-      <label>Password</label>
       <input
         type='text'
         name='password'
         id='password'
+        placeholder="Password"
         onChange={handleChange}
         value={password}
       />

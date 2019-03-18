@@ -7,7 +7,7 @@ const Nav = () => {
       <h1>PostPicle</h1>
       <Link to="/">Home</Link>
       <Link to="/login">Login</Link>
-      <Link to="/login">Register</Link>
+      <Link to="/register">Register</Link>
     </nav>
   )
 }
