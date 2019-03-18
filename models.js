@@ -23,17 +23,27 @@ const Post = sequelize.define('post', {
   publicId: Sequelize.STRING,
 });
 
+const Comment = sequelize.define('Comment', {
+  text: Sequelize.TEXT
+});
+
+const Likes = sequelize.define('Likes', {
+});
+
 User.hasMany(Post);
 Post.belongsTo(User);
 
 User.belongsToMany(Post, { through: 'Likes' });
 Post.belongsToMany(User, { through: 'Likes' });
 
-User.belongsToMany(Post, { through: 'Comments' });
-Post.belongsToMany(User, { through: 'Comments' });
+User.belongsToMany(Post, { through: 'Comment' });
+Post.belongsToMany(User, { through: 'Comment' });
+
 
 module.exports = {
   Post,
   User,
+  Comment,
+  Likes,
   sequelize
 }
