@@ -9,7 +9,7 @@ import {
 // import { Cloudinary } from 'cloudinary-react';
 import FilesBase64 from 'react-file-base64';
 import { Route, Link } from 'react-router-dom';
-import { uploadPhoto, createUser } from './services/services';
+import { uploadPhoto, createUser, loginUser } from './services/services';
 // import Hero from './components/Hero';
 import Nav from './components/Nav';
 // import Profile from './components/Profile';
@@ -31,11 +31,13 @@ class App extends Component {
       filepath: '',
       isLoggedIn: false,
       authToken: '',
+      currentUser: null,
       reelPosts: [],
     };
     this.handleUpload = this.handleUpload.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   async componentDidMount() {
@@ -46,20 +48,53 @@ class App extends Component {
     }
   }
 
-  async handleUpload(ev) {
-    ev.preventDefault();
+  async handleUpload(e) {
+    e.preventDefault();
     let { filepath } = this.state;
     let resp = await uploadPhoto(filepath.base64);
     return resp;
   }
 
-  handleChange(ev) {
-    const { name, value } = ev.target;
+  handleChange(e) {
+    const { name, value } = e.target;
     this.setState(prevState => ({
       ...prevState,
       [name]: value
     }));
   }
+
+  async handleLogin(e) {
+    e.preventDefault();
+    const { email, password } = this.state;
+    const currentUser = await loginUser({
+      email,
+      password,
+    });
+    console.log(currentUser)
+    if (currentUser !== null) {
+      localStorage.setItem('token', currentUser);
+      this.setState({
+        email: '',
+        password: '',
+        isLoggedIn: true,
+      });
+    }
+  }
+  // async handleLogin(e) {
+  //   const currentUser = await login(userData);
+  //   if (currentUser !== null) {
+  //     localStorage.setItem('jwt', currentUser.token);
+  //     this.setState({
+  //       email: '',
+  //       first_name: '',
+  //       last_name: '',
+  //       password: '',
+  //       isLoggedIn: true,
+  //     })
+  //   }
+  // }
+
+
 
   async handleSubmit(e) {
     e.preventDefault();
@@ -92,26 +127,23 @@ class App extends Component {
         <CloudinaryContext
           cloudName='photo-sharing-app'
           apiKey={api_key}
-          apiSecret={api_secret}
-        >
+          apiSecret={api_secret}>
+
           <Route
-            exact
-            path='/'
+            exact path='/'
             render={props => (
               <div>
-                <h2>
-                  This is an image retrieved from our Cloudinary account through
-                  the React SDK.
-                </h2>
-                <Image publicId='sample' width='300' />
+                <h2>Image retrieved from our Cloudinary account through the React SDK.</h2>
+                <Image
+                  publicId='sample'
+                  width='300' />
                 <form>
                   <FilesBase64
                     multiple={false}
-                    onDone={this.getFiles.bind(this)}
-                  />
-                  <button type='submit' onClick={this.handleUpload}>
-                    upload
-                  </button>
+                    onDone={this.getFiles.bind(this)} />
+                  <button
+                    type='submit'
+                    onClick={this.handleUpload}>upload</button>
                 </form>
               </div>
             )}
@@ -127,11 +159,12 @@ class App extends Component {
           />
         </CloudinaryContext>
 
-
         <Route path="/login" render={
           () => <Login
+            email={this.state.email}
+            password={this.state.password}
             handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
+            handleLogin={this.handleLogin}
           />}
         />
         <Route path="/register" render={

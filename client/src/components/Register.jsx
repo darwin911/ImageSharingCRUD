@@ -20,7 +20,7 @@ const Register = (props) => {
         value={email}
       />
       <input
-        type='text'
+        type='password'
         name='password'
         placeholder="Password"
         onChange={handleChange}
