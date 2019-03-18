@@ -21,7 +21,7 @@ const Login = props => {
         onChange={handleChange}
         value={password}
       />
-      <button onClick={handleClick} type='button'>
+      <button onClick={handleSubmit} type='button'>
         Submit
       </button>
     </form>

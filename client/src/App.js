@@ -4,7 +4,7 @@ import { Image, Video, Transformation, CloudinaryContext } from 'cloudinary-reac
 import { Cloudinary } from 'cloudinary-react';
 import FilesBase64 from 'react-file-base64';
 import { Route, Link } from 'react-router-dom';
-import uploadPhoto from './services/services';
+import { uploadPhoto } from './services/services';
 import Hero from './components/Hero';
 import Nav from './components/Nav';
 import Profile from './components/Profile';
@@ -31,7 +31,7 @@ class App extends Component {
         email: '',
         password: ''
       }
-      
+
     }
     this.handleUpload = this.handleUpload.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -108,7 +108,7 @@ class App extends Component {
         <ImageUpload />
         <PostForm />
         <Reel />
-        <Footer /> 
+        <Footer />
       </div>
     );
   }

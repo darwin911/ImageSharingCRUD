@@ -1,5 +1,5 @@
 import axios from 'axios';
-let api_key = process.env.REACT_APP_API_KEY;
+let API_KEY = process.env.REACT_APP_API_KEY;
 
 const baseURL =
   'https://api.cloudinary.com/v1_1/photo-sharing-app/image/upload';
@@ -7,7 +7,7 @@ let cloudinaryApi = axios.create({
   baseURL: baseURL
 });
 
-async function uploadPhoto(filepath) {
+const uploadPhoto = async (filepath) => {
   console.log('triggered');
   let resp = await axios.post(
     'https://api.cloudinary.com/v1_1/photo-sharing-app/image/upload',
@@ -25,7 +25,7 @@ const createUser = async (data) => {
 };
 // Login
  const loginUser = async ({ email, password }) => {
-  const resp = await api.post('/login', {
+  const resp = await axios.post('/login', {
     email,
     password
   });
@@ -48,7 +48,7 @@ const editPost = async (id, data) => {
 }
 // Delete post
 const deletePost = async (id) => {
-  const resp = await api.delete(`/user/${id}/posts`);
+  const resp = await axios.delete(`/user/${id}/posts`);
   return resp.data;
 }
 // Get all public posts once logged in
@@ -63,7 +63,6 @@ const getUserPosts = async id => {
 };
 
 export { 
-  
   uploadPhoto, 
   createUser, 
   loginUser,
@@ -73,6 +72,4 @@ export {
   deletePost,
   getAllPosts,
   getUserPosts,
-  
-
- }
+ };
