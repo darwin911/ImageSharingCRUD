@@ -47,7 +47,7 @@ const editPost = async (id, data) => {
   return resp.data
 }
 // Delete post
-export const deletePost = async (id) => {
+const deletePost = async (id) => {
   const resp = await api.delete(`/user/${id}/posts`);
   return resp.data;
 }
@@ -63,6 +63,7 @@ const getUserPosts = async id => {
 };
 
 export { 
+  
   uploadPhoto, 
   createUser, 
   loginUser,
@@ -71,6 +72,7 @@ export {
   editPost,
   deletePost,
   getAllPosts,
-  getUserPosts
+  getUserPosts,
+  
 
  }
