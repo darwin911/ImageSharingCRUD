@@ -126,8 +126,15 @@ class App extends Component {
           />
         </CloudinaryContext>
 
-        <Route path='/login' render={() => <Login />} />
-        <Route path='/register' render={() => <Register />} />
+
+        <Route path="/login" render={
+          () => <Login 
+            handleChange={this.handleChange}/>} 
+        />
+        <Route path="/register" render={
+          () => <Register 
+            handleChange={this.handleChange}/>} 
+        />
       </div>
     );
   }
