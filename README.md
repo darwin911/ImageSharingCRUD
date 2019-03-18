@@ -30,13 +30,6 @@ App registration, app login, post/see/change/delete a photo (CRUD).
 
 `userRouter.post "/user/:id/posts"` --> create post
 
-<<<<<<< HEAD:README.md
-`userRouter.post "/user/:id/posts"` --> show all post by user
-
-`userRouter.post "/login/publicposts"` --> show all post of all users
-
-=======
->>>>>>> AustinsBranch:client/README.md
 `userRouter.put "/user/:id/posts"` --> edit posts
 
 `userRouter.delete "/user/:id/posts"` --> delete posts
