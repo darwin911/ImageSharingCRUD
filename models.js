@@ -26,11 +26,11 @@ const Post = sequelize.define('post', {
 User.hasMany(Post);
 Post.belongsTo(User);
 
-User.belongsToMany(Post, { through: 'likes' });
-Post.belongsToMany(User, { through: 'likes' });
+User.belongsToMany(Post, { through: 'Likes' });
+Post.belongsToMany(User, { through: 'Likes' });
 
-User.belongsToMany(Post, { through: 'comments' });
-Post.belongsToMany(User, { through: 'comments' });
+User.belongsToMany(Post, { through: 'Comments' });
+Post.belongsToMany(User, { through: 'Comments' });
 
 module.exports = {
   Post,
