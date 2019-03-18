@@ -129,11 +129,15 @@ class App extends Component {
 
         <Route path="/login" render={
           () => <Login 
-            handleChange={this.handleChange}/>} 
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            />} 
         />
         <Route path="/register" render={
           () => <Register 
-            handleChange={this.handleChange}/>} 
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+            />} 
         />
       </div>
     );
