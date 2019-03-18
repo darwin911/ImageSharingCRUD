@@ -30,7 +30,7 @@ const Comment = sequelize.define('Comment', {
 const Likes = sequelize.define('Likes', {
 });
 
-User.hasMany(Post);
+User.hasMany(Post, { onDelete: 'cascade' });
 Post.belongsTo(User);
 
 User.belongsToMany(Post, { through: 'Likes' });
