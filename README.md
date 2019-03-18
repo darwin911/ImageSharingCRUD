@@ -20,7 +20,7 @@ App registration, app login, post/see/change/delete a photo (CRUD).
 ![diagram of the database tables, schemas, and relations.](https://trello-attachments.s3.amazonaws.com/5c8be7275751825d0fd18313/781x512/eef31a9b0efd1eb005c47bbc66b12db9/DatabaseERD.jpg)
 
 ## API Endpoint Documentations
-`userRouter.post "/" ` -->create user
+`userRouter.post "/user"`  -->create user
 
 `userRouter.post "/login"` --> login user
 
