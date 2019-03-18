@@ -20,7 +20,7 @@ const uploadPhoto = async (filepath) => {
 }
 // Register
 const createUser = async (data) => {
-  const resp = await axios.post('/user', data);
+  const resp = await axios.post('http://localhost:3000/users', data);
   return resp.data;
 };
 // Login

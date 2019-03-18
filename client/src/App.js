@@ -70,7 +70,7 @@ class App extends Component {
     }
     const resp = await createUser(userData);
     console.log(resp);
-    // localStorage.setItem('token', resp.token)
+    localStorage.setItem('token', resp.token)
     this.setState(prevState => ({
       name: '',
       email: '',
