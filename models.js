@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize({
-  database: 'postPicle',
+  database: process.env.DATABASE_URL,
   dialect: 'postgres',
   operatorsAliases: false,
   define: {
@@ -30,7 +30,7 @@ const Comment = sequelize.define('Comment', {
 const Likes = sequelize.define('Likes', {
 });
 
-User.hasMany(Post);
+User.hasMany(Post, { onDelete: 'cascade' });
 Post.belongsTo(User);
 
 User.belongsToMany(Post, { through: 'Likes' });
