@@ -24,13 +24,18 @@ App registration, app login, post/see/change/delete a photo (CRUD).
 
 `userRouter.post "/login"` --> login user
 
-`"/user/:id/"` --> user profile page
+`userRouter.get "/user/:id/"` --> user profile page
+
+`userRouter.put "/user/:id/"` --> edit profile page
 
 `userRouter.post "/user/:id/posts"` --> create post
 
+`userRouter.put "/user/:id/posts"` --> edit posts
+
+`userRouter.put "/user/:id/posts"` --> delete posts
+
 ## List Dependencies
-Axios, Express, Morgan, Body-Parser, Cors, React-router-dom
-Cloudinary-React, React-File-Base64
+Axios, Bcrypt, Express, Morgan, Body-Parser, Cors, React-router-dom, Cloudinary-React, React-File-Base64, Jsonwebtoken, Pg, Nodemon, Sequelize
 
 ## Wireframes
 ![Wireframe Main View](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8be7487788656e2020932e/5c88de08d90376e20eebd526d9abac48/IMG_20190316_150426.jpg)
