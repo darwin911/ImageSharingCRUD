@@ -70,6 +70,7 @@ class App extends Component {
     return (
       <div className="App">
 
+        <Nav />
         <CloudinaryContext
           cloudName="photo-sharing-app"
           apiKey={api_key}
@@ -96,11 +97,9 @@ class App extends Component {
                 <h1>User: {props.match.params.id}</h1>
               </div>
             )} />
-
         </CloudinaryContext>
 
         <Hero />
-        <Nav />
         <Profile />
         <Login />
         <Register />
