@@ -19,7 +19,6 @@ app.use(logger('dev'));
 // mount route handlers
 // --> create user
 app.post('/users', async (req, res) => {
-  res.json('hey yall');
   try {
     let {name, password, email, bio, pro_pic} = req.body;
     let password_digest = await hash(password);
@@ -84,17 +83,38 @@ app.put('/users', async (req, res) => {
 // --> create post
 app.post('/users/posts', async (req, res, next) => {
   try {
-    const createPost = await Post.create(req.body)
-    res.json(createPost.get())
+    let {title, description, publicId, userId} = req.body
+    console.log(title, description, publicId, userId);
+    const createPost = await Post.create({
+      title, description, publicId
+    })
+    let selectedUser = await User.findOne({
+      where: {
+        id: userId
+      }
+    })
+    let resp = await createPost.setUser(selectedUser)
+    res.json(resp)
   } catch (e) {
     next(e)
   }
 })
 // --> show one user's posts
-app.get('/users/posts', async (req, res, next) => {
+app.get('/users/:id/posts', async (req, res, next) => {
   try {
-    const userPosts = await Post.findAll()
-    res.json({posts})
+    let {id} = req.params;
+    console.log(req);
+    const userPosts = await Post.findAll({
+      where: {
+        user_id: id
+      }
+    })
+    let selectedUser = await User.findOne({
+      where: {
+        id
+      }
+    })
+    res.json([userPosts,selectedUser])
   } catch (e) {
     next(e)
   }
