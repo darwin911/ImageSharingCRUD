@@ -20,7 +20,7 @@ App registration, app login, post/see/change/delete a photo (CRUD).
 ![diagram of the database tables, schemas, and relations.](https://trello-attachments.s3.amazonaws.com/5c8be7275751825d0fd18313/781x512/eef31a9b0efd1eb005c47bbc66b12db9/DatabaseERD.jpg)
 
 ## API Endpoint Documentations
-`userRouter.post "/"`  -->create user
+`userRouter.post "/user"`  -->create user
 
 `userRouter.post "/login"` --> login user
 
@@ -28,11 +28,15 @@ App registration, app login, post/see/change/delete a photo (CRUD).
 
 `userRouter.put "/user/:id/"` --> edit profile page
 
-`postRouter.post "/user/:id/posts"` --> create post
+`userRouter.post "/user/:id/posts"` --> create post
 
-`postRouter.put "/user/:id/posts"` --> edit posts
+`userRouter.post "/user/:id/posts"` --> show all post by user
 
-`postRouter.put "/user/:id/posts"` --> delete posts
+`userRouter.post "/login/publicposts"` --> show all post of all users
+
+`userRouter.put "/user/:id/posts"` --> edit posts
+
+`userRouter.delete "/user/:id/posts"` --> delete posts
 
 ## List Dependencies
 Axios, Express, Morgan, Body-Parser, Cors, React-router-dom
