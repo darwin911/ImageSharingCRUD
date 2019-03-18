@@ -100,10 +100,12 @@ class App extends Component {
         </CloudinaryContext>
         
             <Route path="/login" render={
-              () => <Login />} 
+              () => <Login 
+                handleChange={this.handleChange}/>} 
             />
             <Route path="/register" render={
-              () => <Register />} 
+              () => <Register 
+                handleChange={this.handleChange}/>} 
             />
       </div>
     );
