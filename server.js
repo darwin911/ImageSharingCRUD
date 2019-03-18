@@ -2,13 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const { Router } = require('express')
+const { Router } = require('express');
+const { hash, compare, encode, verify } = require('./auth');
+const { Post, User, Comment, Likes } = require('./models');
 
 // allow the port to be defined with an env var or a dev value
 const PORT = process.env.PORT || 3000;
-
-// declare userRouter
-const userRouter = Router();
 
 // after importing middleware define app and mount them
 const app = express();
@@ -19,36 +18,63 @@ app.use(logger('dev'));
 
 // mount route handlers
 // --> create user
-userRouter.post('/', async (req, res) => {
+app.post('/users', async (req, res) => {
+  res.json('hey yall');
   try {
-    const createUser = await User.create(req.body)
-    res.json(createUser.get())
+    let {name, password, email, bio, pro_pic} = req.body;
+    let password_digest = await hash(password);
+    const createUser = await User.create({
+      name,
+      password_digest,
+      email,
+      bio,
+      pro_pic
+    })
+    let token = await encode(createUser.dataValues)
+    res.locals.photoapptoken = token
   } catch (e) {
-    res.status(500).send(e.message)
+    console.error(e);
   }
 })
 // --> login user
-userRouter.post('/login', async (req, res) => {
+app.post('/users/login', async (req, res) => {
   try {
-    const loginUser = await User.findone({
+    let {password} = req.body;
+    const loginUser = await User.findOne({
       where: {
-        username: req.body.username
+        email: req.body.email
       }
     });
+    let {password_digest} = loginUser;
+    let verify = await compare(password, password_digest);
+    if (verify) {
+      let token = await encode(loginUser.dataValues)
+      res.locals.photoapptoken = token
+    } else {
+      res.status(403)
+    }
   } catch (e) {
-    res.status(500).send(e.message)
+    res.status(404).send(e.message)
   }
 })
 // --> user profile page
-  userRouter.get('/user/:id', async (req, res) => {
+  app.get('/users', async (req, res) => {
     try {
 
     } catch (e) {
 
     }
   })
+  // --> get ALL users
+    app.get('/allusers', async (req, res) => {
+      try {
+
+      } catch (e) {
+
+      }
+    })
 // --> edit profile page
-userRouter.put('/user/:id/', async (req, res) => {
+app.put('/users', async (req, res) => {
   try {
 
   } catch (e) {
@@ -56,7 +82,7 @@ userRouter.put('/user/:id/', async (req, res) => {
   }
 })
 // --> create post
-userRouter.post('/user/:id/posts', async (req, res, next) => {
+app.post('/users/posts', async (req, res, next) => {
   try {
     const createPost = await Post.create(req.body)
     res.json(createPost.get())
@@ -65,7 +91,7 @@ userRouter.post('/user/:id/posts', async (req, res, next) => {
   }
 })
 // --> show one user's posts
-userRouter.get('/users/posts', async (req, res, next => {
+app.get('/users/posts', async (req, res, next) => {
   try {
     const userPosts = await Post.findAll()
     res.json({posts})
@@ -73,26 +99,18 @@ userRouter.get('/users/posts', async (req, res, next => {
     next(e)
   }
 })
-// --> show ALL posts
-userRouter.get('/posts', async (req, res) => {
-  try {
-
-  } catch (e) {
-
-  }
-})
 // --> edit posts (tentatively done)
-userRouter.put('/user/:id/posts', async (req, res, next) => {
+app.put('/users/posts', async (req, res, next) => {
   try {
     const userPost = await User.findByPk(req.params.id)
-    userPost.update.(req.body)
+    userPost.update(req.body)
     res.json(userPost)
   } catch (e) {
     next(e)
   }
 })
 // --> delete posts (tentatively done)
-userRouter.delete('/user/:id/posts', async (req, res, next) => {
+app.delete('/users/posts', async (req, res, next) => {
   try {
     const userPost = await Post.findByPk(req.params.id)
     userPost.destroy();
@@ -105,10 +123,8 @@ userRouter.delete('/user/:id/posts', async (req, res, next) => {
 // generic "tail" middleware for handling errors
 app.use((e, req, res, next) => {
   console.log(e);
-  res.status(500).send(e.message);
+  res.status(404).send(e.message);
 });
 
 // bind app to a port
 app.listen(PORT, () => console.log(`up and running on port ${PORT}`));
-
-module.exports = userRouter
