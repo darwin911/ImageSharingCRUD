@@ -28,8 +28,7 @@ For Post MVP you will be able to like other peoples posts, and comment on other 
 App registration, app login, post/see/change/delete a photo (CRUD).
 
 ## Entity Relationship Diagram
-![diagram of the database tables, schemas, and relations.]
-(https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8be7275751825d0fd18313/eb845c46a49ac4fbbc2f5de7ef849866/DatabaseERD.jpg)
+![diagram of the database tables, schemas, and relations.](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8be7275751825d0fd18313/eb845c46a49ac4fbbc2f5de7ef849866/DatabaseERD.jpg)
 
 ## API Endpoint Documentations
 `userRouter.post "/user"`  -->create user

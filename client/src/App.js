@@ -26,7 +26,12 @@ class App extends Component {
       filepath: '',
       isLoggedIn: false,
       authToken: '',
-      reelPosts: []
+      reelPosts: [],
+      loginData: {
+        email: '',
+        password: ''
+      }
+      
     }
     this.handleUpload = this.handleUpload.bind(this);
     this.handleChange = this.handleChange.bind(this);
