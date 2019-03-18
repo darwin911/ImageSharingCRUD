@@ -3,12 +3,11 @@ import React from 'react';
 const Register = (props) => {
   const { name, email, password, handleChange, handleSubmit } = props;
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <h3>Register Form</h3>
       <input
         type='text'
         name='name'
-        id='name'
         placeholder="Name"
         onChange={handleChange}
         value={name}
@@ -16,7 +15,6 @@ const Register = (props) => {
       <input
         type='text'
         name='email'
-        id='email'
         placeholder="Email"
         onChange={handleChange}
         value={email}
@@ -24,7 +22,6 @@ const Register = (props) => {
       <input
         type='text'
         name='password'
-        id='password'
         placeholder="Password"
         onChange={handleChange}
         value={password}
