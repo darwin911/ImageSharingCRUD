@@ -10,37 +10,48 @@ Rendering the views differently when a user is logged in vs. when a user is not 
 ## MVP and Post MVP
 ### MVP
 MVP will be an app where you can post pictures after registering and logging in. You will be able to view pictures of other users' posts after logging in. You will be able to go to your user profile page and view pictures that you have posted.
+
+- Register User
+- Login
+- See all posts
+- Create own post
+- Edit own post
+- Delete own post
+
 ### POST MVP
 For Post MVP you will be able to like other peoples posts, and comment on other people's posts. You will also be able to search for other users and go to their pages to see their posts.
+
+- Like posts
+- Add comments
 
 ## Feature List
 App registration, app login, post/see/change/delete a photo (CRUD).
 
 ## Entity Relationship Diagram
-![diagram of the database tables, schemas, and relations.](https://trello-attachments.s3.amazonaws.com/5c8be7275751825d0fd18313/781x512/eef31a9b0efd1eb005c47bbc66b12db9/DatabaseERD.jpg)
+![diagram of the database tables, schemas, and relations.]
+(https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8be7275751825d0fd18313/eb845c46a49ac4fbbc2f5de7ef849866/DatabaseERD.jpg)
 
 ## API Endpoint Documentations
 `userRouter.post "/user"`  -->create user
 
-`userRouter.post "/login"` --> login user
+`userRouter.post "/user/login"` --> login user
 
 `userRouter.get "/user/:id/"` --> user profile page
 
 `userRouter.put "/user/:id/"` --> edit profile page
 
-`userRouter.post "/user/:id/posts"` --> create post
+`userRouter.post "/user/:id/post"` --> create post
 
-`userRouter.post "/user/:id/posts"` --> show all post by user
+`userRouter.get "/user/:id/post"` --> show all post by user
 
-`userRouter.post "/login/publicposts"` --> show all post of all users
+`userRouter.get "/posts"` --> show all posts of all users
 
-`userRouter.put "/user/:id/posts"` --> edit posts
+`userRouter.put "/user/:id/:post_id"` --> edit post
 
-`userRouter.delete "/user/:id/posts"` --> delete posts
+`userRouter.delete "/user/:id/:post_id"` --> delete post
 
 ## List Dependencies
-Axios, Express, Morgan, Body-Parser, Cors, React-router-dom
-Cloudinary-React, React-File-Base64
+Axios, Express, Morgan, Pg, Nodemon, sequelize, Body-Parser, Cors, React-router-dom, Cloudinary-React, React-File-Base64
 
 ## Wireframes
 ![Wireframe Main View](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8be7487788656e2020932e/5c88de08d90376e20eebd526d9abac48/IMG_20190316_150426.jpg)

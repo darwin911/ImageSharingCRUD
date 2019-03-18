@@ -24,11 +24,8 @@ const createUser = async (data) => {
   return resp.data;
 };
 // Login
- const loginUser = async ({ email, password }) => {
-  const resp = await api.post('/login', {
-    email,
-    password
-  });
+ const loginUser = async (data) => {
+  const resp = await api.post('/login', data)
  return resp.data;
  }
  // Edit profile
@@ -38,22 +35,22 @@ const editUser = async (id, data) => {
 }
 // Create post
 const createPost = async (id, data) => {
-  const resp = await axios.post(`/user/${id}/posts`, data);
+  const resp = await axios.post(`/user/${id}/post`, data);
   return resp.data;
 };
 // Edit/Change post
 const editPost = async (id, data) => {
-  const resp = await axios.put(`/user/${id}/posts`, data);
+  const resp = await axios.put(`/user/${id}/${post_id}`, data);
   return resp.data
 }
 // Delete post
 export const deletePost = async (id) => {
-  const resp = await api.delete(`/user/${id}/posts`);
+  const resp = await api.delete(`/user/${id}/${post_id}`);
   return resp.data;
 }
-// Get all public posts once logged in
+// Get all posts once logged in
 const getAllPosts = async () => {
-  const resp = await axios.get('/login/publicposts');
+  const resp = await axios.get('/posts');
   return resp.data;
 };
 // Get users own post on profile page
