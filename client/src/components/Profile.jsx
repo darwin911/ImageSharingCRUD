@@ -1,11 +1,14 @@
 import React from 'react';
 
-const Profile = () => {
+const Profile = props => {
   return (
-    <div>
-      <p>Profile</p>
+    
+    <div className='profile'>
+      <img src='' alt='' />
+      <p>name:</p>
+      <p>bio:</p>
     </div>
-  )
-}
+  );
+};
 
 export default Profile;
