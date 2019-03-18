@@ -32,7 +32,7 @@ App registration, app login, post/see/change/delete a photo (CRUD).
 
 `userRouter.put "/user/:id/posts"` --> edit posts
 
-`userRouter.put "/user/:id/posts"` --> delete posts
+`userRouter.delete "/user/:id/posts"` --> delete posts
 
 ## List Dependencies
 Axios, Bcrypt, Express, Morgan, Body-Parser, Cors, React-router-dom, Cloudinary-React, React-File-Base64, Jsonwebtoken, Pg, Nodemon, Sequelize
