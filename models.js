@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize({
-  database: 'postPicle',
+  database: process.env.DATABASE_URL,
   dialect: 'postgres',
   operatorsAliases: false,
   define: {
