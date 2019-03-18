@@ -16,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/darwin911/ImageSharingCRUD/issues"
   },
-  "homepage": "https://github.com/darwin911/ImageSharingCRUD#readme"
+  "homepage": "https://github.com/darwin911/ImageSharingCRUD#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.4",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.10",
+    "pg": "^7.9.0",
+    "sequelize": "^5.1.0"
+  }
 }
