@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
+let sequelize;
 if (process.env.DATABASE_URL) {
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
   operatorsAliases: false,
   define: {
@@ -9,7 +10,7 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
   }
 });
 } else {
-  const sequelize = new Sequelize({
+  sequelize = new Sequelize({
     database: 'PostPicle',
     dialect: 'postgres',
     operatorsAliases: false,
