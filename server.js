@@ -3,7 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const { Router } = require('express');
-const { hash, compare, encode, verify } = require('./auth');
+const { hash, compare, encode, verify, restrict } = require('./auth');
 const { Post, User, Comment, Likes } = require('./models');
 
 // allow the port to be defined with an env var or a dev value
@@ -56,14 +56,14 @@ app.post('/users/login', async (req, res) => {
     res.status(404).send(e.message)
   }
 })
-// --> user profile page
-  app.get('/users', async (req, res) => {
+// --> user profile page <--- this path is now subsumed in get "users/:id/posts" which returns both a profile and images
+  /*app.get('/users', async (req, res) => {
     try {
 
     } catch (e) {
 
     }
-  })
+  })*/
   // --> get ALL users
     app.get('/allusers', async (req, res) => {
       try {
@@ -99,7 +99,7 @@ app.post('/users/posts', async (req, res, next) => {
     next(e)
   }
 })
-// --> show one user's posts
+// --> show one user's profile & posts
 app.get('/users/:id/posts', async (req, res, next) => {
   try {
     let {id} = req.params;
@@ -120,25 +120,36 @@ app.get('/users/:id/posts', async (req, res, next) => {
   }
 })
 // --> edit posts (tentatively done)
-app.put('/users/posts', async (req, res, next) => {
+app.put('/users/posts/', async (req, res) => {
+  let {id, title, description, publicId} = req.body;
   try {
-    const userPost = await User.findByPk(req.params.id)
-    userPost.update(req.body)
-    res.json(userPost)
+    const userPost = await Post.findByPk(id);
+    let updatedPost = await userPost.update({title,description,publicId});
+    res.json(updatedPost);
   } catch (e) {
-    next(e)
+    res.status(403)
   }
 })
 // --> delete posts (tentatively done)
-app.delete('/users/posts', async (req, res, next) => {
+app.delete('/users/posts/:id', async (req, res) => {
   try {
     const userPost = await Post.findByPk(req.params.id)
     userPost.destroy();
     res.status(200).send(`Deleted post with id ${req.params.id}`)
   } catch (e) {
-    next(e)
+    res.status(403);
   }
 })
+
+app.get('/posts', async (req, res) => {
+  console.log(req);
+  try {
+    const posts = await Post.findAll();
+    res.json(posts);
+  } catch (e) {
+    res.status(403);
+  }
+});
 
 // generic "tail" middleware for handling errors
 app.use((e, req, res, next) => {
