@@ -36,18 +36,20 @@ class App extends Component {
       userForm: {
         name: '',
         email: '',
-        password: '',
+        password: ''
       },
-      reelPosts: [{
-        title: 'Mike Post',
-        description: 'this is a long description'
-      }
-      ],
+      reelPosts: [
+        {
+          title: 'Mike Post',
+          description: 'this is a long description'
+        }
+      ]
     };
     this.handleUpload = this.handleUpload.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this)
   }
 
   async componentDidMount() {
@@ -62,7 +64,7 @@ class App extends Component {
     e.preventDefault();
     let { filepath } = this.state;
     let resp = await uploadPhoto(filepath);
-    console.log(resp)
+    console.log(resp);
     return resp;
   }
 
@@ -80,46 +82,56 @@ class App extends Component {
   async handleLogin(e) {
     e.preventDefault();
     const { email, password } = this.state.userForm;
-    console.log(this.state.userForm)
+    console.log(this.state.userForm);
     const currentUser = await loginUser({
       email,
-      password,
+      password
     });
-    console.log(currentUser)
+    console.log(currentUser);
     if (currentUser !== null) {
       localStorage.setItem('token', currentUser);
       this.setState(prevState => ({
         currentUser: {
           name: 'Mike',
-          bio: 'I love coco, and coding, I live in Queens but Manhattan rocks, sometimes.',
-          pro_pic: null,
+          bio:
+            'I love coco, and coding, I live in Queens but Manhattan rocks, sometimes.',
+          pro_pic: null
         },
         isLoggedIn: true,
         userForm: {
           ...prevState.userForm,
           email: '',
-          password: '',
+          password: ''
         }
       }));
     }
+  }
+  handleLogout(e) {
+    e.preventDefault();
+    console.log('Heyyyyyyyy');
+    
+    localStorage.removeItem('token');
+    this.setState({
+      isLoggedIn: false
+    });
   }
 
   async handleSubmit(e) {
     e.preventDefault();
     //name email password bio pro_pic
-    const userData = { ...this.state.userForm }
+    const userData = { ...this.state.userForm };
     const resp = await createUser(userData);
-    localStorage.setItem('token', resp)
+    localStorage.setItem('token', resp);
     this.setState(prevState => ({
       ...prevState,
       userForm: {
         ...prevState.userForm,
         name: '',
         email: '',
-        password: '',
+        password: ''
       }
     }));
-    console.log(resp)
+    console.log(resp);
   }
 
   getFiles(filepath) {
@@ -132,29 +144,39 @@ class App extends Component {
     return (
       <div className='App'>
         <Nav
-          isLoggedIn={this.state.isLoggedIn} />
+          isLoggedIn={this.state.isLoggedIn}
+          handleLogout={this.handleLogout} />
 
         <h1 className="title"><span>Post</span>Pic</h1>
 
-        <Route path="/login" render={
-          () => <Login
-            userForm={this.state.userForm}
-            handleChange={this.handleChange}
-            handleLogin={this.handleLogin}
-          />} />
-        <Route path="/register" render={
-          () => <Register
-            userForm={this.state.userForm}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />} />
-
-        {this.state.isLoggedIn && <PostForm />}
-        
         <Profile
           currentUser={this.state.currentUser} />
-        <Reel
-          reelPosts={this.state.reelPosts} />
+
+        {!this.state.isLoggedIn && (
+          <>
+            <Route
+              exact path='/login'
+              render={() => (
+                <Login
+                  userForm={this.state.userForm}
+                  handleChange={this.handleChange}
+                  handleLogin={this.handleLogin} />)} />
+            <Route
+              exact path='/register'
+              render={() => (
+                <Register
+                  userForm={this.state.userForm}
+                  handleChange={this.handleChange}
+                  handleSubmit={this.handleSubmit} />)} />
+          </>
+        )}
+        
+         <Profile
+          currentUser={this.state.currentUser} />
+            
+        {this.state.isLoggedIn && <PostForm />}
+
+        <Reel reelPosts={this.state.reelPosts} />
 
         <Footer />
       </div>
@@ -169,7 +191,6 @@ export default App;
 // cloudName='photo-sharing-app'
 // apiKey={api_key}
 // apiSecret={api_secret}>
-
 // <Route exact path='/'
 //   render={props => (
 //     <>
@@ -192,3 +213,4 @@ export default App;
 //   )}
 // />
 // </CloudinaryContext>
+

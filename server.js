@@ -31,7 +31,7 @@ app.post('/users', async (req, res) => {
       pro_pic
     })
     let token = await encode(createUser.dataValues)
-    res.json(token);
+    res.json([token,createUser.dataValues]);
   } catch (e) {
     console.error(e);
   }
@@ -49,7 +49,7 @@ app.post('/users/login', async (req, res) => {
     let verify = await compare(password, password_digest);
     if (verify) {
       let token = await encode(loginUser.dataValues)
-      res.json(token);
+      res.json([token,loginUser.dataValues]);
     } else {
       res.status(403)
     }

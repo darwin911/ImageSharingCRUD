@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize({
-  database: process.env.DATABASE_URL || 'PostPicle',
+let sequelize;
+if (process.env.DATABASE_URL) {
+sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
   operatorsAliases: false,
   define: {
@@ -8,6 +9,17 @@ const sequelize = new Sequelize({
     returning: true
   }
 });
+} else {
+  sequelize = new Sequelize({
+    database: 'PostPicle',
+    dialect: 'postgres',
+    operatorsAliases: false,
+    define: {
+      underscored: true,
+      returning: true
+  }
+  });
+}
 
 const User = sequelize.define('user', {
   name: Sequelize.STRING,
