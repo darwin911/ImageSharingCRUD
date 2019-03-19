@@ -103,7 +103,13 @@ class App extends Component {
       }));
     }
   }
-
+handleLogout(e) {
+  e.preventDefault();
+  localStorage.removeItem('token');
+  this.setState({
+    isLoggedIn: false,
+  })
+}
   async handleSubmit(e) {
     e.preventDefault();
     //name email password bio pro_pic
