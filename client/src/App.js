@@ -149,7 +149,7 @@ class App extends Component {
             handleSubmit={this.handleSubmit}
           />} />
 
-        <PostForm />
+        {this.state.isLoggedIn && <PostForm />}
         
         <Profile
           currentUser={this.state.currentUser} />
