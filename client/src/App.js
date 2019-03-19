@@ -82,18 +82,21 @@ class App extends Component {
     console.log(currentUser)
     if (currentUser !== null) {
       localStorage.setItem('token', currentUser);
-      this.setState({
-        email: '',
-        password: '',
-        isLoggedIn: true,
-      });
+      this.setState(prevState => ({
+        ...prevState,
+        userForm: {
+          ...prevState.userForm,
+          email: '',
+          password: '',
+        }
+      }));
     }
   }
 
   async handleSubmit(e) {
     e.preventDefault();
     //name email password bio pro_pic
-    const userData = {...this.state.userForm }
+    const userData = { ...this.state.userForm }
     const resp = await createUser(userData);
     localStorage.setItem('token', resp)
     this.setState(prevState => ({
@@ -107,17 +110,18 @@ class App extends Component {
     }));
     console.log(resp)
   }
-  
+
   getFiles(filepath) {
     this.setState({
       filepath: filepath
     });
   }
-  
+
   render() {
     return (
       <div className='App'>
-        <Nav />
+        <Nav
+          isLoggedIn={this.state.isLoggedIn} />
 
         <h1 className="title"><span>Post</span>Pic</h1>
 
