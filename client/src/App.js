@@ -56,6 +56,12 @@ class App extends Component {
       this.setState({
         authToken: localStorage.getItem('token')
       });
+      if (localStorage.getItem('user')) {
+        this.setState({
+          currentUser: JSON.parse(localStorage.getItem('user')),
+          isLoggedIn: true
+        })
+      }
     }
   }
 
@@ -81,22 +87,20 @@ class App extends Component {
   async handleLogin(e) {
     e.preventDefault();
     const { email, password } = this.state.userForm;
-    console.log(this.state.userForm);
-    const currentUser = await loginUser({
+    console.log(this.state.userForm)
+    const resp = await loginUser({
       email,
       password
     });
-    console.log(currentUser);
-    if (currentUser !== null) {
-      localStorage.setItem('token', currentUser);
+    console.log(resp[0]);
+    console.log(resp[1]);
+    if (resp !== null) {
+      localStorage.setItem('token', resp[0]);
+      localStorage.setItem('user', JSON.stringify(resp[1]));
       this.setState(prevState => ({
-        currentUser: {
-          name: 'Mike',
-          bio:
-            'I love coco, and coding, I live in Queens but Manhattan rocks, sometimes.',
-          pro_pic: null
-        },
         isLoggedIn: true,
+        authToken: resp[0],
+        currentUser: resp[1],
         userForm: {
           ...prevState.userForm,
           email: '',
@@ -118,15 +122,20 @@ class App extends Component {
     //name email password bio pro_pic
     const userData = { ...this.state.userForm };
     const resp = await createUser(userData);
-    localStorage.setItem('token', resp);
+    localStorage.setItem('token', resp[0]);
+    localStorage.setItem('user', JSON.stringify(resp[1]));
+
     this.setState(prevState => ({
       ...prevState,
       userForm: {
         ...prevState.userForm,
         name: '',
         email: '',
-        password: ''
-      }
+        password: '',
+      },
+      isLoggedIn: true,
+      authToken: resp[0],
+      currentUser: resp[1]
     }));
     console.log(resp);
   }
