@@ -16,7 +16,8 @@ import Nav from './components/Nav';
 // import ImageUpload from './components/ImageUpload';
 import Login from './components/Login';
 import Register from './components/Register';
-import Reel from './components/Reel';
+// import Reel from './components/Reel';
+// import Post from './components/Post';
 // import PostForm from './components/PostForm';
 import Footer from './components/Footer';
 
@@ -72,7 +73,8 @@ class App extends Component {
 
   async handleLogin(e) {
     e.preventDefault();
-    const { email, password } = this.state;
+    const { email, password } = this.state.userForm;
+    console.log(this.state.userForm)
     const currentUser = await loginUser({
       email,
       password,
@@ -91,50 +93,46 @@ class App extends Component {
   async handleSubmit(e) {
     e.preventDefault();
     //name email password bio pro_pic
-    const userData = { ...this.state.userForm }
-    console.log(userData)
+    const userData = {...this.state.userForm }
     const resp = await createUser(userData);
     localStorage.setItem('token', resp)
-    this.setState({
-      name: '',
-      email: '',
-      password: '',
-    });
+    this.setState(prevState => ({
+      ...prevState,
+      userForm: {
+        ...prevState.userForm,
+        name: '',
+        email: '',
+        password: '',
+      }
+    }));
     console.log(resp)
   }
-
+  
   getFiles(filepath) {
     this.setState({
       filepath: filepath
     });
   }
-
+  
   render() {
     return (
       <div className='App'>
-        <Nav
-          isLoggedIn={this.state.isLoggedIn} />
+        <Nav />
 
         <h1 className="title"><span>Post</span>Pic</h1>
 
         <Route path="/login" render={
           () => <Login
-            email={this.state.email}
-            password={this.state.password}
+            userForm={this.state.userForm}
             handleChange={this.handleChange}
             handleLogin={this.handleLogin}
           />} />
         <Route path="/register" render={
           () => <Register
-            name={this.state.name}
-            email={this.state.email}
-            password={this.state.password}
+            userForm={this.state.userForm}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />} />
-
-        <Route path="/home" render={
-          () => <Reel />} />
         {/* <CloudinaryContext
           cloudName='photo-sharing-app'
           apiKey={api_key}
