@@ -135,7 +135,7 @@ class App extends Component {
           isLoggedIn={this.state.isLoggedIn} />
 
         <h1 className="title"><span>Post</span>Pic</h1>
-        
+
         <Route path="/login" render={
           () => <Login
             userForm={this.state.userForm}
@@ -148,44 +148,13 @@ class App extends Component {
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />} />
-        <CloudinaryContext
-          cloudName='photo-sharing-app'
-          apiKey={api_key}
-          apiSecret={api_secret}>
 
-          <Route
-            exact path='/'
-            render={props => (
-              <div>
-                <PostForm/>
-                <h2>Image retrieved from our Cloudinary account through the React SDK.</h2>
-                <Image
-                  publicId='sample'
-                  width='300' />
-                <form>
-                  <FilesBase64
-                    multiple={false}
-                    onDone={this.getFiles.bind(this)} />
-                  <button type='submit'
-                    onClick={this.handleUpload}>upload</button>
-                </form>
-              </div>
-            )}
-          />
-
-          <Route
-            path='/user/:id'
-            render={props => (
-              <div>
-                <h1>User: {props.match.params.id}</h1>
-              </div>
-            )}
-          />
-        </CloudinaryContext>
-        <Profile 
-          currentUser={this.state.currentUser}/>
+        <PostForm />
+        
+        <Profile
+          currentUser={this.state.currentUser} />
         <Reel
-          reelPosts={this.state.reelPosts}/>
+          reelPosts={this.state.reelPosts} />
 
         <Footer />
       </div>
@@ -194,3 +163,32 @@ class App extends Component {
 }
 
 export default App;
+
+
+// <CloudinaryContext
+// cloudName='photo-sharing-app'
+// apiKey={api_key}
+// apiSecret={api_secret}>
+
+// <Route exact path='/'
+//   render={props => (
+//     <>
+//       <h2>Image retrieved from our Cloudinary account through the React SDK.</h2>
+//       <Image
+//         publicId='sample'
+//         width='300' />
+//       <form>
+//         <FilesBase64
+//           multiple={false}
+//           onDone={this.getFiles.bind(this)} />
+//         <button type='submit'
+//           onClick={this.handleUpload}>upload</button>
+//       </form>
+//     </>)} />
+// <Route
+//   path='/user/:id'
+//   render={props => (
+//     <h1>User: {props.match.params.id}</h1>
+//   )}
+// />
+// </CloudinaryContext>

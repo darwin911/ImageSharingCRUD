@@ -109,10 +109,10 @@ input[type="submit"]:hover {
 footer {
   background: darkcyan;
   padding: 1rem 0;
-  /* position: absolute;
+  position: absolute;
   bottom: 0;
   left: 0;
-  right: 0; */
+  right: 0;
 }
 
 footer p {
