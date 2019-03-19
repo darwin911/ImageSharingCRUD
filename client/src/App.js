@@ -12,7 +12,7 @@ import { Route, Link } from 'react-router-dom';
 import { uploadPhoto, createUser, loginUser } from './services/services';
 // import Hero from './components/Hero';
 import Nav from './components/Nav';
-// import Profile from './components/Profile';
+import Profile from './components/Profile';
 // import ImageUpload from './components/ImageUpload';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -135,7 +135,7 @@ class App extends Component {
           isLoggedIn={this.state.isLoggedIn} />
 
         <h1 className="title"><span>Post</span>Pic</h1>
-
+        
         <Route path="/login" render={
           () => <Login
             userForm={this.state.userForm}
@@ -182,7 +182,8 @@ class App extends Component {
             )}
           />
         </CloudinaryContext>
-
+        <Profile 
+          currentUser={this.state.currentUser}/>
         <Reel
           reelPosts={this.state.reelPosts}/>
 
