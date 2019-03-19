@@ -21,6 +21,7 @@ app.use(logger('dev'));
 app.post('/users', async (req, res) => {
   try {
     let {name, password, email, bio, pro_pic} = req.body;
+    console.log(name, password, email)
     let password_digest = await hash(password);
     const createUser = await User.create({
       name,

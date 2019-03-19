@@ -1,10 +1,11 @@
 import React from 'react';
+import Post from './Post';
 
 const Reel = () => {
   return (
-    <div>
-      <p>Reel</p>
-    </div>
+    <main>
+      <Post />
+    </main>
   )
 }
 

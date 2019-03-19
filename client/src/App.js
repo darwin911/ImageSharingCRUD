@@ -16,8 +16,7 @@ import Nav from './components/Nav';
 // import ImageUpload from './components/ImageUpload';
 import Login from './components/Login';
 import Register from './components/Register';
-// import Reel from './components/Reel';
-// import Post from './components/Post';
+import Reel from './components/Reel';
 // import PostForm from './components/PostForm';
 import Footer from './components/Footer';
 
@@ -92,11 +91,8 @@ class App extends Component {
   async handleSubmit(e) {
     e.preventDefault();
     //name email password bio pro_pic
-    const userData = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-    }
+    const userData = { ...this.state.userForm }
+    console.log(userData)
     const resp = await createUser(userData);
     localStorage.setItem('token', resp)
     this.setState({
@@ -106,17 +102,18 @@ class App extends Component {
     });
     console.log(resp)
   }
-  
+
   getFiles(filepath) {
     this.setState({
       filepath: filepath
     });
   }
-  
+
   render() {
     return (
       <div className='App'>
-        <Nav />
+        <Nav
+          isLoggedIn={this.state.isLoggedIn} />
 
         <h1 className="title"><span>Post</span>Pic</h1>
 
@@ -135,6 +132,9 @@ class App extends Component {
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />} />
+
+        <Route path="/home" render={
+          () => <Reel />} />
         {/* <CloudinaryContext
           cloudName='photo-sharing-app'
           apiKey={api_key}
