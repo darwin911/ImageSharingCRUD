@@ -3,7 +3,7 @@ import React from 'react';
 const Reel = props => {
   return (
     <div>
-      {props.reelPost.map(post => (
+      {props.reelPost && props.reelPost.map(post => (
         <div>
           <p>Title Bar</p>
           {/* {post.title}  */}
@@ -11,7 +11,7 @@ const Reel = props => {
           {/* {post.description} */}
         </div>
       ))}
-      <p>Reel</p>
+      
     </div>
   );
 };
