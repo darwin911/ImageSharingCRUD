@@ -2,12 +2,11 @@ import React from 'react';
 
 const Post = props => {
   return (
-    
-    <div className='post'>
+    <article className='post'>
       <img src='' alt='' />
       <p>title:</p>
       <p>description:</p>
-    </div>
+    </article>
   );
 };
 

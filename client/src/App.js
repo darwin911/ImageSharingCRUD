@@ -88,6 +88,11 @@ class App extends Component {
     if (currentUser !== null) {
       localStorage.setItem('token', currentUser);
       this.setState(prevState => ({
+        currentUser: {
+          name: 'Mike',
+          bio: 'I love coco, and coding, I live in Queens but Manhattan rocks, sometimes.',
+          pro_pic: null,
+        },
         isLoggedIn: true,
         userForm: {
           ...prevState.userForm,
