@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:200,400,700,900|Sniglet:400,800');
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -20,13 +22,15 @@ html {
 
 nav {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
   background: linear-gradient(to right, #2ECC40, rgb(10, 173, 29));
   margin-bottom: 1rem;
+  padding: 1rem 0;
 }
 
 a {
-  color: #B10DC9;
+  color: white;
   transition: color 150ms ease-in;
   margin-bottom: 0.5rem;
   font-weight: 900;
@@ -34,6 +38,24 @@ a {
 
 a:hover {
   color: white;
+}
+
+.title {
+  /* font-family: 'Nunito', sans-serif; */
+  font-family: 'Sniglet', cursive;
+  padding: 0;
+  font-size: 3.5rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.title span {
+  font-family: 'Sniglet', cursive;
+  font-family: 'Nunito', sans-serif;
+  font-size: 3.75rem;
+  letter-spacing: -2px;
+  font-weight: 100;
 }
 
 form {
@@ -77,4 +99,17 @@ button[type="button"] {
 
 input[type="submit"]:hover {
   background: rgb(33, 170, 49);;
+}
+
+footer {
+  background: darkcyan;
+  padding: 1rem 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+footer p {
+  font-weight: 400;
 }
