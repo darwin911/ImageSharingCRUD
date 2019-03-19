@@ -19,7 +19,7 @@ import Register from './components/Register';
 // import Reel from './components/Reel';
 // import Post from './components/Post';
 // import PostForm from './components/PostForm';
-// import Footer from './components/Footer';
+import Footer from './components/Footer';
 
 let api_key = process.env.REACT_APP_API_KEY;
 let api_secret = process.env.REACT_APP_API_SECRET;
@@ -117,6 +117,9 @@ class App extends Component {
     return (
       <div className='App'>
         <Nav />
+
+        <h1 className="title"><span>Post</span>Pic</h1>
+
         <Route path="/login" render={
           () => <Login
             email={this.state.email}
@@ -165,7 +168,7 @@ class App extends Component {
             )}
           />
         </CloudinaryContext> */}
-
+        <Footer />
       </div>
     );
   }
