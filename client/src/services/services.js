@@ -9,8 +9,7 @@ let cloudinaryApi = axios.create({
 
 const uploadPhoto = async (filepath) => {
   console.log('triggered');
-  let resp = await axios.post(
-    'https://api.cloudinary.com/v1_1/photo-sharing-app/image/upload',
+  let resp = await cloudinaryApi.post('' ,
     {
       file: filepath,
       upload_preset: 'v3ntb0un'

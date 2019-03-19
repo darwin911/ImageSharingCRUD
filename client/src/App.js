@@ -60,7 +60,8 @@ class App extends Component {
   async handleUpload(e) {
     e.preventDefault();
     let { filepath } = this.state;
-    let resp = await uploadPhoto(filepath.base64);
+    let resp = await uploadPhoto(filepath);
+    console.log(resp)
     return resp;
   }
 
@@ -117,7 +118,7 @@ class App extends Component {
 
   getFiles(filepath) {
     this.setState({
-      filepath: filepath
+      filepath: filepath.base64
     });
   }
 
@@ -141,7 +142,7 @@ class App extends Component {
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />} />
-        {/* <CloudinaryContext
+        <CloudinaryContext
           cloudName='photo-sharing-app'
           apiKey={api_key}
           apiSecret={api_secret}>
@@ -173,7 +174,7 @@ class App extends Component {
               </div>
             )}
           />
-        </CloudinaryContext> */}
+        </CloudinaryContext>
 
         <Reel 
           reelPosts={this.state.reelPosts}/>
