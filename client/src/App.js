@@ -28,10 +28,15 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      filepath: '',
-      isLoggedIn: false,
       authToken: '',
       currentUser: null,
+      filepath: '',
+      isLoggedIn: false,
+      userForm: {
+        name: '',
+        email: '',
+        password: '',
+      },
       reelPosts: [],
     };
     this.handleUpload = this.handleUpload.bind(this);
@@ -59,7 +64,10 @@ class App extends Component {
     const { name, value } = e.target;
     this.setState(prevState => ({
       ...prevState,
-      [name]: value
+      userForm: {
+        ...prevState.userForm,
+        [name]: value
+      }
     }));
   }
 
