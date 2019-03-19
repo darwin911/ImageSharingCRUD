@@ -24,14 +24,11 @@ const createUser = async (data) => {
   return resp.data;
 };
 // Login
- const loginUser = async ({ email, password }) => {
-  const resp = await axios.post('/login', {
-    email,
-    password
-  });
- return resp.data;
- }
- // Edit profile
+const loginUser = async (data) => {
+  const resp = await axios.post('http://localhost:3000/users/login', data);
+  return resp.data;
+}
+// Edit profile
 const editUser = async (id, data) => {
   const resp = await axios.put(`/user/${id}`, data);
   return resp.data;
@@ -62,14 +59,14 @@ const getUserPosts = async id => {
   return resp.data;
 };
 
-export { 
-  uploadPhoto, 
-  createUser, 
+export {
+  uploadPhoto,
+  createUser,
   loginUser,
-  editUser, 
-  createPost, 
+  editUser,
+  createPost,
   editPost,
   deletePost,
   getAllPosts,
   getUserPosts,
- };
+};
