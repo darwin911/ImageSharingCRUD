@@ -83,7 +83,7 @@ class App extends Component {
     if (currentUser !== null) {
       localStorage.setItem('token', currentUser);
       this.setState(prevState => ({
-        ...prevState,
+        isLoggedIn: true,
         userForm: {
           ...prevState.userForm,
           email: '',
