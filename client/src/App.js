@@ -20,6 +20,7 @@ import Reel from './components/Reel';
 // import Post from './components/Post';
 // import PostForm from './components/PostForm';
 import Footer from './components/Footer';
+import PostForm from './components/PostForm';
 
 let api_key = process.env.REACT_APP_API_KEY;
 let api_secret = process.env.REACT_APP_API_SECRET;
@@ -156,6 +157,7 @@ class App extends Component {
             exact path='/'
             render={props => (
               <div>
+                <PostForm/>
                 <h2>Image retrieved from our Cloudinary account through the React SDK.</h2>
                 <Image
                   publicId='sample'
@@ -181,7 +183,7 @@ class App extends Component {
           />
         </CloudinaryContext>
 
-        <Reel 
+        <Reel
           reelPosts={this.state.reelPosts}/>
 
         <Footer />
