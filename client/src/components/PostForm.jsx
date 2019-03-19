@@ -46,7 +46,7 @@ class PostForm extends Component {
   //const { title, description, handleChange, handleSubmit } = props;
   render() {
     return (
-      <form>
+      <form className="post-form">
         <img src={!(this.state.filepath === "") ? this.state.filepath.base64 : null} width='100%'/>
         <FilesBase64 multiple={false} onDone={this.getFiles.bind(this)}/>
         <input

@@ -106,12 +106,34 @@ input[type="submit"]:hover {
   background: rgba(0, 0, 0, 0.5);
   padding: 1.5rem 0;
   margin: 1rem auto;
+  display: grid;
+  grid-template-columns: auto 300px auto;
 }
 
 .pro-pic {
-   width: 200px;
-   -webkit-clip-path: circle(38.5% at 50% 50%);
-  clip-path: circle(38.5% at 50% 50%);
+  grid-column-start: 2;
+  margin: 0 auto;
+}
+
+.profile p:nth-child(2){
+  grid-column-start: 2;
+}
+
+.profile p:nth-child(3){
+  grid-column-start: 2;
+}
+
+.profile button {
+  grid-column-start: 2;
+}
+
+.profile button, .post-form button {
+  border-radius: 3px;
+  margin: 0 auto 1rem;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  font-weight: bolder;
 }
 
 .post {
