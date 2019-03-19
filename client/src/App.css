@@ -5,11 +5,12 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Nunito', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 html {
   height: 100%;
+  position: relative;
 }
 
 .App {
@@ -33,7 +34,7 @@ a {
   color: white;
   transition: color 150ms ease-in;
   margin-bottom: 0.5rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 a:hover {
