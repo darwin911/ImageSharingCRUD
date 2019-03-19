@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Register = (props) => {
+const Register = props => {
   const { name, email, password, handleChange, handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
@@ -8,21 +8,21 @@ const Register = (props) => {
       <input
         type='text'
         name='name'
-        placeholder="Name"
+        placeholder='Name'
         onChange={handleChange}
         value={name}
       />
       <input
         type='text'
         name='email'
-        placeholder="Email"
+        placeholder='Email'
         onChange={handleChange}
         value={email}
       />
       <input
         type='password'
         name='password'
-        placeholder="Password"
+        placeholder='Password'
         onChange={handleChange}
         value={password}
       />
