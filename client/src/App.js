@@ -95,7 +95,7 @@ class App extends Component {
           name: 'Mike',
           bio:
             'I love coco, and coding, I live in Queens but Manhattan rocks, sometimes.',
-          pro_pic: null
+          pro_pic: 'https://images.pexels.com/photos/904276/pexels-photo-904276.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
         },
         isLoggedIn: true,
         userForm: {
@@ -109,7 +109,7 @@ class App extends Component {
   handleLogout(e) {
     e.preventDefault();
     console.log('Heyyyyyyyy');
-    
+
     localStorage.removeItem('token');
     this.setState({
       isLoggedIn: false
@@ -149,9 +149,6 @@ class App extends Component {
 
         <h1 className="title"><span>Post</span>Pic</h1>
 
-        <Profile
-          currentUser={this.state.currentUser} />
-
         {!this.state.isLoggedIn && (
           <>
             <Route
@@ -170,13 +167,15 @@ class App extends Component {
                   handleSubmit={this.handleSubmit} />)} />
           </>
         )}
-        
-         <Profile
-          currentUser={this.state.currentUser} />
-            
-        {this.state.isLoggedIn && <PostForm />}
 
-        <Reel reelPosts={this.state.reelPosts} />
+        {this.state.isLoggedIn && (
+          <>
+            <Profile
+              currentUser={this.state.currentUser} />
+            <PostForm />
+            <Reel reelPosts={this.state.reelPosts} />
+          </>
+        )}
 
         <Footer />
       </div>

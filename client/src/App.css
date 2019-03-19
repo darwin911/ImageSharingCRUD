@@ -102,12 +102,24 @@ input[type="submit"]:hover {
   background: rgb(33, 170, 49);;
 }
 
+.profile {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1.5rem 0;
+  margin: 1rem auto;
+}
+
+.pro-pic {
+   width: 200px;
+   -webkit-clip-path: circle(38.5% at 50% 50%);
+  clip-path: circle(38.5% at 50% 50%);
+}
+
 .post {
   margin-bottom: 2rem;
 }
 
 footer {
-  background: darkcyan;
+  background: rgba(0, 139, 139, 1);
   padding: 0.45rem 0;
   position: sticky;
   bottom: 0;
