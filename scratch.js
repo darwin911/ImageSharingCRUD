@@ -41,9 +41,10 @@ const showUserPosts = async () => {
 
 
 //Insert code here
-
-
-
+const getAllUsers = async () => {
+  let resp = await axios('http://localhost:3000/allusers');
+  console.log(resp.data);
+}
 //getAllUsers();
 
 
@@ -67,9 +68,15 @@ const testEditPost = async () => {
 
 
 //Insert code here
-
-
-//testEditProfile();
+const testEditProfile = async () => {
+  let resp = await axios.put('http://localhost:3000/users/4', {
+    name: 'Austin4Eva',
+    email: 'austin.fritz33@gmail.com',
+    bio: 'just tryna make mah dreamz cum true in da big city'
+  });
+  console.log(resp.data);
+}
+testEditProfile();
 
 
 
@@ -109,4 +116,4 @@ const deletePostWithPermissions = async () => {
   }});
   console.log(resp);
 }
-deletePostWithPermissions();
+//deletePostWithPermissions();

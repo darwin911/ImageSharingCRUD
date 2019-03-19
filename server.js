@@ -68,19 +68,23 @@ app.post('/users/login', async (req, res) => {
   // --> get ALL users
     app.get('/allusers', async (req, res) => {
       try {
-
+        let resp = await User.findAll();
+        res.json(resp.map(user => user.dataValues));
       } catch (e) {
-
+        res.status(403);
       }
-    })
+    });
 // --> edit profile page
-app.put('/users', async (req, res) => {
+app.put('/users/:id', async (req, res) => {
   try {
-
+    let {name, bio, email, pro_pic} = req.body;
+    const userProfile = await User.findByPk(req.params.id);
+    let selectedProfile = await userProfile.update({name, bio, email, pro_pic});
+    res.json(selectedProfile);
   } catch (e) {
-
+    res.status(403)
   }
-})
+});
 // --> create post
 app.post('/users/posts', async (req, res, next) => {
   try {
