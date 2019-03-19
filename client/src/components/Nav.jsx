@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Nav = () => {
+const Nav = (props) => {
+  console.log(props.isLoggedIn)
   return (
     <nav>
       <Link to="/">Home</Link>
+
       <span>
         <Link to="/login">
           Login

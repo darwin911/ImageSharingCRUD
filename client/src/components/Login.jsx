@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Login = props => {
-  const { email, password, handleChange, handleLogin } = props;
+  const { userForm, handleChange, handleLogin } = props;
   return (
     <form 
       onSubmit={handleLogin}
@@ -12,14 +12,14 @@ const Login = props => {
         name='email'
         placeholder="Email"
         onChange={handleChange}
-        value={email}
+        value={userForm.email}
       />
       <input
         type='password'
         name='password'
         placeholder="Password"
         onChange={handleChange}
-        value={password}
+        value={userForm.password}
       />
       <button onClick={handleLogin} type='button'>
         Submit
