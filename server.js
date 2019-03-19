@@ -131,7 +131,7 @@ app.put('/users/posts/', async (req, res) => {
   }
 })
 // --> delete posts (tentatively done)
-app.delete('/users/:id/posts/:post_id', checkAccess, async (req, res) => {
+app.delete('/users/:id/posts/:post_id', async (req, res) => {
   try {
     const userPost = await Post.findByPk(req.params.post_id)
     userPost.destroy();
@@ -141,7 +141,7 @@ app.delete('/users/:id/posts/:post_id', checkAccess, async (req, res) => {
   }
 })
 
-app.get('/posts', restrict, async (req, res) => {
+app.get('/posts', async (req, res) => {
   console.log(req);
   try {
     const posts = await Post.findAll();
