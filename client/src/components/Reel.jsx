@@ -9,8 +9,11 @@ const Reel = props => {
         <article
           className="post">
           <img src="http://unsplash.it/200/200" alt=""/>
-          <p>Title: <strong>{post.title}</strong></p>
-          <p>Description: {post.description}</p>
+          {/* <p>Title: <strong>{post.title}</strong></p>
+          <p>Description: {post.description}</p> */}
+          <Post 
+            title={props.title} 
+            description={props.description}/>
         </article>
       ))}
     </main>
