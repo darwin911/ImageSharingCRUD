@@ -73,7 +73,8 @@ class App extends Component {
 
   async handleLogin(e) {
     e.preventDefault();
-    const { email, password } = this.state;
+    const { email, password } = this.state.userForm;
+    console.log(this.state.userForm)
     const currentUser = await loginUser({
       email,
       password,
@@ -81,57 +82,58 @@ class App extends Component {
     console.log(currentUser)
     if (currentUser !== null) {
       localStorage.setItem('token', currentUser);
-      this.setState({
-        email: '',
-        password: '',
+      this.setState(prevState => ({
         isLoggedIn: true,
-      });
+        userForm: {
+          ...prevState.userForm,
+          email: '',
+          password: '',
+        }
+      }));
     }
   }
 
   async handleSubmit(e) {
     e.preventDefault();
     //name email password bio pro_pic
-    const userData = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-    }
+    const userData = { ...this.state.userForm }
     const resp = await createUser(userData);
     localStorage.setItem('token', resp)
-    this.setState({
-      name: '',
-      email: '',
-      password: '',
-    });
+    this.setState(prevState => ({
+      ...prevState,
+      userForm: {
+        ...prevState.userForm,
+        name: '',
+        email: '',
+        password: '',
+      }
+    }));
     console.log(resp)
   }
-  
+
   getFiles(filepath) {
     this.setState({
       filepath: filepath
     });
   }
-  
+
   render() {
     return (
       <div className='App'>
-        <Nav />
+        <Nav
+          isLoggedIn={this.state.isLoggedIn} />
 
         <h1 className="title"><span>Post</span>Pic</h1>
 
         <Route path="/login" render={
           () => <Login
-            email={this.state.email}
-            password={this.state.password}
+            userForm={this.state.userForm}
             handleChange={this.handleChange}
             handleLogin={this.handleLogin}
           />} />
         <Route path="/register" render={
           () => <Register
-            name={this.state.name}
-            email={this.state.email}
-            password={this.state.password}
+            userForm={this.state.userForm}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />} />

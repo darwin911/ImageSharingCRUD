@@ -18,11 +18,29 @@ const restrict = (req, res, next) => {
     res.status(403).send('Unauthorized');
   }
 }
+const checkAccess = (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    const data = jwt.verify(token, SECRET);
+    if  ((parseInt(data.id) === parseInt(req.params.id)) || //some of these parseInts might not be necessary
+        (parseInt(data.id) === parseInt(req.body.userId)) ||
+        (parseInt(data.id) === parseInt(req.body.id))||
+        (parseInt(data.id) === parseInt(req.params.userId))) {
+      next();
+    } else {
+      res.status(403);
+    }
+  } catch (e) {
+    console.error(e);
+    res.status(403);
+  }
+}
 
 module.exports = {
   hash,
   compare,
   encode,
   verify,
-  restrict
+  restrict,
+  checkAccess
 };

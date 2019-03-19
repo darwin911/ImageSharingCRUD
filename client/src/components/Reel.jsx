@@ -1,8 +1,9 @@
 import React from 'react';
+import Post from './Post';
 
 const Reel = props => {
   return (
-    <div>
+    <main>
       {props.reelPost && props.reelPost.map(post => (
         <div>
           <p>Title Bar</p>
@@ -11,8 +12,7 @@ const Reel = props => {
           {/* {post.description} */}
         </div>
       ))}
-      
-    </div>
+    </main>
   );
 };
 
