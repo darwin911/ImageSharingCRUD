@@ -16,7 +16,7 @@ import Nav from './components/Nav';
 // import ImageUpload from './components/ImageUpload';
 import Login from './components/Login';
 import Register from './components/Register';
-// import Reel from './components/Reel';
+import Reel from './components/Reel';
 // import Post from './components/Post';
 // import PostForm from './components/PostForm';
 import Footer from './components/Footer';
@@ -37,7 +37,11 @@ class App extends Component {
         email: '',
         password: '',
       },
-      reelPosts: [],
+      reelPosts: [{
+        title: 'Mike Post',
+        description: 'this is a long description'
+      }
+      ],
     };
     this.handleUpload = this.handleUpload.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -170,6 +174,10 @@ class App extends Component {
             )}
           />
         </CloudinaryContext> */}
+
+        <Reel 
+          reelPosts={this.state.reelPosts}/>
+
         <Footer />
       </div>
     );

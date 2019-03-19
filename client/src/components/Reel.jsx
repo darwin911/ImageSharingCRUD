@@ -2,14 +2,14 @@ import React from 'react';
 import Post from './Post';
 
 const Reel = props => {
+  console.log(props.reelPosts.map(post => post.title))
   return (
     <main>
-      {props.reelPost && props.reelPost.map(post => (
+      {props.reelPosts && props.reelPosts.map(post => (
         <div>
-          <p>Title Bar</p>
-          {/* {post.title}  */}
-          <p>Description area</p>
-          {/* {post.description} */}
+          <img src="http://unsplash.it/200/200" alt=""/>
+          <p>Title: <strong>{post.title}</strong></p>
+          <p>Description: {post.description}</p>
         </div>
       ))}
     </main>
