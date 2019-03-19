@@ -49,6 +49,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this)
   }
 
   async componentDidMount() {
@@ -56,12 +57,6 @@ class App extends Component {
       this.setState({
         authToken: localStorage.getItem('token')
       });
-      if (localStorage.getItem('user')) {
-        this.setState({
-          currentUser: JSON.parse(localStorage.getItem('user')),
-          isLoggedIn: true
-        })
-      }
     }
   }
 
@@ -87,20 +82,22 @@ class App extends Component {
   async handleLogin(e) {
     e.preventDefault();
     const { email, password } = this.state.userForm;
-    console.log(this.state.userForm)
-    const resp = await loginUser({
+    console.log(this.state.userForm);
+    const currentUser = await loginUser({
       email,
       password
     });
-    console.log(resp[0]);
-    console.log(resp[1]);
-    if (resp !== null) {
-      localStorage.setItem('token', resp[0]);
-      localStorage.setItem('user', JSON.stringify(resp[1]));
+    console.log(currentUser);
+    if (currentUser !== null) {
+      localStorage.setItem('token', currentUser);
       this.setState(prevState => ({
+        currentUser: {
+          name: 'Mike',
+          bio:
+            'I love coco, and coding, I live in Queens but Manhattan rocks, sometimes.',
+          pro_pic: null
+        },
         isLoggedIn: true,
-        authToken: resp[0],
-        currentUser: resp[1],
         userForm: {
           ...prevState.userForm,
           email: '',
@@ -111,6 +108,8 @@ class App extends Component {
   }
   handleLogout(e) {
     e.preventDefault();
+    console.log('Heyyyyyyyy');
+    
     localStorage.removeItem('token');
     this.setState({
       isLoggedIn: false
@@ -122,20 +121,15 @@ class App extends Component {
     //name email password bio pro_pic
     const userData = { ...this.state.userForm };
     const resp = await createUser(userData);
-    localStorage.setItem('token', resp[0]);
-    localStorage.setItem('user', JSON.stringify(resp[1]));
-
+    localStorage.setItem('token', resp);
     this.setState(prevState => ({
       ...prevState,
       userForm: {
         ...prevState.userForm,
         name: '',
         email: '',
-        password: '',
-      },
-      isLoggedIn: true,
-      authToken: resp[0],
-      currentUser: resp[1]
+        password: ''
+      }
     }));
     console.log(resp);
   }
@@ -150,7 +144,8 @@ class App extends Component {
     return (
       <div className='App'>
         <Nav
-          isLoggedIn={this.state.isLoggedIn} />
+          isLoggedIn={this.state.isLoggedIn}
+          handleLogout={this.handleLogout} />
 
         <h1 className="title"><span>Post</span>Pic</h1>
 
