@@ -170,6 +170,11 @@ class App extends Component {
                   handleSubmit={this.handleSubmit} />)} />
           </>
         )}
+        
+         <Profile
+          currentUser={this.state.currentUser} />
+            
+        {this.state.isLoggedIn && <PostForm />}
 
         <Reel reelPosts={this.state.reelPosts} />
 
@@ -188,28 +193,24 @@ export default App;
 // apiSecret={api_secret}>
 // <Route exact path='/'
 //   render={props => (
-//     <div>
+//     <>
 //       <h2>Image retrieved from our Cloudinary account through the React SDK.</h2>
-//       <Image publicId='sample' width='300' />
+//       <Image
+//         publicId='sample'
+//         width='300' />
 //       <form>
 //         <FilesBase64
 //           multiple={false}
-//           onDone={this.getFiles.bind(this)}
-//         />
-//         <button type='submit' onClick={this.handleUpload}>
-//           upload
-//         </button>
+//           onDone={this.getFiles.bind(this)} />
+//         <button type='submit'
+//           onClick={this.handleUpload}>upload</button>
 //       </form>
-//     </div>
-//   )}
-// />
-
+//     </>)} />
 // <Route
 //   path='/user/:id'
 //   render={props => (
-//     <div>
-//       <h1>User: {props.match.params.id}</h1>
-//     </div>
+//     <h1>User: {props.match.params.id}</h1>
 //   )}
 // />
 // </CloudinaryContext>
+
