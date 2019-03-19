@@ -4,7 +4,7 @@ const Register = (props) => {
   const { name, email, password, handleChange, handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <h3>Register Form</h3>
+      <h2>Register</h2>
       <input
         type='text'
         name='name'
@@ -26,7 +26,7 @@ const Register = (props) => {
         onChange={handleChange}
         value={password}
       />
-      <button onClick={handleSubmit} type='submit'>
+      <button onClick={handleSubmit} type='button'>
         Submit
       </button>
     </form>

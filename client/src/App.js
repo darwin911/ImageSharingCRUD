@@ -80,21 +80,6 @@ class App extends Component {
       });
     }
   }
-  // async handleLogin(e) {
-  //   const currentUser = await login(userData);
-  //   if (currentUser !== null) {
-  //     localStorage.setItem('jwt', currentUser.token);
-  //     this.setState({
-  //       email: '',
-  //       first_name: '',
-  //       last_name: '',
-  //       password: '',
-  //       isLoggedIn: true,
-  //     })
-  //   }
-  // }
-
-
 
   async handleSubmit(e) {
     e.preventDefault();
@@ -113,18 +98,33 @@ class App extends Component {
     });
     console.log(resp)
   }
-
+  
   getFiles(filepath) {
     this.setState({
       filepath: filepath
     });
   }
-
+  
   render() {
     return (
       <div className='App'>
         <Nav />
-        <CloudinaryContext
+        <Route path="/login" render={
+          () => <Login
+            email={this.state.email}
+            password={this.state.password}
+            handleChange={this.handleChange}
+            handleLogin={this.handleLogin}
+          />} />
+        <Route path="/register" render={
+          () => <Register
+            name={this.state.name}
+            email={this.state.email}
+            password={this.state.password}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+          />} />
+        {/* <CloudinaryContext
           cloudName='photo-sharing-app'
           apiKey={api_key}
           apiSecret={api_secret}>
@@ -141,8 +141,7 @@ class App extends Component {
                   <FilesBase64
                     multiple={false}
                     onDone={this.getFiles.bind(this)} />
-                  <button
-                    type='submit'
+                  <button type='submit'
                     onClick={this.handleUpload}>upload</button>
                 </form>
               </div>
@@ -157,25 +156,8 @@ class App extends Component {
               </div>
             )}
           />
-        </CloudinaryContext>
+        </CloudinaryContext> */}
 
-        <Route path="/login" render={
-          () => <Login
-            email={this.state.email}
-            password={this.state.password}
-            handleChange={this.handleChange}
-            handleLogin={this.handleLogin}
-          />}
-        />
-        <Route path="/register" render={
-          () => <Register
-            name={this.state.name}
-            email={this.state.email}
-            password={this.state.password}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />}
-        />
       </div>
     );
   }

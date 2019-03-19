@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
-  list-style-type: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 html {
@@ -11,21 +11,70 @@ html {
 }
 
 .App {
+  color: white;
   min-height: 100vh;
   text-align: center;
+  background: radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5));
+  background: radial-gradient(circle at bottom left, #222, #444);
 }
 
 nav {
   display: flex;
   flex-direction: column;
-  background: green;
+  background: linear-gradient(to right, #2ECC40, rgb(10, 173, 29));
+  margin-bottom: 1rem;
 }
 
 a {
-  color: black;
+  color: #B10DC9;
   transition: color 150ms ease-in;
+  margin-bottom: 0.5rem;
+  font-weight: 900;
 }
 
 a:hover {
   color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+form h2 {
+  margin-bottom: 1rem;
+}
+
+input, button[type="button"] {
+  background: rgba(0, 0, 0, 0.825);
+  color: white;
+  border-radius: 3px;
+  margin: 0 auto 1rem;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border: none;
+  width: 100%;
+  max-width: 300px;
+  font-weight: bolder;
+}
+
+input[type="text"]::placeholder, input[type="password"]::placeholder {
+  color: #333;
+} 
+
+input[type="password"] {
+  color: red;
+}
+
+button[type="button"] {
+  cursor: pointer;
+  color: #eee;
+  background: #2ECC40;
+  transition: background 120ms ease-out;
+}
+
+input[type="submit"]:hover {
+  background: rgb(33, 170, 49);;
 }
