@@ -19,7 +19,7 @@ const testCreatePost = async () => {
     title: 'test title',
     description: 'cool picture',
     publicId: 'i dunno',
-    userId: 1
+    userId: 3
   });
   console.log(resp);
 }
@@ -90,4 +90,23 @@ const getAllPosts = async () => {
   let resp = await axios('http://localhost:3000/posts');
   console.log(resp.data);
 }
-getAllPosts();
+//getAllPosts();
+
+
+//Request with headers
+const getAllPostsWithHeaders = async () => {
+  let resp = await axios('http://localhost:3000/posts', {headers: {
+    authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IkF1c3RpbjIiLCJwYXNzd29yZF9kaWdlc3QiOiIkMmIkMTAkRDBQR3RLbXF6VWRZL2hZOHFSeUNmLm9zLkZmT3YvZGZNSGR5TGZ0OXNuTXNyWFI1VkE3Y0ciLCJlbWFpbCI6ImppbW15MkBtYWlsaW5hdG9yLmNvbSIsImJpbyI6ImJsYWgyIiwicHJvX3BpYyI6InNhbXBsZTIiLCJ1cGRhdGVkQXQiOiIyMDE5LTAzLTE5VDEzOjUxOjM0LjU0MFoiLCJjcmVhdGVkQXQiOiIyMDE5LTAzLTE5VDEzOjUxOjM0LjU0MFoiLCJpYXQiOjE1NTMwMDM0OTR9.dTtxUI_XI4iFbvxyFYAlPKBdto_FtlhnN77wtheDITQ'
+  }});
+  console.log(resp.data);
+}
+//getAllPostsWithHeaders();
+
+//Test request with headers and restrict
+const deletePostWithPermissions = async () => {
+  let resp = await axios.delete('http://localhost:3000/users/3/posts/7', {headers: {
+    authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IkF1c3RpbjIiLCJwYXNzd29yZF9kaWdlc3QiOiIkMmIkMTAkRDBQR3RLbXF6VWRZL2hZOHFSeUNmLm9zLkZmT3YvZGZNSGR5TGZ0OXNuTXNyWFI1VkE3Y0ciLCJlbWFpbCI6ImppbW15MkBtYWlsaW5hdG9yLmNvbSIsImJpbyI6ImJsYWgyIiwicHJvX3BpYyI6InNhbXBsZTIiLCJ1cGRhdGVkQXQiOiIyMDE5LTAzLTE5VDEzOjUxOjM0LjU0MFoiLCJjcmVhdGVkQXQiOiIyMDE5LTAzLTE5VDEzOjUxOjM0LjU0MFoiLCJpYXQiOjE1NTMwMDM0OTR9.dTtxUI_XI4iFbvxyFYAlPKBdto_FtlhnN77wtheDITQ'
+  }});
+  console.log(resp);
+}
+deletePostWithPermissions();

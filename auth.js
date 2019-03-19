@@ -22,10 +22,10 @@ const checkAccess = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
     const data = jwt.verify(token, SECRET);
-    if ((data.id === req.body.id) ||
-        (data.id === req.body.userId) ||
-        (data.id === req.params.id)) ||
-        (data.id === req.params.userId) {
+    if  ((parseInt(data.id) === parseInt(req.params.id)) || //some of these parseInts might not be necessary
+        (parseInt(data.id) === parseInt(req.body.userId)) ||
+        (parseInt(data.id) === parseInt(req.body.id))||
+        (parseInt(data.id) === parseInt(req.params.userId))) {
       next();
     } else {
       res.status(403);

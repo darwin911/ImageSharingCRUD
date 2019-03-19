@@ -65,7 +65,7 @@ app.post('/users/login', async (req, res) => {
     }
   })*/
   // --> get ALL users
-    app.get('/allusers', restrict, async (req, res) => {
+    app.get('/allusers', async (req, res) => {
       try {
 
       } catch (e) {
@@ -73,7 +73,7 @@ app.post('/users/login', async (req, res) => {
       }
     })
 // --> edit profile page
-app.put('/users', restrict, async (req, res) => {
+app.put('/users', async (req, res) => {
   try {
 
   } catch (e) {
@@ -81,7 +81,7 @@ app.put('/users', restrict, async (req, res) => {
   }
 })
 // --> create post
-app.post('/users/posts', restrict, async (req, res, next) => {
+app.post('/users/posts', async (req, res, next) => {
   try {
     let {title, description, publicId, userId} = req.body
     console.log(title, description, publicId, userId);
@@ -100,7 +100,7 @@ app.post('/users/posts', restrict, async (req, res, next) => {
   }
 })
 // --> show one user's profile & posts
-app.get('/users/:id/posts', restrict, async (req, res, next) => {
+app.get('/users/:id/posts', async (req, res, next) => {
   try {
     let {id} = req.params;
     console.log(req);
@@ -120,7 +120,7 @@ app.get('/users/:id/posts', restrict, async (req, res, next) => {
   }
 })
 // --> edit posts (tentatively done)
-app.put('/users/posts/', restrict, async (req, res) => {
+app.put('/users/posts/', async (req, res) => {
   let {post_id, title, description, publicId} = req.body;
   try {
     const userPost = await Post.findByPk(post_id);
@@ -131,7 +131,7 @@ app.put('/users/posts/', restrict, async (req, res) => {
   }
 })
 // --> delete posts (tentatively done)
-app.delete('/users/posts/:post_id', restrict, async (req, res) => {
+app.delete('/users/:id/posts/:post_id', checkAccess, async (req, res) => {
   try {
     const userPost = await Post.findByPk(req.params.post_id)
     userPost.destroy();
