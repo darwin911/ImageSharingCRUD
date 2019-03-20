@@ -168,7 +168,8 @@ class App extends Component {
     this.setState(prevState => ({
       ...prevState,
       authToken: token,
-      currentUser: currentUser
+      currentUser: currentUser,
+      isLoggedIn: true
     }));
   }
 
