@@ -59,6 +59,7 @@ class Register extends Component {
   }
 
   render() {
+    const uploadStyleObject = {borderRadius: "100%"};
     return (
       <form onSubmit={this.handleSubmit}>
         <h2>Register</h2>
@@ -91,6 +92,7 @@ class Register extends Component {
           value={this.state.userForm.bio}
           />
         <h6>Select Profile Picture</h6>
+        <img src={!(this.state.filepath === "") ? this.state.filepath.base64 : null} width='100%' style={uploadStyleObject}/>
         <FilesBase64 multiple={false} onDone={this.getFiles.bind(this)}/>
         <button onClick={this.handleSubmit} type='button'>
           Submit

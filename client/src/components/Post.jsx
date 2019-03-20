@@ -15,6 +15,7 @@ class Post extends Component {
       description,
       postId,
       publicId,
+      userId,
       handleDelete,
       currentUser,
       post,
