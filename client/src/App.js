@@ -46,6 +46,7 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.updateReel = this.updateReel.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   updateReel(post) {
@@ -57,6 +58,14 @@ class App extends Component {
       ]
     }))
   }
+
+  handleDelete(postId) {
+    this.setState(prevState => ({
+      ...prevState,
+      reelPosts: prevState.reelPosts.filter(post => !(post.id === postId))
+    })
+  )
+}
 
   async componentDidMount() {
     console.log('component did mount called')
@@ -187,8 +196,8 @@ class App extends Component {
           <>
             <Profile
               currentUser={this.state.currentUser} />
-            <PostForm updateReel={this.updateReel}/>
-            <Reel reelPosts={this.state.reelPosts} />
+            <PostForm/>
+            <Reel reelPosts={this.state.reelPosts} updateReel={this.updateReel} handleDelete={this.handleDelete}/>
           </>
         )}
 
