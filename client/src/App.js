@@ -45,7 +45,18 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
-    this.handleLogout = this.handleLogout.bind(this)
+    this.handleLogout = this.handleLogout.bind(this);
+    this.updateReel = this.updateReel.bind(this);
+  }
+
+  updateReel(post) {
+    this.setState(prevState => {
+      ...prevState,
+      reelPosts: [
+        ...prevState.reelPosts,
+        post
+      ]
+    })
   }
 
   async componentDidMount() {
@@ -176,7 +187,7 @@ class App extends Component {
           <>
             <Profile
               currentUser={this.state.currentUser} />
-            <PostForm />
+            <PostForm updateReel={this.updateReel}/>
             <Reel reelPosts={this.state.reelPosts} />
           </>
         )}
