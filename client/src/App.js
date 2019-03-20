@@ -3,7 +3,7 @@ import './App.css';
 import { Video, Transformation, CloudinaryContext } from 'cloudinary-react';
 // import { Cloudinary } from 'cloudinary-react';
 import FilesBase64 from 'react-file-base64';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Redirect} from 'react-router-dom';
 import {
   uploadPhoto,
   createUser,
@@ -53,6 +53,7 @@ class App extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.updateReel = this.updateReel.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
     this.setCurrentPost = this.setCurrentPost.bind(this);
   }
 // NEEDS FIX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -163,6 +164,15 @@ class App extends Component {
     }
   }
 
+  handleRegister(token, currentUser) {
+    this.setState(prevState => ({
+      ...prevState,
+      authToken: token,
+      currentUser: currentUser,
+      isLoggedIn: true
+    }));
+  }
+
   handleLogout(e) {
     e.preventDefault();
     console.log('User has been logged out');
@@ -213,14 +223,24 @@ class App extends Component {
                 <Login
                   userForm={this.state.userForm}
                   handleChange={this.handleChange}
-                  handleLogin={this.handleLogin} /> )} />
-
-            <Route exact path='/register'
+                  handleLogin={this.handleLogin}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
+              )}
+            />
+            <Route
+              exact
+              path='/register'
               render={() => (
                 <Register
                   userForm={this.state.userForm}
                   handleChange={this.handleChange}
-                  handleSubmit={this.handleSubmit} /> )} />
+                  handleSubmit={this.handleSubmit}
+                  handleRegister={this.handleRegister}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
+              )}
+            />
           </>
         )}
 

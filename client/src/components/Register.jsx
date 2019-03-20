@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import FilesBase64 from 'react-file-base64';
 import {createUser, uploadPhoto} from '../services/services.js';
 
@@ -32,13 +33,16 @@ class Register extends Component {
       }
     }
     //console.log('handlesubmit called in postForm');
-    let response = await createUser({
+    let resp = await createUser({
       name: this.state.userForm.name,
       password: this.state.userForm.password,
       email: this.state.userForm.email,
       bio: this.state.userForm.bio,
       pro_pic: (publicId === undefined) ? "default" : publicId,
     });
+    localStorage.setItem('token', resp[0]);
+    localStorage.setItem('user', JSON.stringify(resp[1]));
+    this.props.handleRegister(resp[0],resp[1]);
   }
 
   getFiles(filepath) {
@@ -59,6 +63,7 @@ class Register extends Component {
   }
 
   render() {
+    const uploadStyleObject = {borderRadius: "100%"};
     return (
       <form onSubmit={this.handleSubmit}>
         <h2>Register</h2>
@@ -91,10 +96,12 @@ class Register extends Component {
           value={this.state.userForm.bio}
           />
         <h6>Select Profile Picture</h6>
+        <img src={!(this.state.filepath === "") ? this.state.filepath.base64 : null} width='100%' style={uploadStyleObject}/>
         <FilesBase64 multiple={false} onDone={this.getFiles.bind(this)}/>
         <button onClick={this.handleSubmit} type='button'>
           Submit
         </button>
+        {this.props.isLoggedIn && <Redirect to='/'/>}
       </form>
   );
  }

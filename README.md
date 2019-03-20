@@ -1,7 +1,7 @@
-# PiclePost
+# **PostPic**
 
 ## Project Description
-A fullstack React app where users can post and share photos.
+A fullstack React app with an Express backend where users can post and share pictures after registering and logging in. Users can view their pictures as well as the pictures of other users. Users can only upload, delete, and edit pictures for their own account.  
 
 ## Challenges
 
@@ -31,26 +31,38 @@ App registration, app login, post/see/change/delete a photo (CRUD).
 ![diagram of the database tables, schemas, and relations.](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8be7275751825d0fd18313/eb845c46a49ac4fbbc2f5de7ef849866/DatabaseERD.jpg)
 
 ## API Endpoint Documentations
-`userRouter.post "/user"`  -->create user
+`app.post "/users"`  -->create user
 
-`userRouter.post "/user/login"` --> login user
+`app.post "/users/login"` --> login user
 
-`userRouter.get "/user/:id/"` --> user profile page
+`app.get "/users/:id/posts"` --> user profile page
 
-`userRouter.put "/user/:id/"` --> edit profile page
+`app.put "/users/:id/"` --> edit profile page
 
-`userRouter.post "/user/:id/post"` --> create post
+`app.post "/users/:id/posts"` --> create post
 
-`userRouter.get "/user/:id/post"` --> show all post by user
+`app.get "/users/:id/post"` --> show all post by user
 
-`userRouter.get "/posts"` --> show all posts of all users
+`app.get "/posts"` --> show all posts of all users
 
-`userRouter.put "/user/:id/:post_id"` --> edit post
+`app.put "/users/:id/posts"` --> edit post
 
-`userRouter.delete "/user/:id/:post_id"` --> delete post
+`app.delete "/users/:id/posts/:post_id"` --> delete post
 
 ## List Dependencies
-Axios, Express, Morgan, Pg, Nodemon, Sequelize, Body-Parser, Cors, React-router-dom, Cloudinary-React, React-File-Base64
+- Axios
+- Express
+- Morgan
+- Pg
+- Nodemon
+- Sequelize
+- Body-Parser,
+- Cors,
+- React-router-dom,
+- Cloudinary-React,
+- React-File-Base64
+- Bcrypt
+- Jsonwebtoken
 
 ## Wireframes
 ![Wireframe Main View](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8be7487788656e2020932e/5c88de08d90376e20eebd526d9abac48/IMG_20190316_150426.jpg)
