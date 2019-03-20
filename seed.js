@@ -4,11 +4,11 @@ async function seed() {
   try {
 
     const user1 = await User.create({
-      name: 'Jimmy Johns',
-      email: 'jimmyj@mailinator.com',
-      password_digest: 'sandwich',
-      bio: 'sandwich shop guy',
-      pro_pic: 'gyro'
+      name: 'guest',
+      email: 'guest@email.com',
+      password_digest: 'guest',
+      bio: 'guest',
+      pro_pic: 'guest'
     })
 
     const user2 = await User.create({
