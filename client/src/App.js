@@ -49,13 +49,13 @@ class App extends Component {
   }
 
   updateReel(post) {
-    this.setState(prevState => {
+    this.setState(prevState => ({
       ...prevState,
       reelPosts: [
         ...prevState.reelPosts,
         post
       ]
-    })
+    }))
   }
 
   async componentDidMount() {
