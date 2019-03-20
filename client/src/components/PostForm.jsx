@@ -19,18 +19,14 @@ class PostForm extends Component {
   async handleSubmit (ev) {
     ev.preventDefault();
     let resp = await uploadPhoto(this.state.filepath.base64);
-    console.log('handlesubmit called in postForm');
     let publicId = resp.data.public_id;
     let response = await createPost(1, { //1 is a placeholder, this will break unless server is running
       publicId: publicId,
       title: this.state.title,
       description: this.state.description,
     });
-    console.log(response)
-    // const { title, description, publicId } = response;
-    this.setState(prevState => ({
-      reelPosts: [...prevState.reelPosts],
-   }))
+
+    this.props.updateReel(response);
   }
 
   handleChange (ev) {
