@@ -1,9 +1,10 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 
 const Login = props => {
-  const { userForm, handleChange, handleLogin } = props;
+  const { userForm, handleChange, handleLogin, isLoggedIn } = props;
   return (
-    <form 
+    <form
       onSubmit={handleLogin}
       className="login-form">
       <h2>Login</h2>
@@ -24,6 +25,7 @@ const Login = props => {
       <button onClick={handleLogin} type='button'>
         Submit
       </button>
+      {isLoggedIn && <Redirect to='/'/>}
     </form>
   );
 };
