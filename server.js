@@ -127,10 +127,10 @@ app.get('/users/:id/posts', async (req, res, next) => {
   }
 })
 // --> edit posts (tentatively done)
-app.put('/users/posts/', async (req, res) => {
-  let {post_id, title, description, publicId} = req.body;
+app.put('/users/:user_id/posts/', async (req, res) => {
+  let {id, title, description, publicId} = req.body;
   try {
-    const userPost = await Post.findByPk(post_id);
+    const userPost = await Post.findByPk(id);
     let updatedPost = await userPost.update({title,description,publicId});
     res.json(updatedPost);
   } catch (e) {

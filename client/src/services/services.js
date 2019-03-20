@@ -42,8 +42,8 @@ const createPost = async (id, data) => {
   return resp.data;
 };
 // Edit/Change post
-const editPost = async (id, data) => {
-  const resp = await axios.put(`/users/${id}/posts`, data);
+const editPost = async (user_id, data) => {
+  const resp = await axios.put(`http://localhost:3000/users/${user_id}/posts/`, data);
   return resp.data
 }
 // Delete post

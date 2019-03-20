@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
-import {
-  Video,
-  Transformation,
-  CloudinaryContext
-} from 'cloudinary-react';
+import { Video, Transformation, CloudinaryContext } from 'cloudinary-react';
 // import { Cloudinary } from 'cloudinary-react';
 import FilesBase64 from 'react-file-base64';
 import { Route, Link } from 'react-router-dom';
-import { uploadPhoto, createUser, loginUser, getAllPosts } from './services/services';
+import {
+  uploadPhoto,
+  createUser,
+  loginUser,
+  getAllPosts,
+  editPost
+} from './services/services';
 // import Hero from './components/Hero';
 import Nav from './components/Nav';
 import Profile from './components/Profile';
@@ -33,47 +35,48 @@ class App extends Component {
       currentUser: null,
       filepath: '',
       isLoggedIn: false,
-      userForm: { //this no longer needs passed to register
+      userForm: {
+        //this no longer needs passed to register
         name: '',
         email: '',
-        password: '',
+        password: ''
       },
-      reelPosts: []
+      reelPosts: [],
+      currentPost: {}
     };
     this.handleUpload = this.handleUpload.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleEditChange = this.handleEditChange.bind(this);
+    this.handleEditSubmit = this.handleEditSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.updateReel = this.updateReel.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.setCurrentPost = this.setCurrentPost.bind(this);
   }
 
   updateReel(post) {
     this.setState(prevState => ({
       ...prevState,
-      reelPosts: [
-        ...prevState.reelPosts,
-        post
-      ]
-    }))
+      reelPosts: [...prevState.reelPosts, post]
+    }));
   }
 
   handleDelete(postId) {
     this.setState(prevState => ({
       ...prevState,
       reelPosts: prevState.reelPosts.filter(post => !(post.id === postId))
-    })
-  )
-}
+    }));
+  }
 
   async componentDidMount() {
-    console.log('component did mount called')
-   const reelPosts = await getAllPosts();
-   console.log(reelPosts)
-   this.setState({
-     reelPosts
-   })
+    console.log('component did mount called');
+    const reelPosts = await getAllPosts();
+    console.log(reelPosts);
+    this.setState({
+      reelPosts
+    });
     if (localStorage.getItem('token')) {
       this.setState({
         authToken: localStorage.getItem('token')
@@ -82,7 +85,7 @@ class App extends Component {
         this.setState({
           currentUser: JSON.parse(localStorage.getItem('user')),
           isLoggedIn: true
-        })
+        });
       }
     }
   }
@@ -106,10 +109,35 @@ class App extends Component {
     }));
   }
 
+  handleEditChange(e) {
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      ...prevState,
+      currentPost: {
+        ...prevState.currentPost,
+        [name]: value
+      }
+    }));
+  }
+
+  async handleEditSubmit() {
+    const newPost = await editPost(
+      this.state.currentUser.id,
+      this.state.currentPost
+    );
+    this.updateReel(newPost);
+  }
+
+  setCurrentPost(post) {
+    this.setState({
+      currentPost: post
+    });
+  }
+
   async handleLogin(e) {
     e.preventDefault();
     const { email, password } = this.state.userForm;
-    console.log(this.state.userForm)
+    console.log(this.state.userForm);
     const resp = await loginUser({
       email,
       password
@@ -155,7 +183,7 @@ class App extends Component {
         ...prevState.userForm,
         name: '',
         email: '',
-        password: '',
+        password: ''
       },
       isLoggedIn: true,
       authToken: resp[0],
@@ -169,35 +197,51 @@ class App extends Component {
       <div className='App'>
         <Nav
           isLoggedIn={this.state.isLoggedIn}
-          handleLogout={this.handleLogout} />
+          handleLogout={this.handleLogout}
+        />
 
         <Hero isLoggedIn={this.state.isLoggedIn} />
 
         {!this.state.isLoggedIn && (
           <>
             <Route
-              exact path='/login'
+              exact
+              path='/login'
               render={() => (
                 <Login
                   userForm={this.state.userForm}
                   handleChange={this.handleChange}
-                  handleLogin={this.handleLogin} />)} />
+                  handleLogin={this.handleLogin}
+                />
+              )}
+            />
             <Route
-              exact path='/register'
+              exact
+              path='/register'
               render={() => (
                 <Register
                   userForm={this.state.userForm}
                   handleChange={this.handleChange}
-                  handleSubmit={this.handleSubmit} />)} />
+                  handleSubmit={this.handleSubmit}
+                />
+              )}
+            />
           </>
         )}
 
         {this.state.isLoggedIn && (
           <>
-            <Profile
-              currentUser={this.state.currentUser} />
-            <PostForm updateReel={this.updateReel}/>
-            <Reel currentUser={this.state.currentUser} reelPosts={this.state.reelPosts} handleDelete={this.handleDelete}/>
+            <Profile currentUser={this.state.currentUser} />
+            <PostForm updateReel={this.updateReel} />
+            <Reel
+              currentUser={this.state.currentUser}
+              reelPosts={this.state.reelPosts}
+              handleDelete={this.handleDelete}
+              handleEditChange={this.handleEditChange}
+              handleEditSubmit={this.handleEditSubmit}
+              setCurrentPost={this.setCurrentPost}
+              currentPost={this.state.currentPost}
+            />
           </>
         )}
 
@@ -208,7 +252,6 @@ class App extends Component {
 }
 
 export default App;
-
 
 // <CloudinaryContext
 // cloudName='photo-sharing-app'
