@@ -59,8 +59,11 @@ class App extends Component {
   updateReel(post) {
     this.setState(prevState => ({
       ...prevState,
-      reelPosts: [...prevState.reelPosts, post]
-    }));
+      reelPosts: [
+        post,
+        ...prevState.reelPosts
+      ]
+    }))
   }
 
   handleDelete(postId) {
@@ -71,12 +74,11 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    console.log('component did mount called');
-    const reelPosts = await getAllPosts();
-    console.log(reelPosts);
-    this.setState({
-      reelPosts
-    });
+   console.log('component did mount called')
+   const reelPosts = await getAllPosts();
+   this.setState({
+     reelPosts
+   })
     if (localStorage.getItem('token')) {
       this.setState({
         authToken: localStorage.getItem('token')
@@ -232,7 +234,8 @@ class App extends Component {
         {this.state.isLoggedIn && (
           <>
             <Profile currentUser={this.state.currentUser} />
-            <PostForm updateReel={this.updateReel} />
+            <PostForm updateReel={this.updateReel}
+                      currentUser={this.state.currentUser}/>
             <Reel
               currentUser={this.state.currentUser}
               reelPosts={this.state.reelPosts}

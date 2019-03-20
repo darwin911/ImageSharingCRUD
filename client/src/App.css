@@ -19,6 +19,7 @@ html {
   background: radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5));
   background: radial-gradient(circle at bottom left, #222, #444);
   position: relative;
+  display: grid;
 }
 
 nav {
@@ -108,6 +109,7 @@ input[type="submit"]:hover {
   margin: 1rem auto;
   display: grid;
   grid-template-columns: auto 300px auto;
+  width: 100%;
 }
 
 .pro-pic {
@@ -136,17 +138,24 @@ input[type="submit"]:hover {
   font-weight: bolder;
 }
 
+.post-form {
+  width: 100%;
+  background: rgba(255, 69, 0, 0.25);
+}
+
 .post {
+  padding: 2rem 0;
+  background: rgba(255, 255, 255, 0.2);
   margin-bottom: 2rem;
 }
 
 footer {
   background: rgba(0, 139, 139, 1);
   padding: 0.45rem 0;
-  position: fixed;
+  /* position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
+  right: 0; */
 }
 
 footer p {

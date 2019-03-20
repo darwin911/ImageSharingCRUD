@@ -66,7 +66,7 @@ app.post('/users/login', async (req, res) => {
     }
   })*/
   // --> get ALL users
-    app.get('/allusers', async (req, res) => {
+    app.get('/allusers', restrict, async (req, res) => {
       try {
         let resp = await User.findAll();
         res.json(resp.map(user => user.dataValues));
@@ -75,7 +75,7 @@ app.post('/users/login', async (req, res) => {
       }
     });
 // --> edit profile page
-app.put('/users/:id', async (req, res) => {
+app.put('/users/:id', restrict, checkAccess, async (req, res) => {
   try {
     let {name, bio, email, pro_pic} = req.body;
     const userProfile = await User.findByPk(req.params.id);
@@ -86,7 +86,7 @@ app.put('/users/:id', async (req, res) => {
   }
 });
 // --> create post
-app.post('/users/:id/posts', async (req, res, next) => {
+app.post('/users/:id/posts', restrict, checkAccess, async (req, res, next) => {
 
   try {
     let {title, description, publicId} = req.body
@@ -107,7 +107,7 @@ app.post('/users/:id/posts', async (req, res, next) => {
   }
 })
 // --> show one user's profile & posts
-app.get('/users/:id/posts', async (req, res, next) => {
+app.get('/users/:id/posts', restrict, checkAccess, async (req, res, next) => {
   try {
     let {id} = req.params;
     console.log(req);
@@ -127,7 +127,8 @@ app.get('/users/:id/posts', async (req, res, next) => {
   }
 })
 // --> edit posts (tentatively done)
-app.put('/users/:user_id/posts/', async (req, res) => {
+
+app.put('/users/:id/posts/', restrict, checkAccess, async (req, res) => {
   let {id, title, description, publicId} = req.body;
   try {
     const userPost = await Post.findByPk(id);
@@ -138,7 +139,7 @@ app.put('/users/:user_id/posts/', async (req, res) => {
   }
 })
 // --> delete posts (tentatively done)
-app.delete('/users/:id/posts/:post_id', async (req, res) => {
+app.delete('/users/:id/posts/:post_id', restrict, checkAccess, async (req, res) => {
   try {
     const userPost = await Post.findByPk(req.params.post_id)
     userPost.destroy();
@@ -148,7 +149,7 @@ app.delete('/users/:id/posts/:post_id', async (req, res) => {
   }
 })
 // Get Posts from All Users
-app.get('/posts', async (req, res) => {
+app.get('/posts', restrict, async (req, res) => {
   try {
     const posts = await Post.findAll();
     res.json(posts);

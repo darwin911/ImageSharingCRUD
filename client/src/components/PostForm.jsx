@@ -10,6 +10,7 @@ class PostForm extends Component {
       filepath: "",
       title: "",
       description: "",
+      currentUser: props.currentUser
       }
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,13 +21,17 @@ class PostForm extends Component {
     ev.preventDefault();
     let resp = await uploadPhoto(this.state.filepath.base64);
     let publicId = resp.data.public_id;
-    let response = await createPost(1, { //1 is a placeholder, this will break unless server is running
+    let response = await createPost(this.state.currentUser.id, { //1 is a placeholder, this will break unless server is running
       publicId: publicId,
       title: this.state.title,
       description: this.state.description,
     });
-
     this.props.updateReel(response);
+    this.setState({
+      filepath: "",
+      title: "",
+      description: ""
+    })
   }
 
   handleChange (ev) {

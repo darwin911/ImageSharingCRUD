@@ -13,6 +13,7 @@ const Reel = props => {
           publicId={post.publicId}
           postId={post.id}
           title={post.title}
+          userId={post.userId}
           description={post.description}
           post={post}
           handleEditChange={props.handleEditChange}
@@ -20,7 +21,7 @@ const Reel = props => {
           setCurrentPost={props.setCurrentPost}
           currentPost={props.currentPost}
           handleDelete={handleDelete}
-          currentUser={currentUser}/>
+        />
       ))}
     </main>
   );

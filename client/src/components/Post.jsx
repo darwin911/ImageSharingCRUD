@@ -82,7 +82,7 @@ class Post extends Component {
 
             <button
               onClick={async () => {
-                await deletePost(currentUser.id, postId);
+                await deletePost(userId, postId);
                 handleDelete(postId);
               }}
             >
@@ -94,5 +94,6 @@ class Post extends Component {
     );
   }
 }
+
 
 export default Post;
