@@ -92,7 +92,6 @@ class App extends Component {
     console.log(resp[0]);
     console.log(resp[1]);
     if (resp !== null) {
-      alert('Logged in!')
       localStorage.setItem('token', resp[0]);
       localStorage.setItem('user', JSON.stringify(resp[1]));
       this.setState(prevState => ({
@@ -152,7 +151,7 @@ class App extends Component {
         <Nav
           isLoggedIn={this.state.isLoggedIn}
           handleLogout={this.handleLogout} />
-        <Hero  />
+        <Hero isLoggedIn={this.state.isLoggedIn} />
 
         {!this.state.isLoggedIn && (
           <>
