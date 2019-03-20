@@ -151,6 +151,13 @@ input[type="submit"]:hover {
 
 svg {
   width: 20px;
+  margin: 0 .5rem;
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+
+svg:hover {
+  color: red;
 }
 
 footer {
