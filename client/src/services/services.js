@@ -44,6 +44,7 @@ const createPost = async (id, data) => {
   return resp.data;
 };
 // Edit/Change post
+
 const editPost = async (id, data) => {
   const resp = await axios.put(`${BASE_URL}/users/${id}/posts`, data, { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
   return resp.data

@@ -127,10 +127,11 @@ app.get('/users/:id/posts', restrict, checkAccess, async (req, res, next) => {
   }
 })
 // --> edit posts (tentatively done)
+
 app.put('/users/:id/posts/', restrict, checkAccess, async (req, res) => {
-  let {post_id, title, description, publicId} = req.body;
+  let {id, title, description, publicId} = req.body;
   try {
-    const userPost = await Post.findByPk(post_id);
+    const userPost = await Post.findByPk(id);
     let updatedPost = await userPost.update({title,description,publicId});
     res.json(updatedPost);
   } catch (e) {
