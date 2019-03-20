@@ -151,7 +151,7 @@ class App extends Component {
         <Nav
           isLoggedIn={this.state.isLoggedIn}
           handleLogout={this.handleLogout} />
-        <Hero  />
+        <Hero isLoggedIn={this.state.isLoggedIn} />
 
         {!this.state.isLoggedIn && (
           <>
