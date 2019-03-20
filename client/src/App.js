@@ -55,7 +55,8 @@ class App extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.setCurrentPost = this.setCurrentPost.bind(this);
   }
-
+// NEEDS FIX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// find array of 1rst and this = that
   updateReel(post) {
     this.setState(prevState => ({
       ...prevState,
@@ -65,7 +66,7 @@ class App extends Component {
       ]
     }))
   }
-
+///////////////////////////////
   handleDelete(postId) {
     this.setState(prevState => ({
       ...prevState,
