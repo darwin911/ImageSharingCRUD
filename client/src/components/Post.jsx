@@ -1,5 +1,5 @@
 import React from 'react';
-import deletePost from '../services/services';
+import {deletePost} from '../services/services';
 import { Image, CloudinaryContext } from 'cloudinary-react';
 
 const Post = props => {
