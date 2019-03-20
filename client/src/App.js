@@ -34,11 +34,10 @@ class App extends Component {
       currentUser: null,
       filepath: '',
       isLoggedIn: false,
-      userForm: {
+      userForm: { //this no longer needs passed to register
         name: '',
         email: '',
         password: '',
-        bio: '',
       },
       reelPosts: []
     };
