@@ -9,6 +9,7 @@ const Reel = props => {
         <article
           className="post">
           <Post 
+            publicId={post.publicId}
             title={post.title} 
             description={post.description}/>
         </article>

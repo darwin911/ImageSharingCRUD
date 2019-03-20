@@ -147,10 +147,10 @@ app.delete('/users/:id/posts/:post_id', async (req, res) => {
     res.status(403).send(e.message);
   }
 })
-
+// Get Posts from All Users
 app.get('/posts', async (req, res) => {
-  console.log(req);
   try {
+    console.log('hi posts')
     const posts = await Post.findAll();
     res.json(posts);
   } catch (e) {
