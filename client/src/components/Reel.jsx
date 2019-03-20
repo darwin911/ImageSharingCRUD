@@ -13,9 +13,10 @@ const Reel = props => {
           publicId={post.publicId}
           postId={post.id}
           title={post.title}
+          userId={post.userId}
           description={post.description}
           handleDelete={handleDelete}
-          currentUser={currentUser}/>
+        />
       ))}
     </main>
   );
