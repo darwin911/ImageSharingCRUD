@@ -21,6 +21,7 @@ import Reel from './components/Reel';
 // import PostForm from './components/PostForm';
 import Footer from './components/Footer';
 import PostForm from './components/PostForm';
+import Hero from './components/Hero';
 
 let api_key = process.env.REACT_APP_API_KEY;
 let api_secret = process.env.REACT_APP_API_SECRET;
@@ -146,8 +147,7 @@ class App extends Component {
         <Nav
           isLoggedIn={this.state.isLoggedIn}
           handleLogout={this.handleLogout} />
-
-        <h1 className="title"><span>Post</span>Pic</h1>
+        <Hero  />
 
         {!this.state.isLoggedIn && (
           <>

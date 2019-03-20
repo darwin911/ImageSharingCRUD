@@ -61,7 +61,7 @@ const testEditPost = async () => {
   });
   console.log(resp.data);
 }
-//testEditPost();
+testEditPost();
 
 
 
@@ -76,7 +76,7 @@ const testEditProfile = async () => {
   });
   console.log(resp.data);
 }
-testEditProfile();
+//testEditProfile();
 
 
 
