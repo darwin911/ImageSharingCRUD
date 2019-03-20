@@ -2,6 +2,7 @@ import React from 'react';
 import Post from './Post';
 
 const Reel = props => {
+  let {updateReel, handleDelete} = props;
   console.log(props.reelPosts.map(post => post.title))
   return (
     <main>
@@ -10,7 +11,8 @@ const Reel = props => {
           publicId={post.publicId}
           postId={post.id}
           title={post.title}
-          description={post.description} />
+          description={post.description}
+          handleDelete={handleDelete}/>
       ))}
     </main>
   );
