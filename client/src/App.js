@@ -37,7 +37,8 @@ class App extends Component {
       userForm: {
         name: '',
         email: '',
-        password: ''
+        password: '',
+        bio: '',
       },
       reelPosts: []
     };
@@ -216,4 +217,3 @@ export default App;
 //   )}
 // />
 // </CloudinaryContext>
-
