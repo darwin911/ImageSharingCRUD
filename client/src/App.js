@@ -208,28 +208,19 @@ class App extends Component {
 
         {!this.state.isLoggedIn && (
           <>
-            <Route
-              exact
-              path='/login'
+            <Route exact path='/login'
               render={() => (
                 <Login
                   userForm={this.state.userForm}
                   handleChange={this.handleChange}
-                  handleLogin={this.handleLogin}
-                />
-              )}
-            />
-            <Route
-              exact
-              path='/register'
+                  handleLogin={this.handleLogin} /> )} />
+
+            <Route exact path='/register'
               render={() => (
                 <Register
                   userForm={this.state.userForm}
                   handleChange={this.handleChange}
-                  handleSubmit={this.handleSubmit}
-                />
-              )}
-            />
+                  handleSubmit={this.handleSubmit} /> )} />
           </>
         )}
 
@@ -245,10 +236,9 @@ class App extends Component {
               handleEditChange={this.handleEditChange}
               handleEditSubmit={this.handleEditSubmit}
               setCurrentPost={this.setCurrentPost}
-              currentPost={this.state.currentPost}
-            />
-          </>
-        )}
+              currentPost={this.state.currentPost} />
+          </> )
+        }
 
         <Footer />
       </div>

@@ -19,7 +19,6 @@ html {
   background: radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5));
   background: radial-gradient(circle at bottom left, #222, #444);
   position: relative;
-  display: grid;
 }
 
 nav {
@@ -107,26 +106,11 @@ input[type="submit"]:hover {
   background: rgba(0, 0, 0, 0.5);
   padding: 1.5rem 0;
   margin: 1rem auto;
-  display: grid;
-  grid-template-columns: auto 300px auto;
   width: 100%;
 }
 
 .pro-pic {
-  grid-column-start: 2;
-  margin: 0 auto;
-}
-
-.profile p:nth-child(2){
-  grid-column-start: 2;
-}
-
-.profile p:nth-child(3){
-  grid-column-start: 2;
-}
-
-.profile button {
-  grid-column-start: 2;
+  width: 100px;
 }
 
 .profile button, .post-form button {
@@ -138,26 +122,25 @@ input[type="submit"]:hover {
   font-weight: bolder;
 }
 
-.post-form {
-  width: 100%;
-  background: rgba(255, 69, 0, 0.25);
-}
-
 .post {
   padding: 2rem 0;
   background: rgba(255, 255, 255, 0.2);
   margin-bottom: 2rem;
 }
 
-svg {
-  width: 20px;
+#editIcon, #deleteIcon {
+  width: 18px;
   margin: 0 .5rem;
   cursor: pointer;
   transition: color 150ms ease;
 }
 
-svg:hover {
-  color: red;
+#editIcon:hover {
+  color: #0074D9;
+}
+
+#deleteIcon:hover {
+  color: orangered;
 }
 
 footer {
