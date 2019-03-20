@@ -49,7 +49,6 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
-    this.handleLogout = this.handleLogout.bind(this)
   }
 
   async componentDidMount() {
@@ -57,6 +56,12 @@ class App extends Component {
       this.setState({
         authToken: localStorage.getItem('token')
       });
+      if (localStorage.getItem('user')) {
+        this.setState({
+          currentUser: JSON.parse(localStorage.getItem('user')),
+          isLoggedIn: true
+        })
+      }
     }
   }
 
@@ -82,22 +87,20 @@ class App extends Component {
   async handleLogin(e) {
     e.preventDefault();
     const { email, password } = this.state.userForm;
-    console.log(this.state.userForm);
-    const currentUser = await loginUser({
+    console.log(this.state.userForm)
+    const resp = await loginUser({
       email,
       password
     });
-    console.log(currentUser);
-    if (currentUser !== null) {
-      localStorage.setItem('token', currentUser);
+    console.log(resp[0]);
+    console.log(resp[1]);
+    if (resp !== null) {
+      localStorage.setItem('token', resp[0]);
+      localStorage.setItem('user', JSON.stringify(resp[1]));
       this.setState(prevState => ({
-        currentUser: {
-          name: 'Mike',
-          bio:
-            'I love coco, and coding, I live in Queens but Manhattan rocks, sometimes.',
-          pro_pic: 'https://images.pexels.com/photos/904276/pexels-photo-904276.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-        },
         isLoggedIn: true,
+        authToken: resp[0],
+        currentUser: resp[1],
         userForm: {
           ...prevState.userForm,
           email: '',
@@ -108,8 +111,6 @@ class App extends Component {
   }
   handleLogout(e) {
     e.preventDefault();
-    console.log('Heyyyyyyyy');
-
     localStorage.removeItem('token');
     this.setState({
       isLoggedIn: false
@@ -121,15 +122,20 @@ class App extends Component {
     //name email password bio pro_pic
     const userData = { ...this.state.userForm };
     const resp = await createUser(userData);
-    localStorage.setItem('token', resp);
+    localStorage.setItem('token', resp[0]);
+    localStorage.setItem('user', JSON.stringify(resp[1]));
+
     this.setState(prevState => ({
       ...prevState,
       userForm: {
         ...prevState.userForm,
         name: '',
         email: '',
-        password: ''
-      }
+        password: '',
+      },
+      isLoggedIn: true,
+      authToken: resp[0],
+      currentUser: resp[1]
     }));
     console.log(resp);
   }
@@ -144,10 +150,12 @@ class App extends Component {
     return (
       <div className='App'>
         <Nav
-          isLoggedIn={this.state.isLoggedIn}
-          handleLogout={this.handleLogout} />
+          isLoggedIn={this.state.isLoggedIn} />
 
         <h1 className="title"><span>Post</span>Pic</h1>
+
+        <Profile
+          currentUser={this.state.currentUser} />
 
         {!this.state.isLoggedIn && (
           <>
@@ -168,14 +176,7 @@ class App extends Component {
           </>
         )}
 
-        {this.state.isLoggedIn && (
-          <>
-            <Profile
-              currentUser={this.state.currentUser} />
-            <PostForm />
-            <Reel reelPosts={this.state.reelPosts} />
-          </>
-        )}
+        <Reel reelPosts={this.state.reelPosts} />
 
         <Footer />
       </div>
@@ -192,24 +193,28 @@ export default App;
 // apiSecret={api_secret}>
 // <Route exact path='/'
 //   render={props => (
-//     <>
+//     <div>
 //       <h2>Image retrieved from our Cloudinary account through the React SDK.</h2>
-//       <Image
-//         publicId='sample'
-//         width='300' />
+//       <Image publicId='sample' width='300' />
 //       <form>
 //         <FilesBase64
 //           multiple={false}
-//           onDone={this.getFiles.bind(this)} />
-//         <button type='submit'
-//           onClick={this.handleUpload}>upload</button>
+//           onDone={this.getFiles.bind(this)}
+//         />
+//         <button type='submit' onClick={this.handleUpload}>
+//           upload
+//         </button>
 //       </form>
-//     </>)} />
+//     </div>
+//   )}
+// />
+
 // <Route
 //   path='/user/:id'
 //   render={props => (
-//     <h1>User: {props.match.params.id}</h1>
+//     <div>
+//       <h1>User: {props.match.params.id}</h1>
+//     </div>
 //   )}
 // />
 // </CloudinaryContext>
-
