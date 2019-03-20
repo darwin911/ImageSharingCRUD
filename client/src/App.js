@@ -218,9 +218,7 @@ class App extends Component {
 
         {!this.state.isLoggedIn && (
           <>
-            <Route
-              exact
-              path='/login'
+            <Route exact path='/login'
               render={() => (
                 <Login
                   userForm={this.state.userForm}
@@ -258,10 +256,9 @@ class App extends Component {
               handleEditChange={this.handleEditChange}
               handleEditSubmit={this.handleEditSubmit}
               setCurrentPost={this.setCurrentPost}
-              currentPost={this.state.currentPost}
-            />
-          </>
-        )}
+              currentPost={this.state.currentPost} />
+          </> )
+        }
 
         <Footer />
       </div>
