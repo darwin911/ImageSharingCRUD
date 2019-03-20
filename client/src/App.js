@@ -177,6 +177,7 @@ class App extends Component {
     //name email password bio pro_pic
     const userData = { ...this.state.userForm };
     const resp = await createUser(userData);
+    
     localStorage.setItem('token', resp[0]);
     localStorage.setItem('user', JSON.stringify(resp[1]));
 

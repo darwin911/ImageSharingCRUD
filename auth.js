@@ -22,13 +22,7 @@ const checkAccess = (req, res, next) => {
   try {
     console.log('checkAccess triggered');
     const token = req.headers.authorization.split(" ")[1];
-    console.log(token);
     const data = jwt.verify(token, SECRET);
-    console.log(data.id);
-    console.log(req.params.id);
-    console.log(req.body.userId);
-    console.log(req.body.id);
-    console.log(req.params.userId);
     if  ((parseInt(data.id) === parseInt(req.params.id)) || //some of these parseInts might not be necessary
         (parseInt(data.id) === parseInt(req.body.userId)) ||
         (parseInt(data.id) === parseInt(req.body.id))||

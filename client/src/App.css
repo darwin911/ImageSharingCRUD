@@ -149,13 +149,13 @@ input[type="submit"]:hover {
   margin-bottom: 2rem;
 }
 
+svg {
+  width: 20px;
+}
+
 footer {
   background: rgba(0, 139, 139, 1);
   padding: 0.45rem 0;
-  /* position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0; */
 }
 
 footer p {
