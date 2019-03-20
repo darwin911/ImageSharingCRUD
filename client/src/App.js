@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import {
-  Image,
   Video,
   Transformation,
   CloudinaryContext
@@ -9,7 +8,7 @@ import {
 // import { Cloudinary } from 'cloudinary-react';
 import FilesBase64 from 'react-file-base64';
 import { Route, Link } from 'react-router-dom';
-import { uploadPhoto, createUser, loginUser } from './services/services';
+import { uploadPhoto, createUser, loginUser, getAllPosts } from './services/services';
 // import Hero from './components/Hero';
 import Nav from './components/Nav';
 import Profile from './components/Profile';
@@ -49,6 +48,12 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    console.log('component did mount called')
+   const reelPosts = await getAllPosts();
+   console.log(reelPosts)
+   this.setState({
+     reelPosts
+   })
     if (localStorage.getItem('token')) {
       this.setState({
         authToken: localStorage.getItem('token')
@@ -139,18 +144,13 @@ class App extends Component {
     console.log(resp);
   }
 
-  getFiles(filepath) {
-    this.setState({
-      filepath: filepath.base64
-    });
-  }
-
   render() {
     return (
       <div className='App'>
         <Nav
           isLoggedIn={this.state.isLoggedIn}
           handleLogout={this.handleLogout} />
+
         <Hero isLoggedIn={this.state.isLoggedIn} />
 
         {!this.state.isLoggedIn && (
