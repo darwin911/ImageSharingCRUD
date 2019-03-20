@@ -47,8 +47,8 @@ const editPost = async (id, data) => {
   return resp.data
 }
 // Delete post
-const deletePost = async (id) => {
-  const resp = await axios.delete(`/users/${id}/posts`);
+const deletePost = async (user_id, post_id) => {
+  const resp = await axios.delete(`http://localhost:3000/users/${user_id}/posts/${post_id}`);
   return resp.data;
 }
 // Get all public posts once logged in

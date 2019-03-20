@@ -197,7 +197,7 @@ class App extends Component {
             <Profile
               currentUser={this.state.currentUser} />
             <PostForm/>
-            <Reel reelPosts={this.state.reelPosts} updateReel={this.updateReel} handleDelete={this.handleDelete}/>
+            <Reel currentUser={this.state.currentUser} reelPosts={this.state.reelPosts} updateReel={this.updateReel} handleDelete={this.handleDelete}/>
           </>
         )}
 
