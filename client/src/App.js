@@ -33,10 +33,10 @@ class App extends Component {
       currentUser: null,
       filepath: '',
       isLoggedIn: false,
-      userForm: {
+      userForm: { //this no longer needs passed to register
         name: '',
         email: '',
-        password: ''
+        password: '',
       },
       reelPosts: []
     };
@@ -150,7 +150,8 @@ class App extends Component {
         <Nav
           isLoggedIn={this.state.isLoggedIn}
           handleLogout={this.handleLogout} />
-        <Hero />
+
+        <Hero isLoggedIn={this.state.isLoggedIn} />
 
         {!this.state.isLoggedIn && (
           <>
@@ -215,4 +216,3 @@ export default App;
 //   )}
 // />
 // </CloudinaryContext>
-
