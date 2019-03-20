@@ -86,13 +86,15 @@ app.put('/users/:id', async (req, res) => {
   }
 });
 // --> create post
-app.post('/users/posts', async (req, res, next) => {
+app.post('/users/:id/posts', async (req, res, next) => {
+
   try {
-    let {title, description, publicId, userId} = req.body
-    console.log(title, description, publicId, userId);
+    let {title, description, publicId} = req.body
+    const userId = req.params.id;
     const createPost = await Post.create({
-      title, description, publicId
+      title, description, publicId, userId
     })
+    console.log(title, userId)
     let selectedUser = await User.findOne({
       where: {
         id: userId
