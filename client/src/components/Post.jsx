@@ -1,11 +1,13 @@
 import React from 'react';
+import deletePost from '../services/services';
 import { Image, CloudinaryContext } from 'cloudinary-react';
 
+const Post = props => {
+  const { title, description, id} = props;
+    
 let api_key = process.env.REACT_APP_API_KEY;
 let api_secret = process.env.REACT_APP_API_SECRET;
 
-const Post = props => {
-  const { title, description, publicId } = props;
   return (
     <article className='post'>
       <CloudinaryContext
@@ -20,6 +22,7 @@ const Post = props => {
         Title: <strong>{title}</strong>
       </p>
       <p>Description: {description}</p>
+      <button>Delete</button>
     </article>
   );
 };
