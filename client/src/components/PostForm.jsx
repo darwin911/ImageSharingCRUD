@@ -26,6 +26,11 @@ class PostForm extends Component {
       title: this.state.title,
       description: this.state.description,
     });
+    console.log(response)
+    // const { title, description, publicId } = response;
+    this.setState(prevState => ({
+      reelPosts: [...prevState.reelPosts],
+   }))
   }
 
   handleChange (ev) {
