@@ -1,5 +1,5 @@
 import React from 'react';
-import deletePost from '../services/services';
+import {deletePost} from '../services/services';
 import { Image, CloudinaryContext } from 'cloudinary-react';
 
 const Post = props => {
@@ -22,7 +22,10 @@ let api_secret = process.env.REACT_APP_API_SECRET;
         Title: <strong>{title}</strong>
       </p>
       <p>Description: {description}</p>
-      //<button onClick={}>Delete</button>
+      <button onClick={async () => {
+          await deletePost(id);
+          handleDelete(id);
+        }}>Delete</button>
     </article>
   );
 };
