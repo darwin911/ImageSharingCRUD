@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Nav = props => {
-  console.log(props.isLoggedIn);
+  console.log('You are logged in: ', props.isLoggedIn);
   return (
     <nav>
       <Link to='/'>Home</Link>

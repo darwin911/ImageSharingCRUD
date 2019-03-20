@@ -150,7 +150,6 @@ app.delete('/users/:id/posts/:post_id', async (req, res) => {
 // Get Posts from All Users
 app.get('/posts', async (req, res) => {
   try {
-    console.log('hi posts')
     const posts = await Post.findAll();
     res.json(posts);
   } catch (e) {
