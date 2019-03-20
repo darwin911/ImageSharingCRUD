@@ -6,12 +6,11 @@ const Reel = props => {
   return (
     <main>
       {props.reelPosts && props.reelPosts.map(post => (
-        <article
-          className="post">
-          <Post 
-            title={post.title} 
-            description={post.description}/>
-        </article>
+        <Post
+          publicId={post.publicId}
+          postId={post.id}
+          title={post.title}
+          description={post.description} />
       ))}
     </main>
   );

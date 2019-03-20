@@ -53,7 +53,8 @@ const deletePost = async (id) => {
 }
 // Get all public posts once logged in
 const getAllPosts = async () => {
-  const resp = await axios.get('/login/publicposts');
+  const resp = await axios.get('http://localhost:3000/posts');
+  console.log(resp.data)
   return resp.data;
 };
 // Get users own post on profile page
