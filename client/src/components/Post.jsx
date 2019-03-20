@@ -31,8 +31,7 @@ class Post extends Component {
         <CloudinaryContext
           cloudName='photo-sharing-app'
           apiKey={api_key}
-          apiSecret={api_secret}
-        >
+          apiSecret={api_secret}>
           <Image publicId={publicId} width='300' />
         </CloudinaryContext>
 
@@ -41,58 +40,44 @@ class Post extends Component {
             <form onSubmit={(e) => {
               e.preventDefault();
               handleEditSubmit();
-              this.setState({
-                isEdit: false
-              })
-            }}>
+              this.setState({ isEdit: false })}}>
+
               <input
                 type='text'
                 name='title'
                 value={currentPost.title}
-                onChange={handleEditChange}
-              />
+                onChange={handleEditChange} />
+
               <input
                 type='text'
                 name='description'
                 value={currentPost.description}
-                onChange={handleEditChange}
-              />
+                onChange={handleEditChange} />
               <button>Submit</button>
+
             </form>
           </>
         ) : (
-          <>
-            <p>
-              Title: <strong>{title}</strong>
-            </p>
+            <>
+              <p><strong>{title}</strong></p>
+              <p>{description}</p>
 
-            <p>Description: {description}</p>
-
-            <button
-              onClick={() => {
-                this.setState({
-                  isEdit: true
-                });
-                setCurrentPost(post)
-              }}
-            >
-              Edit
-            </button>
-
-            <button
-              onClick={async () => {
+              <button onClick={() => {
+                this.setState({ isEdit: true });
+                setCurrentPost(post) }}>
+                Edit
+              </button>
+              {/* ************************* DELETE POST NEEDS DYNAMIC ID */}
+              <button onClick={async () => {
                 await deletePost(1, postId);
-                handleDelete(postId);
-              }}
-            >
-              Delete
-            </button>
-          </>
-        )}
+                handleDelete(postId) }}>
+                Delete
+              </button>
+            </>
+          )}
       </article>
     );
   }
 }
-
 
 export default Post;
