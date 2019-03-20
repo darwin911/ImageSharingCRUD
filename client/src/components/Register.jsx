@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import FilesBase64 from 'react-file-base64';
 import {createUser, uploadPhoto} from '../services/services.js';
 
@@ -41,7 +42,7 @@ class Register extends Component {
     });
     localStorage.setItem('token', resp[0]);
     localStorage.setItem('user', JSON.stringify(resp[1]));
-    this.props.handleRegister(resp[0],resp[1]); 
+    this.props.handleRegister(resp[0],resp[1]);
   }
 
   getFiles(filepath) {
@@ -100,6 +101,7 @@ class Register extends Component {
         <button onClick={this.handleSubmit} type='button'>
           Submit
         </button>
+        {this.props.isLoggedIn && <Redirect to='/'/>}
       </form>
   );
  }

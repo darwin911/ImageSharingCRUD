@@ -3,7 +3,7 @@ import './App.css';
 import { Video, Transformation, CloudinaryContext } from 'cloudinary-react';
 // import { Cloudinary } from 'cloudinary-react';
 import FilesBase64 from 'react-file-base64';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Redirect} from 'react-router-dom';
 import {
   uploadPhoto,
   createUser,
@@ -169,7 +169,6 @@ class App extends Component {
       authToken: token,
       currentUser: currentUser
     }));
-    return null;
   }
 
   handleLogout(e) {
@@ -224,6 +223,7 @@ class App extends Component {
                   userForm={this.state.userForm}
                   handleChange={this.handleChange}
                   handleLogin={this.handleLogin}
+                  isLoggedIn={this.state.isLoggedIn}
                 />
               )}
             />
@@ -236,6 +236,7 @@ class App extends Component {
                   handleChange={this.handleChange}
                   handleSubmit={this.handleSubmit}
                   handleRegister={this.handleRegister}
+                  isLoggedIn={this.state.isLoggedIn}
                 />
               )}
             />
