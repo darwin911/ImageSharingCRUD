@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Link, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import {
   uploadPhoto,
   createUser,
@@ -9,18 +9,12 @@ import {
   editPost
 } from './services/services';
 import Nav from './components/Nav';
-import Profile from './components/Profile';
 import Login from './components/Login';
 import Register from './components/Register';
 import Reel from './components/Reel';
 import Footer from './components/Footer';
 import PostForm from './components/PostForm';
 import Hero from './components/Hero';
-
-// import ImageUpload from './components/ImageUpload';
-// import { Video, Transformation, CloudinaryContext } from 'cloudinary-react';
-// import { Cloudinary } from 'cloudinary-react';
-// import FilesBase64 from 'react-file-base64';
 
 class App extends Component {
   constructor() {
@@ -57,18 +51,17 @@ class App extends Component {
     this.handleRedirect = this.handleRedirect.bind(this);
     this.loginErrorMessage = this.loginErrorMessage.bind(this);
   }
-// NEEDS FIX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// find array of 1rst and this = that
+
   updateReel(post) {
     this.setState(prevState => ({
       ...prevState,
       reelPosts: [
         post,
-        ...prevState.reelPosts
+        ...prevState.reelPosts.filter((post, idx) => post.idx > 0),
       ]
     }))
   }
-///////////////////////////////
+
   handleRedirect() {
     this.setState(prevState => ({
       ...prevState,
@@ -76,6 +69,7 @@ class App extends Component {
     }));
     return (<Redirect to = '/'/>);
   };
+
   handleDelete(postId) {
     this.setState(prevState => ({
       ...prevState,
@@ -83,8 +77,15 @@ class App extends Component {
     }));
   }
 
+  async loadReel () {
+    const reelPosts = await getAllPosts();
+    this.setState({
+      reelPosts,
+    })
+  }
+
   async componentDidMount() {
-   console.log('component did mount called')
+   console.log('component did mount called');
    const reelPosts = await getAllPosts();
    this.setState({
      reelPosts,
@@ -99,6 +100,11 @@ class App extends Component {
           isLoggedIn: true,
         });
       }
+    } else {
+      this.setState({
+        isLoggedIn: false,
+        redirect: false
+      })
     }
   }
 
@@ -171,12 +177,12 @@ class App extends Component {
             password: ''
           }
         }));
+        await this.loadReel();
       }
     } catch (error) {
       this.loginErrorMessage();
       console.log(error)
     }
- 
   }
 
   loginErrorMessage() {
@@ -187,13 +193,14 @@ class App extends Component {
     })
   }
 
-  handleRegister(token, currentUser) {
+  async handleRegister(token, currentUser) {
     this.setState(prevState => ({
       ...prevState,
       authToken: token,
       currentUser: currentUser,
       isLoggedIn: true
     }));
+    await this.loadReel();
   }
 
   handleLogout(e) {
@@ -201,7 +208,8 @@ class App extends Component {
     console.log('User has been logged out');
     localStorage.removeItem('token');
     this.setState({
-      isLoggedIn: false
+      isLoggedIn: false,
+      redirected: false
     });
   }
 
@@ -237,9 +245,10 @@ class App extends Component {
           isLoggedIn={this.state.isLoggedIn}
           handleLogout={this.handleLogout}
         />
+
         {(this.state.isLoggedIn && (this.state.redirected === false)) ? this.handleRedirect() : null}
 
-        <Hero 
+        <Hero
           homeMsg={this.state.homeMsg}
           isLoggedIn={this.state.isLoggedIn} />
 

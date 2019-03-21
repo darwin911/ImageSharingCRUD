@@ -35,15 +35,15 @@ class Post extends Component {
 
     return (
       <article className='card'>
-        <Profile currentUser={currentUser} />
+
+
         <CloudinaryContext
           cloudName='photo-sharing-app'
           apiKey={api_key}
           apiSecret={api_secret}>
           <Image className="post" publicId={publicId} />
         </CloudinaryContext>
-        <Comments postId={postId} currentUser={currentUser}/>
-        <Likes postId={postId} currentUser={currentUser}/>
+        
         {this.state.isEdit ? (
           <>
             <form onSubmit={(e) => {
@@ -86,6 +86,8 @@ class Post extends Component {
             </>
 
           )}
+          <Likes postId={postId} currentUser={currentUser}/>
+          <Comments postId={postId} currentUser={currentUser}/>
       </article>
     );
   }
