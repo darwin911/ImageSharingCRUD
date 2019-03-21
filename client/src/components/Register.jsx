@@ -100,7 +100,7 @@ class Register extends Component {
         />
         <h6>Select Profile Picture</h6>
         <img
-          src={!(this.state.filepath === "") ? this.state.filepath.base64 : null} width='100%' style={uploadStyleObject}
+          src={!(this.state.filepath === "") ? this.state.filepath.base64 : "https://res.cloudinary.com/photo-sharing-app/image/upload/v1553094181/default.png"} width='100%' style={uploadStyleObject}
           alt="" />
         <FilesBase64 multiple={false} onDone={this.getFiles.bind(this)} />
         <button onClick={this.handleSubmit} type='button'>
