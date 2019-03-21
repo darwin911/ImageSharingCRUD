@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const { Router } = require('express');
 const { hash, compare, encode, verify, restrict, checkAccess } = require('./auth');
-const { Post, User, Comment, Likes } = require('./models');
+const { Post, User, Comment, Like } = require('./models');
 
 // allow the port to be defined with an env var or a dev value
 const PORT = process.env.PORT || 3000;
@@ -159,13 +159,16 @@ app.get('/posts', restrict, async (req, res) => {
 });
 
 //make a Comment
-app.post('comment/users/:id/posts/:post_id', restrict, checkAccess, async (req, res) => {
+app.post('/comment/users/:id/posts/:post_id', restrict, checkAccess, async (req, res) => {
   try {
-    const {text} = req.body
+    const {text} = req.body;
+    console.log(text);
+    console.log(req.params.id);
+    console.log(req.params.post_id);
     const resp = await Comment.create({
       text: text,
-      user_id: req.params.id,
-      post_id: req.params.post_id
+      userId: req.params.id,
+      postId: req.params.post_id
     });
     res.json(resp);
   } catch(e) {
@@ -175,11 +178,11 @@ app.post('comment/users/:id/posts/:post_id', restrict, checkAccess, async (req, 
 })
 
 //make a like
-app.post('comment/users/:user_id/posts/:post_id', restrict, checkAccess, async (req, res) => {
+app.post('/like/users/:id/posts/:post_id', restrict, checkAccess, async (req, res) => {
   try {
     const resp = await Like.create(
-      {user_id: req.params.user_id,
-      post_id: req.params.post_id});
+      {userId: req.params.id,
+      postId: req.params.post_id});
     res.json(resp);
   } catch(e) {
     console.error(e);
@@ -188,9 +191,9 @@ app.post('comment/users/:user_id/posts/:post_id', restrict, checkAccess, async (
 });
 
 //get comments for a post
-app.get('post/:id/comments', restrict, async (req, res) => {
+app.get('/post/:post_id/comments', restrict, async (req, res) => {
   try {
-    const selectedPost = await Post.findOne({where:{id: req.params.id}});
+    const selectedPost = await Post.findOne({where:{id: req.params.post_id}});
     const comments = await selectedPost.getComments();
     res.json(comments);
   } catch(e) {
@@ -200,7 +203,7 @@ app.get('post/:id/comments', restrict, async (req, res) => {
 });
 
 //get likes for a post
-app.get('post/:id/likes', restrict, async (req, res) => {
+app.get('/post/:id/likes', restrict, async (req, res) => {
   try {
     const selectedPost = await Post.findOne({where:{id: req.params.id}});
     const likes = await selectedPost.getLikes();
@@ -212,7 +215,7 @@ app.get('post/:id/likes', restrict, async (req, res) => {
 });
 
 //get likes for a user
-app.get('user/:id/likes', restrict, async (req, res) => {
+app.get('/user/:id/likes', restrict, async (req, res) => {
   try {
     const selectedUser = await User.findOne({where: {id: req.params.id}});
     let likes = await selectedUser.getLikes();
