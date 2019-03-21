@@ -16,6 +16,7 @@ import Reel from './components/Reel';
 import Footer from './components/Footer';
 import PostForm from './components/PostForm';
 import Hero from './components/Hero';
+
 // import ImageUpload from './components/ImageUpload';
 // import { Video, Transformation, CloudinaryContext } from 'cloudinary-react';
 // import { Cloudinary } from 'cloudinary-react';
@@ -183,7 +184,7 @@ class App extends Component {
     //name email password bio pro_pic
     const userData = { ...this.state.userForm };
     const resp = await createUser(userData);
-    
+
     localStorage.setItem('token', resp[0]);
     localStorage.setItem('user', JSON.stringify(resp[1]));
 

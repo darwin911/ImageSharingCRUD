@@ -1,4 +1,5 @@
 import React from 'react';
+import {FacebookProvider, Share} from 'react-facebook';
 import { Link } from 'react-router-dom';
 import { CloudinaryContext, Image } from 'cloudinary-react';
 
@@ -16,8 +17,7 @@ const Nav = props => {
           apiKey={api_key}
           apiSecret={api_secret}>
           <Image className="nav-pro-pic" publicId={props.proPic} />
-        </CloudinaryContext>
-      }
+        </CloudinaryContext>}
         <Link to='/'>Home</Link>
         {
           props.isLoggedIn

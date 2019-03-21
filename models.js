@@ -39,7 +39,7 @@ const Comment = sequelize.define('Comment', {
   text: Sequelize.TEXT
 });
 
-const Likes = sequelize.define('Likes', {
+const Like = sequelize.define('Likes', {
 });
 
 User.hasMany(Post, { onDelete: 'cascade' });
@@ -56,6 +56,6 @@ module.exports = {
   Post,
   User,
   Comment,
-  Likes,
+  Like,
   sequelize
 }
