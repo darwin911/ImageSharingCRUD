@@ -10,7 +10,7 @@ const Hero = props => {
         <p>Logged in! Welcome!</p>
 
         :
-        <p>Welcome to PostPic, where you can post a pic!</p>
+        <p>{props.homeMsg}</p>
       }
     </section>
   );
