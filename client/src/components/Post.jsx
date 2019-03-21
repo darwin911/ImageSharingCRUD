@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { deletePost } from '../services/services';
 import { Image, CloudinaryContext } from 'cloudinary-react';
 import Profile from './Profile';
+import Comments from './Comments';
 
 class Post extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class Post extends Component {
           apiSecret={api_secret}>
           <Image className="post" publicId={publicId} />
         </CloudinaryContext>
-
+        <Comments postId={postId} currentUser={currentUser}/>
         {this.state.isEdit ? (
           <>
             <form onSubmit={(e) => {
@@ -81,7 +82,7 @@ class Post extends Component {
               <p><strong>{title}</strong></p>
               <p>{description}</p>
             </>
-            
+
           )}
       </article>
     );
