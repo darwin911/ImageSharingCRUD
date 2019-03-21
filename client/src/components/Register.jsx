@@ -99,7 +99,7 @@ class Register extends Component {
           value={this.state.userForm.bio}
         />
         <h6>Select Profile Picture</h6>
-        <img
+        <img className="pro-pic-register-form"
           src={!(this.state.filepath === "") ? this.state.filepath.base64 : "https://res.cloudinary.com/photo-sharing-app/image/upload/v1553094181/default.png"} width='100%' style={uploadStyleObject}
           alt="" />
         <FilesBase64 multiple={false} onDone={this.getFiles.bind(this)} />

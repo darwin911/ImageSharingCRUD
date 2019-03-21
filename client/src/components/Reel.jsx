@@ -8,6 +8,7 @@ const Reel = props => {
     <main className="container">
       {props.reelPosts && props.reelPosts.map(post => (
         <Post
+          key={post.id}
           currentUser={currentUser}
           publicId={post.publicId}
           postId={post.id}

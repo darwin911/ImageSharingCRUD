@@ -46,7 +46,6 @@ nav {
 a {
   color: white;
   transition: color 150ms ease-in;
-  margin-bottom: 0.5rem;
   font-weight: 700;
 }
 
@@ -88,17 +87,16 @@ form h2 {
 }
 
 input, button[type="button"] {
-  background: rgba(255, 255, 255, 0.325);
+  background: rgba(255, 255, 255, 0.125);
   color: white;
   border-radius: 3px;
-  margin: 0 auto 1rem;
+  margin: 0 auto 0.5rem;
   font-size: 1rem;
   padding: 0.75rem;
   border: none;
   width: 100%;
   max-width: 300px;
-  font-weight: bolder;
-  /* box-shadow: inset 0 0 10px 4px rgba(0, 0, 0, 0.25); */
+  font-weight: normal;
 }
 
 input[type="text"]::placeholder, input[type="password"]::placeholder {
@@ -110,10 +108,11 @@ input[type="password"] {
 }
 
 input[type="file"] {
-  background: none;
+  background: rgba(0,0, 0, 0.6);
   box-shadow: none;
-  color: black;
+  color: white;
   font-size: 0.8rem;
+  display: inline-block;
 }
 
 button[type="button"] {
@@ -127,12 +126,14 @@ input[type="submit"]:hover {
   background: rgb(33, 170, 49);;
 }
 
-/* .profile {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 1.5rem 0;
-  margin: 1rem auto;
-  width: 100%;
-} */
+.card:last-child {
+  padding-bottom: 3rem;
+}
+
+.pro-pic-register-form {
+  width: 100px;
+  margin: 0 auto 0.5rem;
+}
 
 .pro-pic {
   width: 100px;
@@ -148,6 +149,7 @@ input[type="submit"]:hover {
   background: rgb(18, 180, 39);;
   padding: 1rem 0.75rem;
   border-radius: 3px;
+  margin-bottom: 2rem;
 }
 
 .post-form img {
@@ -161,10 +163,14 @@ input[type="submit"]:hover {
 .profile button, .post-form button {
   border-radius: 3px;
   margin: 0 auto 1rem;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   padding: 0.25rem 0.5rem;
   border: none;
   font-weight: bolder;
+}
+
+.post-form button {
+  margin-bottom: 0;
 }
 
 .post-container {
@@ -175,6 +181,7 @@ input[type="submit"]:hover {
 
 .post {
   width: 100%;
+  max-width: 600px;
 }
 
 .edit-icon, .delete-icon {
