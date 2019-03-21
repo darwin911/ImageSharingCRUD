@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import FilesBase64 from 'react-file-base64';
-import {createUser, uploadPhoto} from '../services/services.js';
+import { createUser, uploadPhoto } from '../services/services.js';
 
 //const { userForm, handleChange, handleSubmit } = props;
 
@@ -21,14 +21,14 @@ class Register extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  async handleSubmit (ev) {
+  async handleSubmit(ev) {
     ev.preventDefault();
     let publicId;
     if (this.state.filepath) {
       try {
         let resp = await uploadPhoto(this.state.filepath.base64);
         publicId = resp.data.public_id;
-      } catch(e) {
+      } catch (e) {
         console.error(e);
       }
     }
@@ -42,7 +42,7 @@ class Register extends Component {
     });
     localStorage.setItem('token', resp[0]);
     localStorage.setItem('user', JSON.stringify(resp[1]));
-    this.props.handleRegister(resp[0],resp[1]);
+    this.props.handleRegister(resp[0], resp[1]);
   }
 
   getFiles(filepath) {
@@ -63,7 +63,7 @@ class Register extends Component {
   }
 
   render() {
-    const uploadStyleObject = {borderRadius: "100%"};
+    const uploadStyleObject = { borderRadius: "100%" };
     return (
       <form onSubmit={this.handleSubmit}>
         <h2>Register</h2>
@@ -73,38 +73,43 @@ class Register extends Component {
           placeholder='Name'
           onChange={this.handleChange}
           value={this.state.userForm.name}
-          />
+          required
+        />
         <input
           type='text'
           name='email'
           placeholder='Email'
           onChange={this.handleChange}
           value={this.state.userForm.email}
-          />
+          required
+        />
         <input
           type='password'
           name='password'
           placeholder='Password'
           onChange={this.handleChange}
           value={this.state.userForm.password}
-          />
+          required
+        />
         <input
           type='text'
           name='bio'
           placeholder='Bio'
           onChange={this.handleChange}
           value={this.state.userForm.bio}
-          />
+        />
         <h6>Select Profile Picture</h6>
-        <img src={!(this.state.filepath === "") ? this.state.filepath.base64 : null} width='100%' style={uploadStyleObject}/>
-        <FilesBase64 multiple={false} onDone={this.getFiles.bind(this)}/>
+        <img
+          src={!(this.state.filepath === "") ? this.state.filepath.base64 : null} width='100%' style={uploadStyleObject}
+          alt="" />
+        <FilesBase64 multiple={false} onDone={this.getFiles.bind(this)} />
         <button onClick={this.handleSubmit} type='button'>
           Submit
         </button>
-        {this.props.isLoggedIn && <Redirect to='/'/>}
+        {this.props.isLoggedIn && <Redirect to='/' />}
       </form>
-  );
- }
+    );
+  }
 };
 
 export default Register;

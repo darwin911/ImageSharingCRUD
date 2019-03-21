@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Video, Transformation, CloudinaryContext } from 'cloudinary-react';
-// import { Cloudinary } from 'cloudinary-react';
-import FilesBase64 from 'react-file-base64';
-import { Route, Link, Redirect} from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import {
   uploadPhoto,
   createUser,
@@ -11,21 +8,18 @@ import {
   getAllPosts,
   editPost
 } from './services/services';
-// import Hero from './components/Hero';
 import Nav from './components/Nav';
 import Profile from './components/Profile';
-// import ImageUpload from './components/ImageUpload';
 import Login from './components/Login';
 import Register from './components/Register';
 import Reel from './components/Reel';
-// import Post from './components/Post';
-// import PostForm from './components/PostForm';
 import Footer from './components/Footer';
 import PostForm from './components/PostForm';
 import Hero from './components/Hero';
-
-let api_key = process.env.REACT_APP_API_KEY;
-let api_secret = process.env.REACT_APP_API_SECRET;
+// import ImageUpload from './components/ImageUpload';
+// import { Video, Transformation, CloudinaryContext } from 'cloudinary-react';
+// import { Cloudinary } from 'cloudinary-react';
+// import FilesBase64 from 'react-file-base64';
 
 class App extends Component {
   constructor() {
