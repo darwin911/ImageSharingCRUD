@@ -193,9 +193,8 @@ app.post('/like/users/:id/posts/:post_id', restrict, checkAccess, async (req, re
 //get comments for a post
 app.get('/post/:post_id/comments', restrict, async (req, res) => {
   try {
-    const selectedPost = await Post.findOne({where:{id: req.params.post_id}});
-    const comments = await selectedPost.getComments();
-    res.json(comments);
+    const postComments = await Comment.findAll({where:{postId: req.params.post_id}});
+    res.json(postComments);
   } catch(e) {
     console.error(e);
     res.status(403);
@@ -203,11 +202,10 @@ app.get('/post/:post_id/comments', restrict, async (req, res) => {
 });
 
 //get likes for a post
-app.get('/post/:id/likes', restrict, async (req, res) => {
+app.get('/post/:post_id/likes', restrict, async (req, res) => {
   try {
-    const selectedPost = await Post.findOne({where:{id: req.params.id}});
-    const likes = await selectedPost.getLikes();
-    res.json(likes);
+    const postLikes = await Like.findAll({where: {postId: req.params.post_id}})
+    res.json(postLikes);
   } catch(e) {
     console.error(e);
     res.status(403);
@@ -215,10 +213,9 @@ app.get('/post/:id/likes', restrict, async (req, res) => {
 });
 
 //get likes for a user
-app.get('/user/:id/likes', restrict, async (req, res) => {
+app.get('/users/:id/likes', restrict, async (req, res) => {
   try {
-    const selectedUser = await User.findOne({where: {id: req.params.id}});
-    let likes = await selectedUser.getLikes();
+    const likes = await Like.findAll({where: {userId: req.params.id}});
     res.json(likes);
   } catch(e) {
     console.error(e);
