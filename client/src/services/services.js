@@ -66,6 +66,41 @@ const getUserPosts = async (id) => {
   return resp.data;
 };
 
+//endpoint to record a like on a post
+const createLike = async (user_id, post_id) => { //here user_id refers to the user who is doing the liking
+  const resp = await axios.post(`${BASE_URL}/like/users/${user_id}/posts/${post_id}`, {text: "placeholder"},
+     { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
+  return resp.data;
+}
+
+//endpoint to make a comment on a post
+const createComment = async (user_id, post_id, text) => { //here user_id refers to the user who is doing the posting
+  const resp = await axios.post(`${BASE_URL}/comment/users/${user_id}/posts/${post_id}`, {text},
+     { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
+  return resp.data;
+}
+
+//endpoint to get all comments for a post
+const getPostComments = async (post_id) => { //here user_id refers to the user who is doing the posting
+  const resp = await axios.get(`${BASE_URL}/post/${post_id}/comments`,
+     { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
+  return resp.data;
+}
+
+//endpoint to get all likes for a post
+const getPostLikes = async (post_id) => { //here user_id refers to the user who is doing the posting
+  const resp = await axios.get(`${BASE_URL}/post/${post_id}/likes`,
+     { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
+  return resp.data;
+}
+
+//endpoint to get all likes for a user
+const getUserLikes = async (user_id) => { //here user_id refers to the user whose likes you're getting
+  const resp = await axios.get(`${BASE_URL}/users/${user_id}/likes`,
+     { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
+  return resp.data;
+}
+
 export {
   uploadPhoto,
   createUser,
@@ -76,4 +111,9 @@ export {
   deletePost,
   getAllPosts,
   getUserPosts,
+  createLike,
+  createComment,
+  getPostComments,
+  getPostLikes,
+  getUserLikes
 };
