@@ -57,18 +57,17 @@ class App extends Component {
     this.handleRedirect = this.handleRedirect.bind(this);
     this.loginErrorMessage = this.loginErrorMessage.bind(this);
   }
-// NEEDS FIX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// find array of 1rst and this = that
+
   updateReel(post) {
     this.setState(prevState => ({
       ...prevState,
       reelPosts: [
         post,
-        ...prevState.reelPosts
+        ...prevState.reelPosts.filter((post, idx) => post.idx > 0),
       ]
     }))
   }
-///////////////////////////////
+
   handleRedirect() {
     this.setState(prevState => ({
       ...prevState,
