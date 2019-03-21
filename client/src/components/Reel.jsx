@@ -5,9 +5,10 @@ const Reel = props => {
   let {updateReel, handleDelete, currentUser, reelPosts, setCurrentPost} = props;
 
   return (
-    <main>
+    <main className="container">
       {props.reelPosts && props.reelPosts.map(post => (
         <Post
+          currentUser={currentUser}
           publicId={post.publicId}
           postId={post.id}
           title={post.title}

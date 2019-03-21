@@ -8,6 +8,12 @@
   font-family: 'Nunito', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.container {
+  width: 720px;
+  max-width: calc(100vw - 1rem);
+  margin: 0 auto;
+}
+
 html {
   height: 100%;
 }
@@ -19,15 +25,22 @@ html {
   background: radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5));
   background: radial-gradient(circle at bottom left, #222, #444);
   position: relative;
+  /* overflow-x: hidden; */
+}
+
+header {
+  background: linear-gradient(to right, #2ECC40, rgb(10, 173, 29));
+  box-shadow: 0 5px 12px 2px rgba(0,0,0, .5);
+
 }
 
 nav {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  background: linear-gradient(to right, #2ECC40, rgb(10, 173, 29));
+  align-items: center;
   margin-bottom: 1rem;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 }
 
 a {
@@ -59,6 +72,10 @@ a:hover {
   font-weight: 100;
 }
 
+.hero p {
+  margin-bottom: 1rem;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -71,7 +88,7 @@ form h2 {
 }
 
 input, button[type="button"] {
-  background: rgba(0, 0, 0, 0.825);
+  background: rgba(255, 255, 255, 0.325);
   color: white;
   border-radius: 3px;
   margin: 0 auto 1rem;
@@ -81,6 +98,7 @@ input, button[type="button"] {
   width: 100%;
   max-width: 300px;
   font-weight: bolder;
+  /* box-shadow: inset 0 0 10px 4px rgba(0, 0, 0, 0.25); */
 }
 
 input[type="text"]::placeholder, input[type="password"]::placeholder {
@@ -89,6 +107,13 @@ input[type="text"]::placeholder, input[type="password"]::placeholder {
 
 input[type="password"] {
   color: red;
+}
+
+input[type="file"] {
+  background: none;
+  box-shadow: none;
+  color: black;
+  font-size: 0.8rem;
 }
 
 button[type="button"] {
@@ -102,16 +127,35 @@ input[type="submit"]:hover {
   background: rgb(33, 170, 49);;
 }
 
-.profile {
+/* .profile {
   background: rgba(0, 0, 0, 0.5);
   padding: 1.5rem 0;
   margin: 1rem auto;
   width: 100%;
-}
+} */
 
 .pro-pic {
   width: 100px;
   border-radius: 50%;
+}
+
+.nav-pro-pic {
+  width: 3rem;
+  border-radius: 50%;
+}
+
+.post-form {
+  background: rgb(18, 180, 39);;
+  padding: 1rem 0.75rem;
+  border-radius: 3px;
+}
+
+.post-form img {
+  border-radius: 6px;
+}
+
+.profile .pro-pic{
+  width: 30px;
 }
 
 .profile button, .post-form button {
@@ -123,10 +167,14 @@ input[type="submit"]:hover {
   font-weight: bolder;
 }
 
-.post {
+.post-container {
   padding: 2rem 0;
   background: rgba(255, 255, 255, 0.2);
   margin-bottom: 1.5rem;
+}
+
+.post {
+  width: 100%;
 }
 
 .edit-icon, .delete-icon {
@@ -155,4 +203,14 @@ footer {
 
 footer p {
   font-weight: 400;
+}
+
+@media screen and (min-width: 1200px) {
+  .title {
+    font-size: 5.5rem;
+  }
+  
+  .title span {
+    font-size: 6rem;
+  }
 }
