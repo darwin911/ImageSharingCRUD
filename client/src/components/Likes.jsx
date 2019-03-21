@@ -22,13 +22,13 @@ class Likes extends Component {
       ...prevState,
       likes: likes
     }));
-    if (this.state.likes.some(function(like) {
-      return (like.userId === this.state.currentUser.id);
-    })) {
-      this.setState({
-        isThisLiked: true
-      });
-    }
+    if (this.state.currentUser !== null) {
+      if (likes.some(like => (parseInt(like.userId) === this.state.currentUser.id))) {
+        this.setState({
+          isThisLiked: true
+        });
+      }
+    }  
   }
 
   async handleChange() {
