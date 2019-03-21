@@ -6,7 +6,8 @@ import {
   createUser,
   loginUser,
   getAllPosts,
-  editPost
+  editPost,
+  editUser
 } from './services/services';
 import Nav from './components/Nav';
 import Profile from './components/Profile';
@@ -41,6 +42,7 @@ class App extends Component {
       },
       reelPosts: [],
       currentPost: {},
+      
       homeMsg: 'Welcome to PostPic, where you can post a pic!',
     };
     this.handleUpload = this.handleUpload.bind(this);
@@ -56,6 +58,9 @@ class App extends Component {
     this.setCurrentPost = this.setCurrentPost.bind(this);
     this.handleRedirect = this.handleRedirect.bind(this);
     this.loginErrorMessage = this.loginErrorMessage.bind(this);
+    this.setCurrentUser = this.setCurrentUser.bind(this);
+    this.handleEditProfChange = this.handleEditProfChange.bind(this);
+    this.handleEditProfSubmit = this.handleEditProfSubmit.bind(this);
   }
 
   updateReel(post) {
@@ -163,10 +168,11 @@ class App extends Component {
     this.updateReel(newPost);
   }
   async handleEditProfSubmit() {
-    const editUser = await editUser(
+    const userEdit = await editUser(
       this.state.currentUser.id,
       this.state.currentUser
-    )
+    );
+    this.handleRegister(userEdit);
 
   }
 
@@ -308,6 +314,12 @@ class App extends Component {
 
         {this.state.isLoggedIn && (
           <>
+          <Profile 
+          currentUser={this.currentUser}
+          setCurrentUser={this.setCurrentUser}
+          handleEditProfChange={this.handleEditProfChange}
+          handleEditProfSubmit={this.handleEditProfSubmit} />
+
             <PostForm updateReel={this.updateReel}
                       currentUser={this.state.currentUser}/>
             <Route exact path="/" render={props => (

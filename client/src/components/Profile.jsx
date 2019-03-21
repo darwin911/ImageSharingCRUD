@@ -23,6 +23,8 @@ class Profile extends Component {
     const {
       name,
       bio,
+      user,
+      setCurrentUser,
       currentUser,
       handleProfEditChange,
       handleProfEditSubmit
@@ -75,7 +77,7 @@ class Profile extends Component {
                 <button
                   onClick={() => {
                     this.setState({ isEdit: true });
-                    setCurrentUser(user);
+                    // setCurrentUser(user);
                   }}
                 >
                   Edit
