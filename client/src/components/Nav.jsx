@@ -11,12 +11,14 @@ const Nav = props => {
     <header>
       <nav className="container">
       {props.proPic && 
-        <CloudinaryContext
-          cloudName='photo-sharing-app'
-          apiKey={api_key}
-          apiSecret={api_secret}>
-          <Image className="nav-pro-pic" publicId={props.proPic} />
-        </CloudinaryContext>}
+        <Link to='/users/:id'>
+          <CloudinaryContext
+            cloudName='photo-sharing-app'
+            apiKey={api_key}
+            apiSecret={api_secret}>
+            <Image className="nav-pro-pic" publicId={props.proPic} />
+          </CloudinaryContext>
+        </Link>}
         <Link to='/'>Home</Link>
         {
           props.isLoggedIn

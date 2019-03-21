@@ -226,9 +226,7 @@ class App extends Component {
                 />
               )}
             />
-            <Route
-              exact
-              path='/register'
+            <Route exact path='/register'
               render={() => (
                 <Register
                   userForm={this.state.userForm}
@@ -246,7 +244,8 @@ class App extends Component {
           <>
             <PostForm updateReel={this.updateReel}
                       currentUser={this.state.currentUser}/>
-            <Reel
+            <Route exact path="/" render={props => (
+             <Reel
               currentUser={this.state.currentUser}
               reelPosts={this.state.reelPosts}
               handleDelete={this.handleDelete}
@@ -254,6 +253,22 @@ class App extends Component {
               handleEditSubmit={this.handleEditSubmit}
               setCurrentPost={this.setCurrentPost}
               currentPost={this.state.currentPost} />
+              )}
+            />
+            <Route path="/users/:id" render={props => {              
+            const userReel = this.state.reelPosts.filter(post => post.userId === this.state.currentUser.id)
+            return <Reel
+              currentUser={this.state.currentUser}
+              reelPosts={userReel}
+              handleDelete={this.handleDelete}
+              handleEditChange={this.handleEditChange}
+              handleEditSubmit={this.handleEditSubmit}
+              setCurrentPost={this.setCurrentPost}
+              currentPost={this.state.currentPost} />
+                }
+              }
+            />
+  
           </> )
         }
 
