@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Link, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import {
   uploadPhoto,
   createUser,
@@ -9,18 +9,12 @@ import {
   editPost
 } from './services/services';
 import Nav from './components/Nav';
-import Profile from './components/Profile';
 import Login from './components/Login';
 import Register from './components/Register';
 import Reel from './components/Reel';
 import Footer from './components/Footer';
 import PostForm from './components/PostForm';
 import Hero from './components/Hero';
-
-// import ImageUpload from './components/ImageUpload';
-// import { Video, Transformation, CloudinaryContext } from 'cloudinary-react';
-// import { Cloudinary } from 'cloudinary-react';
-// import FilesBase64 from 'react-file-base64';
 
 class App extends Component {
   constructor() {
