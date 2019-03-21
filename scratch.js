@@ -61,7 +61,7 @@ const testEditPost = async () => {
   });
   console.log(resp.data);
 }
-testEditPost();
+//testEditPost();
 
 
 
@@ -117,3 +117,25 @@ const deletePostWithPermissions = async () => {
   console.log(resp);
 }
 //deletePostWithPermissions();
+
+const createComment = async () => {
+  const resp = await axios.post(`http://localhost:3000/comment/users/6/posts/2`,
+    {text: "hello this is a comment"},
+    { headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwibmFtZSI6ImJsYWg3IiwicGFzc3dvcmRfZGlnZXN0IjoiJDJiJDEwJE5FdnJ3Wmc4VlhiZFdrSDRyd2JFTS5NTDJ4Q3dGbXc0b3RNTUgxdXV0WUZHdEFSU3dZS2dhIiwiZW1haWwiOiJibGFoNyIsImJpbyI6ImJsYWg3IiwicHJvX3BpYyI6ImRlZmF1bHQiLCJ1cGRhdGVkQXQiOiIyMDE5LTAzLTIxVDAyOjQyOjAyLjg5OFoiLCJjcmVhdGVkQXQiOiIyMDE5LTAzLTIxVDAyOjQyOjAyLjg5OFoiLCJpYXQiOjE1NTMxMzYxMjJ9.VLBtA1zZmqwtG208cEuuCUyR_V5cNNq_G45ZB3lDXyM` } });
+  return resp.data;
+}
+//createComment();
+
+const createLike = async () => {
+  const resp = await axios.post(`http://localhost:3000/like/users/6/posts/2`, {text: "text"},
+    { headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwibmFtZSI6ImJsYWg3IiwicGFzc3dvcmRfZGlnZXN0IjoiJDJiJDEwJE5FdnJ3Wmc4VlhiZFdrSDRyd2JFTS5NTDJ4Q3dGbXc0b3RNTUgxdXV0WUZHdEFSU3dZS2dhIiwiZW1haWwiOiJibGFoNyIsImJpbyI6ImJsYWg3IiwicHJvX3BpYyI6ImRlZmF1bHQiLCJ1cGRhdGVkQXQiOiIyMDE5LTAzLTIxVDAyOjQyOjAyLjg5OFoiLCJjcmVhdGVkQXQiOiIyMDE5LTAzLTIxVDAyOjQyOjAyLjg5OFoiLCJpYXQiOjE1NTMxMzYxMjJ9.VLBtA1zZmqwtG208cEuuCUyR_V5cNNq_G45ZB3lDXyM` } });
+  return resp.data;
+}
+//createLike();
+
+const getComments = async () => {
+  const resp = await axios.get(`http://localhost:3000/post/2/comments`,
+    { headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwibmFtZSI6ImJsYWg3IiwicGFzc3dvcmRfZGlnZXN0IjoiJDJiJDEwJE5FdnJ3Wmc4VlhiZFdrSDRyd2JFTS5NTDJ4Q3dGbXc0b3RNTUgxdXV0WUZHdEFSU3dZS2dhIiwiZW1haWwiOiJibGFoNyIsImJpbyI6ImJsYWg3IiwicHJvX3BpYyI6ImRlZmF1bHQiLCJ1cGRhdGVkQXQiOiIyMDE5LTAzLTIxVDAyOjQyOjAyLjg5OFoiLCJjcmVhdGVkQXQiOiIyMDE5LTAzLTIxVDAyOjQyOjAyLjg5OFoiLCJpYXQiOjE1NTMxMzYxMjJ9.VLBtA1zZmqwtG208cEuuCUyR_V5cNNq_G45ZB3lDXyM` } });
+  return resp.data;
+}
+getComments();

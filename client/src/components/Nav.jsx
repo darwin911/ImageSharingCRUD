@@ -1,4 +1,5 @@
 import React from 'react';
+import {FacebookProvider, Share} from 'react-facebook';
 import { Link } from 'react-router-dom';
 
 const Nav = props => {
@@ -9,9 +10,9 @@ const Nav = props => {
 
       {
         props.isLoggedIn
-       ? 
+       ?
         <a href='' onClick={props.handleLogout}>Logout</a>
-       : 
+       :
         <span>
           <Link to='/login'>Login</Link> / <Link to='/register'>Register</Link>
         </span>
