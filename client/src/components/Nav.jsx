@@ -9,8 +9,8 @@ const Nav = props => {
   return (
     <header>
       <nav className="container">
-      {props.proPic && 
-        <Link to='/users/:id'>
+      {props.proPic &&
+        <Link to={"/users/" + props.currentUser.id}>
           <CloudinaryContext
             cloudName='photo-sharing-app'
             apiKey={api_key}

@@ -247,6 +247,7 @@ class App extends Component {
           proPic={this.state.currentUser.pro_pic}
           isLoggedIn={this.state.isLoggedIn}
           handleLogout={this.handleLogout}
+          currentUser={this.state.currentUser}
         />
 
         {(this.state.isLoggedIn && (this.state.redirected === false)) ? this.handleRedirect() : null}
