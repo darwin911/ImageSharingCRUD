@@ -1,11 +1,12 @@
 # **PostPic**
 
 ## Project Description
-A fullstack React app with an Express backend where users can post and share pictures after registering and logging in. Users can view their pictures as well as the pictures of other users. Users can only upload, delete, and edit pictures for their own account.  
+A fullstack app using React, Node, and Express where users can post and share pictures after registering and logging in. Users can view their pictures as well as the pictures of other users. Users can only upload, delete, and edit pictures for their own account. Users can like and comment on posts.   
 
 ## Challenges
 
-Rendering the views differently when a user is logged in vs. when a user is not logged in. We will check if a user is logged in as part of state to amend this.
+- Rendering the views differently when a user is logged in vs. when a user is not logged in. We checked if a user is logged in as part of state to amend this.
+- Redirecting to appropriate views when a form is submitted. Used React-router redirects to fix this.  
 
 ## MVP and Post MVP
 ### MVP
@@ -25,7 +26,11 @@ For Post MVP you will be able to like other peoples posts, and comment on other 
 - Add comments
 
 ## Feature List
-App registration, app login, post/see/change/delete a photo (CRUD).
+- App registration
+- App login
+- Post/see/change/delete a post (CRUD).
+- Like a post
+- Add a comment to a post
 
 ## Entity Relationship Diagram
 ![diagram of the database tables, schemas, and relations.](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8be7275751825d0fd18313/eb845c46a49ac4fbbc2f5de7ef849866/DatabaseERD.jpg)

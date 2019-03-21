@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Redirect } from 'react-router-dom';
 import {
   uploadPhoto,
   createUser,
@@ -32,6 +32,7 @@ class App extends Component {
       },
       filepath: '',
       isLoggedIn: false,
+      redirected: false,
       userForm: {
         //this no longer needs passed to register
         name: '',
@@ -53,20 +54,28 @@ class App extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
     this.setCurrentPost = this.setCurrentPost.bind(this);
+    this.handleRedirect = this.handleRedirect.bind(this);
     this.loginErrorMessage = this.loginErrorMessage.bind(this);
   }
-// NEEDS FIX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// find array of 1rst and this = that
+
   updateReel(post) {
     this.setState(prevState => ({
       ...prevState,
       reelPosts: [
         post,
-        ...prevState.reelPosts
+        ...prevState.reelPosts.filter((post, idx) => post.idx > 0),
       ]
     }))
   }
-///////////////////////////////
+
+  handleRedirect() {
+    this.setState(prevState => ({
+      ...prevState,
+      redirected: true
+    }));
+    return (<Redirect to = '/'/>);
+  };
+
   handleDelete(postId) {
     this.setState(prevState => ({
       ...prevState,
@@ -74,22 +83,34 @@ class App extends Component {
     }));
   }
 
+  async loadReel () {
+    const reelPosts = await getAllPosts();
+    this.setState({
+      reelPosts,
+    })
+  }
+
   async componentDidMount() {
-   console.log('component did mount called')
+   console.log('component did mount called');
    const reelPosts = await getAllPosts();
    this.setState({
-     reelPosts
+     reelPosts,
    })
     if (localStorage.getItem('token')) {
       this.setState({
-        authToken: localStorage.getItem('token')
+        authToken: localStorage.getItem('token'),
       });
       if (localStorage.getItem('user')) {
         this.setState({
           currentUser: JSON.parse(localStorage.getItem('user')),
-          isLoggedIn: true
+          isLoggedIn: true,
         });
       }
+    } else {
+      this.setState({
+        isLoggedIn: false,
+        redirect: false
+      })
     }
   }
 
@@ -184,12 +205,12 @@ class App extends Component {
             password: ''
           }
         }));
+        await this.loadReel();
       }
     } catch (error) {
       this.loginErrorMessage();
       console.log(error)
     }
- 
   }
 
   loginErrorMessage() {
@@ -200,13 +221,14 @@ class App extends Component {
     })
   }
 
-  handleRegister(token, currentUser) {
+  async handleRegister(token, currentUser) {
     this.setState(prevState => ({
       ...prevState,
       authToken: token,
       currentUser: currentUser,
       isLoggedIn: true
     }));
+    await this.loadReel();
   }
 
   handleLogout(e) {
@@ -214,7 +236,8 @@ class App extends Component {
     console.log('User has been logged out');
     localStorage.removeItem('token');
     this.setState({
-      isLoggedIn: false
+      isLoggedIn: false,
+      redirected: false
     });
   }
 
@@ -251,7 +274,9 @@ class App extends Component {
           handleLogout={this.handleLogout}
         />
 
-        <Hero 
+        {(this.state.isLoggedIn && (this.state.redirected === false)) ? this.handleRedirect() : null}
+
+        <Hero
           homeMsg={this.state.homeMsg}
           isLoggedIn={this.state.isLoggedIn} />
 
@@ -296,7 +321,7 @@ class App extends Component {
               currentPost={this.state.currentPost} />
               )}
             />
-            <Route path="/users/:id" render={props => {              
+            <Route path="/users/:id" render={props => {
             const userReel = this.state.reelPosts.filter(post => post.userId === this.state.currentUser.id)
             return <Reel
               currentUser={this.state.currentUser}
@@ -310,8 +335,6 @@ class App extends Component {
                 }
               }
             />
-            
-  
           </> )
         }
 
