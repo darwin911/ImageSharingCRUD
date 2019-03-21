@@ -158,6 +158,72 @@ app.get('/posts', restrict, async (req, res) => {
   }
 });
 
+//make a Comment
+app.post('comment/users/:id/posts/:post_id', restrict, checkAccess, async (req, res) => {
+  try {
+    const {text} = req.body
+    const resp = await Comment.create({
+      text: text,
+      user_id: req.params.id,
+      post_id: req.params.post_id
+    });
+    res.json(resp);
+  } catch(e) {
+    console.error(e);
+    res.status(403);
+  }
+})
+
+//make a like
+app.post('comment/users/:user_id/posts/:post_id', restrict, checkAccess, async (req, res) => {
+  try {
+    const resp = await Like.create(
+      {user_id: req.params.user_id,
+      post_id: req.params.post_id});
+    res.json(resp);
+  } catch(e) {
+    console.error(e);
+    res.status(403);
+  }
+});
+
+//get comments for a post
+app.get('post/:id/comments', restrict, async (req, res) => {
+  try {
+    const selectedPost = await Post.findOne({where:{id: req.params.id}});
+    const comments = await selectedPost.getComments();
+    res.json(comments);
+  } catch(e) {
+    console.error(e);
+    res.status(403);
+  }
+});
+
+//get likes for a post
+app.get('post/:id/likes', restrict, async (req, res) => {
+  try {
+    const selectedPost = await Post.findOne({where:{id: req.params.id}});
+    const likes = await selectedPost.getLikes();
+    res.json(likes);
+  } catch(e) {
+    console.error(e);
+    res.status(403);
+  }
+});
+
+//get likes for a user
+app.get('user/:id/likes', restrict, async (req, res) => {
+  try {
+    const selectedUser = await User.findOne({where: {id: req.params.id}});
+    let likes = await selectedUser.getLikes();
+    res.json(likes);
+  } catch(e) {
+    console.error(e);
+    res.status(403);
+  }
+})
+
+
 // generic "tail" middleware for handling errors
 app.use((e, req, res, next) => {
   console.log(e);
