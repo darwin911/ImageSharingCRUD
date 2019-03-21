@@ -3,6 +3,7 @@ import { deletePost } from '../services/services';
 import { Image, CloudinaryContext } from 'cloudinary-react';
 import Profile from './Profile';
 import Comments from './Comments';
+import Likes from './Likes'
 
 class Post extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class Post extends Component {
           apiSecret={api_secret}>
           <Image className="post" publicId={publicId} />
         </CloudinaryContext>
-
+        
         {this.state.isEdit ? (
           <>
             <form onSubmit={(e) => {
@@ -85,6 +86,7 @@ class Post extends Component {
             </>
 
           )}
+          <Likes postId={postId} currentUser={currentUser}/>
           <Comments postId={postId} currentUser={currentUser}/>
       </article>
     );
