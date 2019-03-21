@@ -41,6 +41,7 @@ class App extends Component {
       },
       reelPosts: [],
       currentPost: {},
+      homeMsg: 'Welcome to PostPic, where you can post a pic!',
     };
     this.handleUpload = this.handleUpload.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -54,6 +55,7 @@ class App extends Component {
     this.handleRegister = this.handleRegister.bind(this);
     this.setCurrentPost = this.setCurrentPost.bind(this);
     this.handleRedirect = this.handleRedirect.bind(this);
+    this.loginErrorMessage = this.loginErrorMessage.bind(this);
   }
 // NEEDS FIX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // find array of 1rst and this = that
@@ -112,6 +114,7 @@ class App extends Component {
     const { name, value } = e.target;
     this.setState(prevState => ({
       ...prevState,
+      homeMsg: 'Welcome to PostPic, where you can post a pic!',
       userForm: {
         ...prevState.userForm,
         [name]: value
@@ -146,28 +149,42 @@ class App extends Component {
 
   async handleLogin(e) {
     e.preventDefault();
-    const { email, password } = this.state.userForm;
-    console.log(this.state.userForm);
-    const resp = await loginUser({
-      email,
-      password
-    });
-    console.log(resp[0]);
-    console.log(resp[1]);
-    if (resp !== null) {
-      localStorage.setItem('token', resp[0]);
-      localStorage.setItem('user', JSON.stringify(resp[1]));
-      this.setState(prevState => ({
-        isLoggedIn: true,
-        authToken: resp[0],
-        currentUser: resp[1],
-        userForm: {
-          ...prevState.userForm,
-          email: '',
-          password: ''
-        }
-      }));
+    try {
+      const { email, password } = this.state.userForm;
+      console.log(this.state.userForm);
+      const resp = await loginUser({
+        email,
+        password
+      });
+      console.log(resp[0]);
+      console.log(resp[1]);
+      if (resp !== null) {
+        localStorage.setItem('token', resp[0]);
+        localStorage.setItem('user', JSON.stringify(resp[1]));
+        this.setState(prevState => ({
+          isLoggedIn: true,
+          authToken: resp[0],
+          currentUser: resp[1],
+          userForm: {
+            ...prevState.userForm,
+            email: '',
+            password: ''
+          }
+        }));
+      }
+    } catch (error) {
+      this.loginErrorMessage();
+      console.log(error)
     }
+ 
+  }
+
+  loginErrorMessage() {
+    const msg = 'You are not registerd or have entered incorrect credentials';
+    console.log(msg);
+    this.setState({
+      homeMsg: msg,
+    })
   }
 
   handleRegister(token, currentUser) {
@@ -221,7 +238,11 @@ class App extends Component {
           handleLogout={this.handleLogout}
         />
         {(this.state.isLoggedIn && (this.state.redirected === false)) ? this.handleRedirect() : null}
-        <Hero isLoggedIn={this.state.isLoggedIn} />
+
+        <Hero 
+          homeMsg={this.state.homeMsg}
+          isLoggedIn={this.state.isLoggedIn} />
+
         {!this.state.isLoggedIn && (
           <>
             <Route exact path='/login'
