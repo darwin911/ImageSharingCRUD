@@ -36,20 +36,28 @@ const Post = sequelize.define('post', {
 });
 
 const Comment = sequelize.define('Comment', {
-  text: Sequelize.TEXT
+  text: Sequelize.TEXT,
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  userId: Sequelize.STRING,
+  postId: Sequelize.STRING
 });
 
 const Like = sequelize.define('Likes', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  userId: Sequelize.STRING,
+  postId: Sequelize.STRING
 });
 
 User.hasMany(Post, { onDelete: 'cascade' });
 Post.belongsTo(User);
-
-User.belongsToMany(Post, { through: 'Likes' });
-Post.belongsToMany(User, { through: 'Likes' });
-
-User.belongsToMany(Post, { through: 'Comment' });
-Post.belongsToMany(User, { through: 'Comment' });
 
 
 module.exports = {
