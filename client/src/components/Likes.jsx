@@ -55,7 +55,7 @@ class Likes extends Component {
       <div>
         <p>
         {this.state.isThisLiked ?
-        `Liked by you and ${this.state.likes.length - 1} users` :
+        `Liked by you and ${this.state.likes.length - 1} other users` :
         `Liked by ${this.state.likes.length} users`}
         </p>
         {this.state.isThisLiked ?
