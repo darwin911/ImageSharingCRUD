@@ -209,7 +209,10 @@ class App extends Component {
     localStorage.removeItem('token');
     this.setState({
       isLoggedIn: false,
-      redirected: false
+      redirected: false,
+      currentUser: {
+        publicId: ''
+      }
     });
   }
 
