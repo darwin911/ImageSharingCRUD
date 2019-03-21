@@ -29,6 +29,7 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.18.10",
     "pg": "^7.9.0",
+    "react-router": "^5.0.0",
     "sequelize": "^5.1.0"
   }
 }

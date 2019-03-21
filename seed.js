@@ -8,7 +8,7 @@ async function seed() {
       email: 'guest@email.com',
       password_digest: 'guest',
       bio: 'guest',
-      pro_pic: 'guest'
+      pro_pic: 'default'
     })
 
     const user2 = await User.create({

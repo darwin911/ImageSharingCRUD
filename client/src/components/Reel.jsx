@@ -3,9 +3,7 @@ import Post from './Post';
 
 const Reel = props => {
   let {updateReel, handleDelete, currentUser, reelPosts, setCurrentPost} = props;
-  //console.log(props.reelPosts.map(post => post.title))
-  //console.log(props.reelPosts.map(post => post.id))
-  //console.log(currentUser)
+
   return (
     <main>
       {props.reelPosts && props.reelPosts.map(post => (

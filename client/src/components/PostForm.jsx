@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import {uploadPhoto, createPost} from '../services/services';
 import FilesBase64 from 'react-file-base64';
 
@@ -53,7 +53,7 @@ class PostForm extends Component {
   render() {
     return (
       <form className="post-form">
-        <img src={!(this.state.filepath === "") ? this.state.filepath.base64 : null} width='100%'/>
+        <img src={!(this.state.filepath === "") ? this.state.filepath.base64 : null} width='100%' alt=""/>
         <FilesBase64 multiple={false} onDone={this.getFiles.bind(this)}/>
         <input
           type='text'

@@ -111,6 +111,7 @@ input[type="submit"]:hover {
 
 .pro-pic {
   width: 100px;
+  border-radius: 50%;
 }
 
 .profile button, .post-form button {
@@ -125,27 +126,31 @@ input[type="submit"]:hover {
 .post {
   padding: 2rem 0;
   background: rgba(255, 255, 255, 0.2);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
-#editIcon, #deleteIcon {
+.edit-icon, .delete-icon {
   width: 18px;
   margin: 0 .5rem;
   cursor: pointer;
   transition: color 150ms ease;
 }
 
-#editIcon:hover {
+.edit-icon:hover {
   color: #0074D9;
 }
 
-#deleteIcon:hover {
+.delete-icon:hover {
   color: orangered;
 }
 
 footer {
   background: rgba(0, 139, 139, 1);
   padding: 0.45rem 0;
+  position: absolute;
+  bottom: -26px;
+  left: 0;
+  right: 0;
 }
 
 footer p {

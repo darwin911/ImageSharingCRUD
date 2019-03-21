@@ -1,5 +1,5 @@
 import axios from 'axios';
-let API_KEY = process.env.REACT_APP_API_KEY;
+// let API_KEY = process.env.REACT_APP_API_KEY;
 
 const baseURL =
   'https://api.cloudinary.com/v1_1/photo-sharing-app/image/upload';
@@ -9,9 +9,9 @@ let cloudinaryApi = axios.create({
 
 const BASE_URL = 'http://localhost:3000'
 
-const api = axios.create({
-  baseURL: `http://localhost:3000`,
-})
+// const api = axios.create({
+//   baseURL: `http://localhost:3000`,
+// })
 
 const uploadPhoto = async (data) => {
   console.log('triggered');
