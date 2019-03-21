@@ -53,7 +53,7 @@ class PostForm extends Component {
   render() {
     return (
       <form className="post-form">
-        <img src={!(this.state.filepath === "") ? this.state.filepath.base64 : null} width='100%' alt=""/>
+        <img src={!(this.state.filepath === "") ? this.state.filepath.base64 : "http://unsplash.it/500"} width='100%' alt=""/>
         <FilesBase64 multiple={false} onDone={this.getFiles.bind(this)}/>
         <input
           type='text'
@@ -69,7 +69,7 @@ class PostForm extends Component {
           onChange={this.handleChange}
           value={this.state.description}
         />
-        <button onClick={this.handleSubmit}>Submit</button>
+        <button onClick={this.handleSubmit}>Upload</button>
       </form>
     );
   };

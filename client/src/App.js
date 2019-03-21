@@ -26,7 +26,9 @@ class App extends Component {
     super();
     this.state = {
       authToken: '',
-      currentUser: null,
+      currentUser: {
+        publicId: '',
+      },
       filepath: '',
       isLoggedIn: false,
       userForm: {
@@ -36,7 +38,7 @@ class App extends Component {
         password: ''
       },
       reelPosts: [],
-      currentPost: {}
+      currentPost: {},
     };
     this.handleUpload = this.handleUpload.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -204,6 +206,7 @@ class App extends Component {
     return (
       <div className='App'>
         <Nav
+          proPic={this.state.currentUser.pro_pic}
           isLoggedIn={this.state.isLoggedIn}
           handleLogout={this.handleLogout}
         />
@@ -240,7 +243,6 @@ class App extends Component {
 
         {this.state.isLoggedIn && (
           <>
-            <Profile currentUser={this.state.currentUser} />
             <PostForm updateReel={this.updateReel}
                       currentUser={this.state.currentUser}/>
             <Reel
