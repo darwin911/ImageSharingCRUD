@@ -6,7 +6,6 @@ let api_key = process.env.REACT_APP_API_KEY;
 let api_secret = process.env.REACT_APP_API_SECRET;
 
 const Nav = props => {
-  console.log('You are logged in: ', props.isLoggedIn);
   return (
     <header>
       <nav className="container">
