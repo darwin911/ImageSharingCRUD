@@ -123,6 +123,16 @@ class App extends Component {
       }
     }));
   }
+  handleEditProfChange(e) {
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      ...prevState,
+      currentUser: {
+        ...prevState.currentUser,
+        [name]: value
+      }
+    }));
+  }
 
   async handleEditSubmit() {
     const newPost = await editPost(
@@ -131,10 +141,22 @@ class App extends Component {
     );
     this.updateReel(newPost);
   }
+  async handleEditProfSubmit() {
+    const editUser = await editUser(
+      this.state.currentUser.id,
+      this.state.currentUser
+    )
+
+  }
 
   setCurrentPost(post) {
     this.setState({
       currentPost: post
+    });
+  }
+  setCurrentUser(user) {
+    this.setState({
+      currentUser: user
     });
   }
 
@@ -284,9 +306,11 @@ class App extends Component {
               handleEditSubmit={this.handleEditSubmit}
               setCurrentPost={this.setCurrentPost}
               currentPost={this.state.currentPost} />
+              
                 }
               }
             />
+            
   
           </> )
         }
