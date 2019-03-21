@@ -21,7 +21,7 @@ class Comments extends Component {
     this.setState(prevState => ({
       ...prevState,
       comments: comments
-    })
+    }));
   }
 
   handleChange(ev) {
@@ -34,11 +34,12 @@ class Comments extends Component {
     ))
   }
 
-  handleSubmit(ev) {
+  async handleSubmit(ev) {
     ev.preventDefault();
     let comment = await createComment(
       this.state.currentUser.id,
-      this.state.postId);
+      this.state.postId,
+      this.state.commentField);
     this.setState(prevState => ({
       ...prevState,
       comments: [
@@ -62,6 +63,9 @@ class Comments extends Component {
         </form>
         {this.state.comments.map(comment => (
           <div>
+            <p>
+              {comment.text}
+            </p>
           </div>
         ))}
       </div>
