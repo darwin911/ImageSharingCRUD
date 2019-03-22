@@ -39,22 +39,24 @@ class Post extends Component {
 
     return (
       <article className='card'>
-          <CloudinaryContext className='imageHeader'
-            cloudName='photo-sharing-app'
-            apiKey={api_key}
-            apiSecret={api_secret}>
-            <Link to={userInfo ? "/users/" + userInfo.id : null}>
-              <Image publicId={userInfo ? userInfo.pro_pic : "default"} className='post-user-pro-pic'/>
-            </Link>
-            <p>{userInfo ? userInfo.email : null}</p>
-            </CloudinaryContext>
+
+        <CloudinaryContext
+          className='image-header'
+          cloudName='photo-sharing-app'
+          apiKey={api_key}
+          apiSecret={api_secret}>
+          <Link to={userInfo ? "/users/" + userInfo.id : null}>
+            <Image publicId={userInfo ? userInfo.pro_pic : "default"} className='post-user-pro-pic'/>
+          </Link>
+          <p>{userInfo ? userInfo.email : null}</p>
+        </CloudinaryContext>
+
         <CloudinaryContext
           cloudName='photo-sharing-app'
           apiKey={api_key}
           apiSecret={api_secret}>
           <Image className="post" publicId={publicId} />
         </CloudinaryContext>
-
 
         <section className="card-details">
           {this.state.isEdit ? (
