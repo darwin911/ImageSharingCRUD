@@ -97,6 +97,7 @@ const getUserLikes = async (user_id) => { //here user_id refers to the user whos
   return resp.data;
 }
 
+
 export {
   uploadPhoto,
   createUser,
@@ -111,5 +112,5 @@ export {
   createComment,
   getPostComments,
   getPostLikes,
-  getUserLikes
+  getUserLikes,
 };

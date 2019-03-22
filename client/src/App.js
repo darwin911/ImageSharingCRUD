@@ -38,7 +38,7 @@ class App extends Component {
       reelPosts: [],
       currentPost: {},
       profileForm: {},
-      homeMsg: 'Welcome to PostPic, where you can post a pic!'
+      homeMsg: 'Welcome to PostPic, where you can post a pic!',
     };
     this.handleUpload = this.handleUpload.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -86,7 +86,7 @@ class App extends Component {
   async loadReel() {
     const reelPosts = await getAllPosts();
     this.setState({
-      reelPosts
+      reelPosts,
     });
   }
 
@@ -349,6 +349,7 @@ class App extends Component {
                   handleEditSubmit={this.handleEditSubmit}
                   setCurrentPost={this.setCurrentPost}
                   currentPost={this.state.currentPost}
+                  allUsers={this.state.allUsers}
                 />
               )}
             />
