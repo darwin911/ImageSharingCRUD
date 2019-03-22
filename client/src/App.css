@@ -25,12 +25,13 @@ html {
   background: radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5));
   background: radial-gradient(circle at bottom left, #222, #444);
   position: relative;
+  height: 100%;
 }
 
 header {
   display: flex;
   background: linear-gradient(to right, #2ECC40, rgb(10, 173, 29));
-  background: linear-gradient(to right, #fcd307, #e5ff00);
+  /* background: linear-gradient(to right, #fcd307, #e5ff00); */
   box-shadow: 0 5px 12px 2px rgba(0,0,0, .5);
   height: 70px;
   position: sticky;
