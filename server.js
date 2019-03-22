@@ -80,7 +80,8 @@ app.put('/users/:id', restrict, checkAccess, async (req, res) => {
     let {name, bio, email, pro_pic} = req.body;
     const userProfile = await User.findByPk(req.params.id);
     let selectedProfile = await userProfile.update({name, bio, email, pro_pic});
-    res.json(selectedProfile);
+    let token = await encode(selectedProfile.dataValues)
+    res.json([token, selectedProfile.dataValues]);
   } catch (e) {
     res.status(403)
   }

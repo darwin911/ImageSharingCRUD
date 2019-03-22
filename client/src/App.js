@@ -154,15 +154,25 @@ class App extends Component {
       }
     }));
   }
+
   async handleEditProfSubmit() {
-    const userEdit = await editUser(this.state.currentUser.id, {
-      ...this.state.currentUser,
-      ...this.state.profileForm
-    });
-    this.setState({
-      currentUser: userEdit
-    });
-  }
+    try{
+      const resp = await editUser(this.state.currentUser.id, {
+        ...this.state.currentUser,
+        ...this.state.profileForm
+      });
+      if (resp !== null) {
+        localStorage.setItem('token', resp[0]);
+        localStorage.setItem('user', JSON.stringify(resp[1]));
+        this.setState({
+          authToken: resp[0],
+          currentUser: resp[1]
+        });
+      }
+    }catch(e){
+      console.log(e)
+    }
+  };
 
   async handleEditSubmit() {
     const newPost = await editPost(

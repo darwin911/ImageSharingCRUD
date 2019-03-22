@@ -7,7 +7,8 @@ let cloudinaryApi = axios.create({
   baseURL: baseURL
 });
 
-const BASE_URL = 'https://post-picle.herokuapp.com';
+// const BASE_URL = 'https://post-picle.herokuapp.com';
+const BASE_URL = 'http://localhost:3000';
 
 // const api = axios.create({
 //   baseURL: `http://localhost:3000`,
