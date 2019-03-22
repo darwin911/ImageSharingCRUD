@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { deletePost, getUser} from '../services/services';
+import { deletePost} from '../services/services';
 import {Link} from 'react-router-dom';
 import { Image, CloudinaryContext } from 'cloudinary-react';
 import Comments from './Comments';
@@ -14,13 +14,6 @@ class Post extends Component {
     };
   }
 
-  async componentDidMount() {
-    let userInfo = await getUser();
-    this.setState(prevState => ({
-      ...prevState,
-      userInfo
-    }))
-  }
 
   render() {
     const {
