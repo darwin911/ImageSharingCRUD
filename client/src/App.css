@@ -99,7 +99,7 @@ input, button[type="button"] {
 
 input[type="text"]::placeholder, input[type="password"]::placeholder {
   color: #333;
-} 
+}
 
 input[type="password"] {
   color: red;
@@ -150,7 +150,7 @@ input[type="submit"]:hover {
 .post-form img {
   margin: 0 auto 1.5rem;
   border-radius: 3px;
-  max-width: 400px; 
+  max-width: 400px;
 }
 
 .profile .pro-pic{
@@ -181,6 +181,10 @@ input[type="submit"]:hover {
 .post {
   width: 100%;
   max-width: 600px;
+}
+
+.postUserProPic {
+  width: 20px;
 }
 
 .card {
@@ -277,7 +281,7 @@ footer p {
   .title {
     font-size: 5.5rem;
   }
-  
+
   .title span {
     font-size: 6rem;
   }

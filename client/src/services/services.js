@@ -97,6 +97,12 @@ const getUserLikes = async (user_id) => { //here user_id refers to the user whos
   return resp.data;
 }
 
+const getUser = async (user_id) => {
+  const resp = await axios.get(`${BASE_URL}/users/${user_id}`,
+     { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
+  return resp.data;
+}
+
 export {
   uploadPhoto,
   createUser,
@@ -111,5 +117,6 @@ export {
   createComment,
   getPostComments,
   getPostLikes,
-  getUserLikes
+  getUserLikes,
+  getUser
 };

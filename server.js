@@ -224,6 +224,22 @@ app.get('/users/:id/likes', restrict, async (req, res) => {
 })
 
 
+//get user info
+app.get('/users/:id', restrict, async (req, res) => {
+  try {
+    let selectedUser = await User.findOne({
+      where: {
+        id: req.params.id
+      }
+    });
+    res.json(selectedUser);
+  } catch(e) {
+    console.error(e);
+    res.status(403);
+  }
+});
+
+
 // generic "tail" middleware for handling errors
 app.use((e, req, res, next) => {
   console.log(e);
