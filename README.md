@@ -1,12 +1,16 @@
 # **PostPic**
 
+## Link to deployed project
+
+http://luxuriant-bun.surge.sh/
+
 ## Project Description
-A fullstack app using React, Node, and Express where users can post and share pictures after registering and logging in. Users can view their pictures as well as the pictures of other users. Users can only upload, delete, and edit pictures for their own account. Users can like and comment on posts.   
+A fullstack app using React, Node, and Express where users can post and share pictures after registering and logging in. Users can view their pictures as well as the pictures of other users. Users can only upload, delete, and edit pictures for their own account. Users can like and comment on any posts.   
 
 ## Challenges
-
+- Most of the challenges involved rendering different views based on user information. Is the user logged in? Is the user the owner of a post? We used different types of conditional rendering (if statements, ternaries, etc) to combat this problem.
 - Rendering the views differently when a user is logged in vs. when a user is not logged in. We checked if a user is logged in as part of state to amend this.
-- Redirecting to appropriate views when a form is submitted. Used React-router redirects to fix this.  
+- Redirecting to appropriate views when a form is submitted. React-router redirects fix this.  
 
 ## MVP and Post MVP
 ### MVP
@@ -24,11 +28,13 @@ For Post MVP you will be able to like other peoples posts, and comment on other 
 
 - Like posts
 - Add comments
+- Edit user profile
 
 ## Feature List
 - App registration
 - App login
-- Post/see/change/delete a post (CRUD).
+- Post/see/change/delete a post
+- Edit user profile
 - Like a post
 - Add a comment to a post
 
@@ -54,6 +60,16 @@ For Post MVP you will be able to like other peoples posts, and comment on other 
 
 `app.delete "/users/:id/posts/:post_id"` --> delete post
 
+`app.post "/comment/users/:id/posts/:post_id"` --> make a comment
+
+`app.post "/like/users/:id/posts/:post_id"` --> make a like
+
+`app.get "/post/:post_id/comments"` --> get comments for a post
+
+`app.get "/post/:post_id/likes"` --> get likes for a post
+
+`app.get "/users/:id/likes"` --> get likes for a user
+
 ## List Dependencies
 - Axios
 - Express
@@ -77,3 +93,24 @@ For Post MVP you will be able to like other peoples posts, and comment on other 
 ## Component Hierarchy
 
 ![Components](https://trello-attachments.s3.amazonaws.com/5c8be5981231c1271f26bc10/5c8eb50a8768ee6416e5cecc/5d3379f9724c2c065a503aa52c1b45f7/IMG_20190316_144600.jpg)
+
+## Code Snippet
+
+```
+<Route
+  path='/users/:id'
+  render={props => {
+    const userReel = this.state.reelPosts.filter(
+      post => post.userId === this.state.currentUser.id
+    );
+    return (
+      <Reel
+        currentUser={this.state.currentUser}
+        reelPosts={userReel}
+        handleDelete={this.handleDelete}
+        handleEditChange={this.handleEditChange}
+        handleEditSubmit={this.handleEditSubmit}
+        setCurrentPost={this.setCurrentPost}
+        currentPost={this.state.currentPost}
+      />
+      ```
