@@ -2,10 +2,10 @@ import React from 'react';
 import Post from './Post';
 
 const Reel = props => {
-  let {updateReel, handleDelete, currentUser, reelPosts, setCurrentPost} = props;
+  let { handleDelete, currentUser } = props;
 
   return (
-    <main className="container">
+    <main className="">
       {props.reelPosts && props.reelPosts.map(post => (
         <Post
           key={post.id}

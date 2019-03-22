@@ -85,7 +85,6 @@ class App extends Component {
   }
 
   async componentDidMount() {
-   console.log('component did mount called');
    const reelPosts = await getAllPosts();
    this.setState({
      reelPosts,
