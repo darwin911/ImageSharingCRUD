@@ -40,7 +40,7 @@ class Post extends Component {
     return (
       <article className='card'>
         <CloudinaryContext
-          className='imageHeader'
+          className='image-header'
           cloudName='photo-sharing-app'
           apiKey={api_key}
           apiSecret={api_secret}>

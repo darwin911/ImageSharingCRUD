@@ -130,10 +130,19 @@ input[type="submit"]:hover {
   background: rgb(33, 170, 49);;
 }
 
+.image-header {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  display: flex;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.75);
+}
+
 .post-user-pro-pic {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+
 }
 
 .pro-pic-register-form {
@@ -191,8 +200,6 @@ input[type="submit"]:hover {
 }
 
 .post {
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
   width: 100%;
   max-width: 600px;
 }
