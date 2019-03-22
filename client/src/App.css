@@ -114,9 +114,9 @@ input[type="password"] {
 input[type="file"] {
   background: rgba(0,0, 0, 0.6);
   box-shadow: none;
-  color: white;
-  fill: white;
-  -webkit-text-fill-color: white;
+  color: grey;
+  fill: grey;
+  -webkit-text-fill-color: grey;
   font-size: 0.8rem;
   display: inline-block;
 }
