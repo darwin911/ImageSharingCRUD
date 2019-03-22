@@ -23,7 +23,7 @@ html {
   min-height: 100vh;
   text-align: center;
   background: radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5));
-  background: radial-gradient(circle at bottom left, #222, #444);
+  background: radial-gradient(circle at bottom left, #444, #666);
   position: relative;
   height: 100%;
 }
@@ -36,7 +36,7 @@ header {
   height: 70px;
   position: sticky;
   top: 0;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 nav {
@@ -266,6 +266,8 @@ input[type="submit"]:hover {
 
 .comment {
   grid-column: span 4;
+  margin-left: 0.5rem;
+  padding: 0.5rem;
 }
 
 .comment-input {
