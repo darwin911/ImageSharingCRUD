@@ -32,6 +32,7 @@ const loginUser = async (data) => {
 // Edit profile
 const editUser = async (id, data) => {
   const resp = await axios.put(`${BASE_URL}/users/${id}`, data, { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
+  console.log(resp.data)
   return resp.data;
 }
 // Create post

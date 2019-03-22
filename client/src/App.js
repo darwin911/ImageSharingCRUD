@@ -6,7 +6,8 @@ import {
   createUser,
   loginUser,
   getAllPosts,
-  editPost
+  editPost,
+  editUser
 } from './services/services';
 import Nav from './components/Nav';
 import Login from './components/Login';
@@ -15,6 +16,7 @@ import Reel from './components/Reel';
 import Footer from './components/Footer';
 import PostForm from './components/PostForm';
 import Hero from './components/Hero';
+import Profile from './components/Profile';
 
 class App extends Component {
   constructor() {
@@ -22,7 +24,7 @@ class App extends Component {
     this.state = {
       authToken: '',
       currentUser: {
-        publicId: '',
+        publicId: ''
       },
       filepath: '',
       isLoggedIn: false,
@@ -35,7 +37,8 @@ class App extends Component {
       },
       reelPosts: [],
       currentPost: {},
-      homeMsg: 'Welcome to PostPic, where you can post a pic!',
+      profileForm: {},
+      homeMsg: 'Welcome to PostPic, where you can post a pic!'
     };
     this.handleUpload = this.handleUpload.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -50,6 +53,9 @@ class App extends Component {
     this.setCurrentPost = this.setCurrentPost.bind(this);
     this.handleRedirect = this.handleRedirect.bind(this);
     this.loginErrorMessage = this.loginErrorMessage.bind(this);
+    this.handleEditProfChange = this.handleEditProfChange.bind(this);
+    this.handleEditProfSubmit = this.handleEditProfSubmit.bind(this);
+    this.setProfileForm = this.setProfileForm.bind(this);
   }
 
   updateReel(post) {
@@ -57,9 +63,9 @@ class App extends Component {
       ...prevState,
       reelPosts: [
         post,
-        ...prevState.reelPosts.filter((post, idx) => post.idx > 0),
+        ...prevState.reelPosts.filter((post, idx) => post.idx > 0)
       ]
-    }))
+    }));
   }
 
   handleRedirect() {
@@ -67,8 +73,8 @@ class App extends Component {
       ...prevState,
       redirected: true
     }));
-    return (<Redirect to = '/'/>);
-  };
+    return <Redirect to='/' />;
+  }
 
   handleDelete(postId) {
     this.setState(prevState => ({
@@ -77,33 +83,34 @@ class App extends Component {
     }));
   }
 
-  async loadReel () {
+  async loadReel() {
     const reelPosts = await getAllPosts();
     this.setState({
-      reelPosts,
-    })
+      reelPosts
+    });
   }
 
   async componentDidMount() {
-   const reelPosts = await getAllPosts();
-   this.setState({
-     reelPosts,
-   })
+    const reelPosts = await getAllPosts();
+    this.setState({
+      reelPosts
+    });
+
     if (localStorage.getItem('token')) {
       this.setState({
-        authToken: localStorage.getItem('token'),
+        authToken: localStorage.getItem('token')
       });
       if (localStorage.getItem('user')) {
         this.setState({
           currentUser: JSON.parse(localStorage.getItem('user')),
-          isLoggedIn: true,
+          isLoggedIn: true
         });
       }
     } else {
       this.setState({
         isLoggedIn: false,
         redirect: false
-      })
+      });
     }
   }
 
@@ -137,6 +144,25 @@ class App extends Component {
       }
     }));
   }
+  handleEditProfChange(e) {
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      ...prevState,
+      profileForm: {
+        ...prevState.profileForm,
+        [name]: value
+      }
+    }));
+  }
+  async handleEditProfSubmit() {
+    const userEdit = await editUser(this.state.currentUser.id, {
+      ...this.state.currentUser,
+      ...this.state.profileForm
+    });
+    this.setState({
+      currentUser: userEdit
+    });
+  }
 
   async handleEditSubmit() {
     const newPost = await editPost(
@@ -149,6 +175,14 @@ class App extends Component {
   setCurrentPost(post) {
     this.setState({
       currentPost: post
+    });
+  }
+  setProfileForm(user) {
+    this.setState({
+      profileForm: {
+        name: user.name,
+        bio: user.bio
+      }
     });
   }
 
@@ -180,7 +214,7 @@ class App extends Component {
       }
     } catch (error) {
       this.loginErrorMessage();
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -188,8 +222,8 @@ class App extends Component {
     const msg = 'You are not registerd or have entered incorrect credentials';
     console.log(msg);
     this.setState({
-      homeMsg: msg,
-    })
+      homeMsg: msg
+    });
   }
 
   async handleRegister(token, currentUser) {
@@ -249,15 +283,17 @@ class App extends Component {
           currentUser={this.state.currentUser}
         />
 
-        {(this.state.isLoggedIn && (this.state.redirected === false)) ? this.handleRedirect() : null}
+        {this.state.isLoggedIn && this.state.redirected === false
+          ? this.handleRedirect()
+          : null}
 
-        <Hero
-          homeMsg={this.state.homeMsg}
-          isLoggedIn={this.state.isLoggedIn} />
+        <Hero homeMsg={this.state.homeMsg} isLoggedIn={this.state.isLoggedIn} />
 
         {!this.state.isLoggedIn && (
           <>
-            <Route exact path='/login'
+            <Route
+              exact
+              path='/login'
               render={() => (
                 <Login
                   userForm={this.state.userForm}
@@ -267,7 +303,9 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path='/register'
+            <Route
+              exact
+              path='/register'
               render={() => (
                 <Register
                   userForm={this.state.userForm}
@@ -283,35 +321,58 @@ class App extends Component {
 
         {this.state.isLoggedIn && (
           <>
-            <PostForm updateReel={this.updateReel}
-                      currentUser={this.state.currentUser}/>
-            <Route exact path="/" render={props => (
-             <Reel
-              currentUser={this.state.currentUser}
-              reelPosts={this.state.reelPosts}
-              handleDelete={this.handleDelete}
-              handleEditChange={this.handleEditChange}
-              handleEditSubmit={this.handleEditSubmit}
-              setCurrentPost={this.setCurrentPost}
-              currentPost={this.state.currentPost} />
+            <Route
+              path='/users/:id'
+              render={props => (
+                <Profile
+                  profileForm={this.state.profileForm}
+                  handleEditProfSubmit={this.handleEditProfSubmit}
+                  handleEditProfChange={this.handleEditProfChange}
+                  currentUser={this.state.currentUser}
+                  setProfileForm={this.setProfileForm}
+                />
               )}
             />
-            <Route path="/users/:id" render={props => {
-            const userReel = this.state.reelPosts.filter(post => post.userId === this.state.currentUser.id)
-            return <Reel
+            <PostForm
+              updateReel={this.updateReel}
               currentUser={this.state.currentUser}
-              reelPosts={userReel}
-              handleDelete={this.handleDelete}
-              handleEditChange={this.handleEditChange}
-              handleEditSubmit={this.handleEditSubmit}
-              setCurrentPost={this.setCurrentPost}
-              currentPost={this.state.currentPost} />
-                }
-              }
             />
-
-          </> )
-        }
+            <Route
+              exact
+              path='/'
+              render={props => (
+                <Reel
+                  currentUser={this.state.currentUser}
+                  reelPosts={this.state.reelPosts}
+                  handleDelete={this.handleDelete}
+                  handleEditChange={this.handleEditChange}
+                  handleEditSubmit={this.handleEditSubmit}
+                  setCurrentPost={this.setCurrentPost}
+                  currentPost={this.state.currentPost}
+                />
+              )}
+            />
+            <Route
+              path='/users/:id'
+              render={props => {
+                const userReel = this.state.reelPosts.filter(
+                  post => post.userId === this.state.currentUser.id
+                );
+                return (
+                  <Reel
+                    currentUser={this.state.currentUser}
+                    reelPosts={userReel}
+                    handleDelete={this.handleDelete}
+                    handleEditChange={this.handleEditChange}
+                    handleEditSubmit={this.handleEditSubmit}
+                    setCurrentPost={this.setCurrentPost}
+                    currentPost={this.state.currentPost}
+                  />
+                );
+              }}
+            />
+          </>
+        )}
 
         <Footer />
       </div>
@@ -320,30 +381,3 @@ class App extends Component {
 }
 
 export default App;
-
-// <CloudinaryContext
-// cloudName='photo-sharing-app'
-// apiKey={api_key}
-// apiSecret={api_secret}>
-// <Route exact path='/'
-//   render={props => (
-//     <>
-//       <h2>Image retrieved from our Cloudinary account through the React SDK.</h2>
-//       <Image
-//         publicId='sample'
-//         width='300' />
-//       <form>
-//         <FilesBase64
-//           multiple={false}
-//           onDone={this.getFiles.bind(this)} />
-//         <button type='submit'
-//           onClick={this.handleUpload}>upload</button>
-//       </form>
-//     </>)} />
-// <Route
-//   path='/user/:id'
-//   render={props => (
-//     <h1>User: {props.match.params.id}</h1>
-//   )}
-// />
-// </CloudinaryContext>
