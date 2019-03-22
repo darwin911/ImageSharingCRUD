@@ -25,13 +25,13 @@ html {
   background: radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5));
   background: radial-gradient(circle at bottom left, #222, #444);
   position: relative;
-  /* overflow-x: hidden; */
 }
 
 header {
+  display: flex;
   background: linear-gradient(to right, #2ECC40, rgb(10, 173, 29));
   box-shadow: 0 5px 12px 2px rgba(0,0,0, .5);
-
+  height: 70px;
 }
 
 nav {
@@ -54,7 +54,6 @@ a:hover {
 }
 
 .title {
-  /* font-family: 'Nunito', sans-serif; */
   font-family: 'Sniglet', cursive;
   padding: 0;
   font-size: 3.5rem;
@@ -78,7 +77,6 @@ a:hover {
 form {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
   margin: 0 auto;
 }
 
@@ -126,10 +124,6 @@ input[type="submit"]:hover {
   background: rgb(33, 170, 49);;
 }
 
-.card:last-child {
-  padding-bottom: 3rem;
-}
-
 .pro-pic-register-form {
   width: 100px;
   margin: 0 auto 0.5rem;
@@ -148,12 +142,15 @@ input[type="submit"]:hover {
 .post-form {
   background: rgb(18, 180, 39);;
   padding: 1rem 0.75rem;
-  border-radius: 3px;
-  margin-bottom: 2rem;
+  margin: 0 auto 6rem;
+  width: 100%;
+  display: grid;
 }
 
 .post-form img {
-  border-radius: 6px;
+  margin: 0 auto 1.5rem;
+  border-radius: 3px;
+  max-width: 400px; 
 }
 
 .profile .pro-pic{
@@ -170,6 +167,8 @@ input[type="submit"]:hover {
 }
 
 .post-form button {
+  background: #0074D9;
+  color: white;
   margin-bottom: 0;
 }
 
@@ -184,11 +183,73 @@ input[type="submit"]:hover {
   max-width: 600px;
 }
 
+.card {
+  max-width: 600px;
+  margin: 0 auto 5rem;
+}
+
+.card:last-child {
+  padding-bottom: 3rem;
+}
+
+.card-details {
+  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.25);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.card-title {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.card-description {
+  grid-column: 1;
+  grid-row: 2;
+}
+
 .edit-icon, .delete-icon {
-  width: 18px;
+  justify-self: right;
+  grid-column: 4;
+  width: 0.8rem;
   margin: 0 .5rem;
   cursor: pointer;
   transition: color 150ms ease;
+}
+
+.card form {
+  width: 100%;
+  max-width: 100%;
+  grid-column: span 4;
+}
+
+.likes {
+  grid-column: span 4;
+}
+
+.likes span {
+  align-self: center;
+}
+
+.comment-input {
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+.card p {
+  text-align: left;
+}
+
+.comment-input {
+  margin: 0;
+}
+
+.comment-button {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 0;
+  border: none;
 }
 
 .edit-icon:hover {

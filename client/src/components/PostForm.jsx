@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import axios from 'axios';
 import {uploadPhoto, createPost} from '../services/services';
 import FilesBase64 from 'react-file-base64';
 
@@ -21,7 +20,7 @@ class PostForm extends Component {
     ev.preventDefault();
     let resp = await uploadPhoto(this.state.filepath.base64);
     let publicId = resp.data.public_id;
-    let response = await createPost(this.state.currentUser.id, { //1 is a placeholder, this will break unless server is running
+    let response = await createPost(this.state.currentUser.id, {
       publicId: publicId,
       title: this.state.title,
       description: this.state.description,
@@ -48,8 +47,6 @@ class PostForm extends Component {
     });
   }
 
-
-  //const { title, description, handleChange, handleSubmit } = props;
   render() {
     return (
       <form className="post-form">

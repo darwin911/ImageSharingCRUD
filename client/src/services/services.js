@@ -1,17 +1,13 @@
 import axios from 'axios';
-// let API_KEY = process.env.REACT_APP_API_KEY;
 
 const baseURL =
   'https://api.cloudinary.com/v1_1/photo-sharing-app/image/upload';
+
 let cloudinaryApi = axios.create({
   baseURL: baseURL
 });
 
 const BASE_URL = 'https://post-picle.herokuapp.com';
-
-// const api = axios.create({
-//   baseURL: `http://localhost:3000`,
-// })
 
 const uploadPhoto = async (data) => {
   console.log('triggered');
@@ -58,7 +54,6 @@ const deletePost = async (user_id, post_id) => {
 // Get all public posts once logged in
 const getAllPosts = async () => {
   const resp = await axios.get(`${BASE_URL}/posts`, { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
-  console.log(resp.data)
   return resp.data;
 };
 // Get users own post on profile page

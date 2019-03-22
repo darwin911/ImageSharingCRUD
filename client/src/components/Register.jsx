@@ -3,8 +3,6 @@ import { Redirect } from 'react-router-dom';
 import FilesBase64 from 'react-file-base64';
 import { createUser, uploadPhoto } from '../services/services.js';
 
-//const { userForm, handleChange, handleSubmit } = props;
-
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +30,7 @@ class Register extends Component {
         console.error(e);
       }
     }
-    //console.log('handlesubmit called in postForm');
+
     let resp = await createUser({
       name: this.state.userForm.name,
       password: this.state.userForm.password,
@@ -103,7 +101,7 @@ class Register extends Component {
           src={!(this.state.filepath === "") ? this.state.filepath.base64 : "https://res.cloudinary.com/photo-sharing-app/image/upload/v1553094181/default.png"} width='100%' style={uploadStyleObject}
           alt="" />
         <FilesBase64 multiple={false} onDone={this.getFiles.bind(this)} />
-        <button onClick={this.handleSubmit} type='button'>
+        <button onClick={this.handleSubmit} type='submit'>
           Submit
         </button>
         {this.props.isLoggedIn && <Redirect to='/' />}

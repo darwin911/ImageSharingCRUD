@@ -91,11 +91,11 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    console.log('component did mount called');
     const reelPosts = await getAllPosts();
     this.setState({
       reelPosts
     });
+
     if (localStorage.getItem('token')) {
       this.setState({
         authToken: localStorage.getItem('token')
@@ -381,30 +381,3 @@ class App extends Component {
 }
 
 export default App;
-
-// <CloudinaryContext
-// cloudName='photo-sharing-app'
-// apiKey={api_key}
-// apiSecret={api_secret}>
-// <Route exact path='/'
-//   render={props => (
-//     <>
-//       <h2>Image retrieved from our Cloudinary account through the React SDK.</h2>
-//       <Image
-//         publicId='sample'
-//         width='300' />
-//       <form>
-//         <FilesBase64
-//           multiple={false}
-//           onDone={this.getFiles.bind(this)} />
-//         <button type='submit'
-//           onClick={this.handleUpload}>upload</button>
-//       </form>
-//     </>)} />
-// <Route
-//   path='/user/:id'
-//   render={props => (
-//     <h1>User: {props.match.params.id}</h1>
-//   )}
-// />
-// </CloudinaryContext>

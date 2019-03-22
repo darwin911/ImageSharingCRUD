@@ -22,7 +22,7 @@ const Nav = props => {
         {
           props.isLoggedIn
             ?
-            <a href='' onClick={props.handleLogout}>Logout</a>
+            <Link to='/' onClick={props.handleLogout}>Logout</Link>
             :
             <span>
               <Link to='/login'>Login</Link> / <Link to='/register'>Register</Link>

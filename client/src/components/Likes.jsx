@@ -49,20 +49,20 @@ class Likes extends Component {
   render() {
     return (
       <CloudinaryContext
+      className="likes"
       cloudName='photo-sharing-app'
       apiKey={api_key}
       apiSecret={api_secret}>
-      <div>
-        <p>
+ 
+        <span>
         {this.state.isThisLiked ?
         `Liked by you and ${this.state.likes.length - 1} other users` :
         `Liked by ${this.state.likes.length} users`}
-        </p>
+        </span>
         {this.state.isThisLiked ?
           <Image publicId='heart-solid' width='20px' /> :
           <Image publicId='heart-regular' width='20px' onClick={this.handleChange}/>
         }
-      </div>
       </CloudinaryContext>
     )
   }

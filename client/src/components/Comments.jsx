@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Image, CloudinaryContext } from 'cloudinary-react';
 //cause we might  need to render the user's picture...
 import {createComment, getPostComments} from '../services/services';
 
@@ -26,12 +25,11 @@ class Comments extends Component {
 
   handleChange(ev) {
     let {value} = ev.target;
-    this.setState(prevState => (
-      {
-        ...prevState,
-        commentField: value
-      }
-    ))
+    this.setState(prevState => ({
+      ...prevState,
+      commentField: value,
+      })
+    )
   }
 
   async handleSubmit(ev) {
@@ -44,31 +42,29 @@ class Comments extends Component {
       ...prevState,
       comments: [
         ...prevState.comments,
-        comment
+        comment,
       ]
     }))
   }
 
   render() {
     return (
-      <div>
+      <>
         <form>
-          <input
+          <input 
+            className="comment-input"
             type='text'
             name='commentField'
             value={this.state.commentField}
-            onChange={this.handleChange}
-            />
-          <button type='submit' onClick={this.handleSubmit}>Submit</button>
+            onChange={this.handleChange} />
+          <button 
+            className="comment-button"
+            type='submit' onClick={this.handleSubmit}>Comment</button>
         </form>
         {this.state.comments.map(comment => (
-          <div>
-            <p>
-              {comment.text}
-            </p>
-          </div>
+          <p>{comment.text}</p>
         ))}
-      </div>
+      </>
     )
   }
 
