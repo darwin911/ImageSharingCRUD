@@ -63,7 +63,7 @@ class App extends Component {
       ...prevState,
       reelPosts: [
         post,
-        ...prevState.reelPosts.filter((post, idx) => post.idx > 0)
+        ...prevState.reelPosts
       ]
     }));
   }
