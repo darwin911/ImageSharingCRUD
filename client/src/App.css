@@ -23,7 +23,7 @@ html {
   min-height: 100vh;
   text-align: center;
   background: radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5));
-  background: radial-gradient(circle at bottom left, #222, #444);
+  background: radial-gradient(circle at bottom left, #444, #666);
   position: relative;
   height: 100%;
 }
@@ -36,7 +36,7 @@ header {
   height: 70px;
   position: sticky;
   top: 0;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 nav {
@@ -130,6 +130,21 @@ input[type="submit"]:hover {
   background: rgb(33, 170, 49);;
 }
 
+.image-header {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  display: flex;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.post-user-pro-pic {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
+}
+
 .pro-pic-register-form {
   width: 100px;
   margin: 0 auto 0.5rem;
@@ -198,6 +213,10 @@ input[type="submit"]:hover {
   margin: 0 auto 5rem;
 }
 
+.card * {
+  line-height: 1;
+}
+
 .card:last-child {
   padding-bottom: 3rem;
 }
@@ -213,12 +232,17 @@ input[type="submit"]:hover {
 }
 
 .card-title {
-  grid-column: 1;
+  margin-left: 1rem;
+  padding: 0.25rem 0;
+  font-size: 1rem;
+  grid-column: 1 / 4;
   grid-row: 1;
 }
 
 .card-description {
-  grid-column: 1;
+  margin-left: 1rem;
+  padding: 0.25rem 0;
+  grid-column: 1 / 4;
   grid-row: 2;
 }
 
@@ -238,6 +262,7 @@ input[type="submit"]:hover {
 }
 
 .likes {
+  padding: 0.5rem 0;
   grid-column: span 4;
 }
 
@@ -245,10 +270,17 @@ input[type="submit"]:hover {
   align-self: center;
 }
 
+
+.comment {
+  grid-column: span 4;
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+}
+
 .comment-input {
+  padding: 0.25rem 0.5rem;
   background: white;
   color: black;
-  padding: 0.25rem 0.5rem;
   width: 100%;
   max-width: 100%;
   margin: 0;
@@ -258,10 +290,8 @@ input[type="submit"]:hover {
   text-align: left;
 }
 
-.comment-input {
-}
-
 .comment-button {
+  padding: 0.5rem;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 0;
   border: none;

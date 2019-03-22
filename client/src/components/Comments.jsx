@@ -62,7 +62,7 @@ class Comments extends Component {
             type='submit' onClick={this.handleSubmit}>Comment</button>
         </form>
         {this.state.comments.map(comment => (
-          <p>{comment.text}</p>
+          <p className="comment">{comment.text}</p>
         ))}
       </>
     )

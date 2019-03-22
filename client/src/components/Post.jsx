@@ -39,15 +39,13 @@ class Post extends Component {
 
     return (
       <article className='card'>
-        <div className='imageHeader'>
-          <CloudinaryContext
-            cloudName='photo-sharing-app'
-            apiKey={api_key}
-            apiSecret={api_secret}>
-            <Image publicId={publicId} className='postUserProPic'/>
-            </CloudinaryContext>
-          <p></p>
-        </div>
+        <CloudinaryContext
+          className='image-header'
+          cloudName='photo-sharing-app'
+          apiKey={api_key}
+          apiSecret={api_secret}>
+          <Image publicId={publicId} className='post-user-pro-pic'/>
+        </CloudinaryContext>
         <CloudinaryContext
           cloudName='photo-sharing-app'
           apiKey={api_key}
