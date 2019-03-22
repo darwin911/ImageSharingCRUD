@@ -357,10 +357,11 @@ class App extends Component {
               path='/users/:id'
               render={props => {
                 const userReel = this.state.reelPosts.filter(
-                  post => post.userId === this.state.currentUser.id
+                  post => (post.userId === parseInt(props.match.params.id))
                 );
                 return (
                   <Reel
+                    {...props}
                     currentUser={this.state.currentUser}
                     reelPosts={userReel}
                     handleDelete={this.handleDelete}
