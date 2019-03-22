@@ -153,10 +153,3 @@ const getUsersLikes = async () => {
   console.log(resp.data);
 }
 //getUsersLikes();
-
-const getUser = async () => {
-  const resp = await axios.get('http://localhost:3000/users/2',
-  { headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwibmFtZSI6ImJsYWg3IiwicGFzc3dvcmRfZGlnZXN0IjoiJDJiJDEwJE5FdnJ3Wmc4VlhiZFdrSDRyd2JFTS5NTDJ4Q3dGbXc0b3RNTUgxdXV0WUZHdEFSU3dZS2dhIiwiZW1haWwiOiJibGFoNyIsImJpbyI6ImJsYWg3IiwicHJvX3BpYyI6ImRlZmF1bHQiLCJ1cGRhdGVkQXQiOiIyMDE5LTAzLTIxVDAyOjQyOjAyLjg5OFoiLCJjcmVhdGVkQXQiOiIyMDE5LTAzLTIxVDAyOjQyOjAyLjg5OFoiLCJpYXQiOjE1NTMxMzYxMjJ9.VLBtA1zZmqwtG208cEuuCUyR_V5cNNq_G45ZB3lDXyM` } });
-  console.log(resp.data);
-}
-getUser();
