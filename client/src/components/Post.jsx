@@ -48,7 +48,7 @@ class Post extends Component {
           <Link to={userInfo ? "/users/" + userInfo.id : null}>
             <Image publicId={userInfo ? userInfo.pro_pic : "default"} className='post-user-pro-pic'/>
           </Link>
-          <p>{userInfo ? userInfo.email : null}</p>
+          <p>{userInfo ? userInfo.name : null}</p>
         </CloudinaryContext>
 
         <CloudinaryContext
