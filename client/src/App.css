@@ -30,8 +30,12 @@ html {
 header {
   display: flex;
   background: linear-gradient(to right, #2ECC40, rgb(10, 173, 29));
+  background: linear-gradient(to right, #fcd307, #e5ff00);
   box-shadow: 0 5px 12px 2px rgba(0,0,0, .5);
   height: 70px;
+  position: sticky;
+  top: 0;
+  opacity: 0.8;
 }
 
 nav {
@@ -44,9 +48,10 @@ nav {
 }
 
 a {
-  color: white;
+  color: navy;
   transition: color 150ms ease-in;
   font-weight: 700;
+  font-size: 1.25rem;
 }
 
 a:hover {
