@@ -30,6 +30,6 @@
     "nodemon": "^1.18.10",
     "pg": "^7.9.0",
     "react-router": "^5.0.0",
-    "sequelize": "^5.1.0"
+    "sequelize": "^5.3.0"
   }
 }
